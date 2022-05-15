@@ -32,6 +32,9 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
 
+  # "Memory" file for $ rspec --next-failure
+  config.example_status_persistence_file_path = "rspec_results.txt"
+
   # Use simpler browser for systems tests
   config.before(type: :system) do
     driven_by :rack_test
