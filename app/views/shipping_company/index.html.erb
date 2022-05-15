@@ -6,7 +6,7 @@
   <% else %>
     <ul>
       <% @shipping_cos.each do |company| %>
-        <li><%= company.name %></li>
+        <li><%= link_to company.name, company %></li>
       <% end %>
     </ul>
   <% end %>

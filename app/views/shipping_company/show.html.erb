@@ -1,0 +1,24 @@
+<h1><%= @shipping_co.name %></h1>
+
+<section>
+  <dl>
+    <dt>Status</dt>
+    <dd><%= @shipping_co.status %></dd>
+
+    <dt>Nome fantasia</dt>
+    <dd><%= @shipping_co.name %></dd>
+
+    <dt>Razão Social</dt>
+    <dd><%= @shipping_co.legal_name %></dd>
+
+    <dt>CNPJ</dt>
+    <dd><%= @shipping_co.cnpj %></dd>
+
+    <dt>Domínio de email</dt>
+    <dd><%= @shipping_co.email_domain %></dd>
+
+    <dt>Endereço de faturamento</dt>
+    <dd><%= @shipping_co.billing_address %></dd>
+  </dl>
+  <%= link_to 'Voltar', shipping_company_index_path %>
+</section>
