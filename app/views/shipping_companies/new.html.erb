@@ -1,0 +1,23 @@
+<h1>Cadastrar transportadora</h1>
+
+<div>
+  <%= form_with model: @shipping_co do |f| %>
+    <dl>
+      <dt><%= f.label :name, t('activerecord.attributes.shipping_company.name').capitalize %></dt>
+      <dd><%= f.text_field :name %></dd>
+
+      <dt><%= f.label :legal_name, t('activerecord.attributes.shipping_company.legal_name').capitalize %></dt>
+      <dd><%= f.text_field :legal_name %></dd>
+
+      <dt><%= f.label :cnpj, t('activerecord.attributes.shipping_company.cnpj').upcase %></dt>
+      <dd><%= f.text_field :cnpj %></dd>
+
+      <dt><%= f.label :email_domain, t('activerecord.attributes.shipping_company.email_domain').capitalize %></dt>
+      <dd><%= f.text_field :email_domain %></dd>
+
+      <dt><%= f.label :billing_address, t('activerecord.attributes.shipping_company.billing_address').capitalize %></dt>
+      <dd><%= f.text_area :billing_address %></dd>
+    </dl>
+    <%= f.submit %>
+  <% end %>
+</div>

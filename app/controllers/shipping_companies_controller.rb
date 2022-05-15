@@ -12,6 +12,22 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def create
-    flash[:alert] = 'Entered create'
+    @shipping_co = ShippingCompany.new(shipping_co_params)
+    @shipping_co.in_registration!
+    if @shipping_co.save
+      flash[:notice] = t('shipping_company_registration_succesful')
+      redirect_to @shipping_co
+    else
+      flash[:alert] = t('shipping_company_registration_failed')
+      render :new
+    end
   end
+end
+
+private
+
+def shipping_co_params
+  params.require(:shipping_company).permit(:name, :status, :legal_name,
+                                           :cnpj, :email_domain, 
+                                           :billing_address)
 end
