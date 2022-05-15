@@ -4,7 +4,7 @@ describe 'Unlogged user lands on homepage and' do
   it 'see application name' do
     visit '/'
 
-    expect(page).to have_css('nav', text: 'East Wing - Shipping')
+    expect(page).to have_css('nav', text: 'East Wing - Departamento de Envios')
   end
 end
 

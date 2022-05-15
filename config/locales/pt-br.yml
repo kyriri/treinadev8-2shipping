@@ -1,0 +1,25 @@
+pt-BR:
+  app_name: East Wing - Departamento de Envios
+
+  activerecord:
+    errors:
+      models:
+        shipping_company:
+          attributes:
+            cnpj:
+              invalid: deve ter formato 00.000.000/0000-00
+    models:
+      shipping_company: transportadora
+      package: encomenda
+    attributes:
+      shipping_company:
+        name: nome fantasia
+        status: status
+        legal_name: razão social
+        email_domain: domínio de email
+        cnpj: CNPJ
+        billing_address: endereço de faturamento
+      shipping_company/status:
+        active: ativa
+        suspended: suspensa
+      package:

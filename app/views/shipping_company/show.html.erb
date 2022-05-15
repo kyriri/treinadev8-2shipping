@@ -1,23 +1,23 @@
-<h1><%= @shipping_co.name %></h1>
+<h1><%= @shipping_co.name.titleize %></h1>
 
 <section>
   <dl>
-    <dt>Status</dt>
-    <dd><%= @shipping_co.status %></dd>
+    <dt><%= ShippingCompany.human_attribute_name('status').capitalize %></dt>
+    <dd><%= ShippingCompany.human_attribute_name("status.#{@shipping_co.status}").capitalize %></dd>
 
-    <dt>Nome fantasia</dt>
+    <dt><%= ShippingCompany.human_attribute_name('name').capitalize %></dt>
     <dd><%= @shipping_co.name %></dd>
 
-    <dt>Razão Social</dt>
+    <dt><%= ShippingCompany.human_attribute_name('legal_name').capitalize %></dt>
     <dd><%= @shipping_co.legal_name %></dd>
 
-    <dt>CNPJ</dt>
+    <dt><%= ShippingCompany.human_attribute_name('cnpj').upcase %></dt>
     <dd><%= @shipping_co.cnpj %></dd>
 
-    <dt>Domínio de email</dt>
+    <dt><%= ShippingCompany.human_attribute_name('email_domain').capitalize %></dt>
     <dd><%= @shipping_co.email_domain %></dd>
 
-    <dt>Endereço de faturamento</dt>
+    <dt><%= ShippingCompany.human_attribute_name('billing_address').capitalize %></dt>
     <dd><%= @shipping_co.billing_address %></dd>
   </dl>
   <%= link_to 'Voltar', shipping_company_index_path %>

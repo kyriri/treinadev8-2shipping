@@ -13,7 +13,7 @@ describe 'Admin sees details of a Shipping Company' do
     click_on 'Cheirex'
     
     expect(page).to have_text('Cheirex')
-    expect(page).to have_text('suspended')
+    expect(page).to have_text('Suspensa')
     expect(page).to have_text('Transportes Federais do Brasil S.A.')
     expect(page).to have_text('cheirex.com')
     expect(page).to have_text('12345678901234')
