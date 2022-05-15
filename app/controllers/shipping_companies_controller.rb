@@ -22,12 +22,30 @@ class ShippingCompaniesController < ApplicationController
       render :new
     end
   end
-end
 
-private
+  def edit
+    @shipping_co = ShippingCompany.find(params[:id])
+    @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
+  end
 
-def shipping_co_params
-  params.require(:shipping_company).permit(:name, :status, :legal_name,
-                                           :cnpj, :email_domain, 
-                                           :billing_address)
+  def update
+    @shipping_co = ShippingCompany.find(params[:id])
+    @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
+
+    if @shipping_co.update(shipping_co_params)
+      flash[:notice] = t('shipping_company_update_succesful')
+      redirect_to @shipping_co
+    else
+      flash.now[:alert] = t('shipping_company_update_failed')
+      render :edit
+    end
+  end
+
+  private
+
+  def shipping_co_params
+    params.require(:shipping_company).permit(:name, :status, :legal_name,
+                                            :cnpj, :email_domain, 
+                                            :billing_address)
+  end
 end
