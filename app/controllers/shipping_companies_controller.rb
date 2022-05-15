@@ -18,7 +18,7 @@ class ShippingCompaniesController < ApplicationController
       flash[:notice] = t('shipping_company_registration_succesful')
       redirect_to @shipping_co
     else
-      flash[:alert] = t('shipping_company_registration_failed')
+      flash.now[:alert] = t('shipping_company_registration_failed')
       render :new
     end
   end
