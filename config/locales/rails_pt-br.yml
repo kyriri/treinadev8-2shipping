@@ -25,8 +25,8 @@ pt-BR:
       less_than: deve ser menor que %{count}
       less_than_or_equal_to: deve ser menor ou igual a %{count}
       model_invalid: 'A validação falhou: %{errors}'
-      not_a_number: não é um número
-      not_an_integer: não é um número inteiro
+      not_a_number: deve conter apenas números
+      not_an_integer: deve ser um número inteiro
       odd: deve ser ímpar
       other_than: deve ser diferente de %{count}
       present: deve ficar em branco
@@ -39,8 +39,8 @@ pt-BR:
         one: 'é muito curto (mínimo: 1 caracter)'
         other: 'é muito curto (mínimo: %{count} caracteres)'
       wrong_length:
-        one: não possui o tamanho esperado (1 caracter)
-        other: não possui o tamanho esperado (%{count} caracteres)
+        one: deve ter apenas 1 caracter
+        other: deve ter %{count} caracteres
     template:
       body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
       header:
