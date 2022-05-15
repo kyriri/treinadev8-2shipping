@@ -7,13 +7,7 @@ pt-BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
-  helpers:
-    select:
-      prompt: Por favor selecione
-    submit:
-      create: Cadastrar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
+
   errors:
     format: "%{attribute} %{message}"
     messages:

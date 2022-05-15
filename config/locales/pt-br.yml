@@ -1,6 +1,13 @@
 pt-BR:
   app_name: East Wing - Departamento de Envios
 
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Cadastrar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
   activerecord:
     errors:
       models:
