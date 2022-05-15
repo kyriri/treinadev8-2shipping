@@ -16,7 +16,7 @@ describe 'Admin sees details of a Shipping Company' do
     expect(page).to have_text('Suspensa')
     expect(page).to have_text('Transportes Federais do Brasil S.A.')
     expect(page).to have_text('cheirex.com')
-    expect(page).to have_text('12345678901234')
+    expect(page).to have_text('12.345.678/9012-34')
     expect(page).to have_text('Av. das Nações Unidas, 1.532 - São Paulo, SP')
   end
 

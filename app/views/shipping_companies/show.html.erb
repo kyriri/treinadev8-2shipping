@@ -12,7 +12,7 @@
     <dd><%= @shipping_co.legal_name %></dd>
 
     <dt><%= ShippingCompany.human_attribute_name('cnpj').upcase %></dt>
-    <dd><%= @shipping_co.cnpj %></dd>
+    <dd><%= @shipping_co.cnpj.to_s.insert(5,'.').insert(2,'.').insert(-7,'/').insert(-3,'-') %></dd>
 
     <dt><%= ShippingCompany.human_attribute_name('email_domain').capitalize %></dt>
     <dd><%= @shipping_co.email_domain %></dd>
