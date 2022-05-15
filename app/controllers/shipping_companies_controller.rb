@@ -1,10 +1,11 @@
 class ShippingCompaniesController < ApplicationController
+  before_action :find_shipping_co, only: [:show, :edit, :update, :fake_delete]
+
   def index
     @shipping_cos = ShippingCompany.where.not(status: :deleted).order('name')
   end
 
   def show
-    @shipping_co = ShippingCompany.find(params[:id])
   end
 
   def new
@@ -24,14 +25,11 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def edit
-    @shipping_co = ShippingCompany.find(params[:id])
     @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
   end
 
   def update
-    @shipping_co = ShippingCompany.find(params[:id])
     @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
-
     if @shipping_co.update(shipping_co_params)
       flash[:notice] = t('shipping_company_update_succesful')
       redirect_to @shipping_co
@@ -42,9 +40,8 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def fake_delete
-    @shipping_co = ShippingCompany.find(params[:id])
     if @shipping_co.update(status: 'deleted')
-      flash[:notice] = t('shipping_company_fakedelete_succesful', name:@shipping_co.name)
+      flash[:notice] = t('shipping_company_fakedelete_succesful', name: @shipping_co.name)
       redirect_to shipping_companies_path
     else
       flash[:alert] = t('shipping_company_fakedelete_failed')
@@ -56,7 +53,10 @@ class ShippingCompaniesController < ApplicationController
 
   def shipping_co_params
     params.require(:shipping_company).permit(:name, :status, :legal_name,
-                                            :cnpj, :email_domain, 
-                                            :billing_address)
+                                            :cnpj, :email_domain, :billing_address)
+  end
+
+  def find_shipping_co
+    @shipping_co = ShippingCompany.find(params[:id])
   end
 end
