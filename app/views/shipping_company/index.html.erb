@@ -1,0 +1,13 @@
+<h1>Transportadoras</h1>
+
+<div>
+  <% if @shipping_cos.empty? %>
+    Nenhuma transportadora cadastrada.
+  <% else %>
+    <ul>
+      <% @shipping_cos.each do |company| %>
+        <li><%= company.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
