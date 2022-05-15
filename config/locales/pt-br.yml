@@ -5,6 +5,8 @@ pt-BR:
   shipping_company_registration_failed: Houve um erro. A transportadora não foi salva.
   shipping_company_update_succesful: Dados atualizados com sucesso.
   shipping_company_update_failed: Houve um erro. A atualização não foi feita.
+  shipping_company_fakedelete_succesful: Transportadora %{name} apagada com sucesso.
+  shipping_company_fakedelete_failed: Houve um erro. A transportadora não foi apagada.
 
   helpers:
     select:

@@ -5,5 +5,5 @@ class ShippingCompany < ApplicationRecord
   validates :cnpj, length: { is: 14 }
   validates :cnpj, numericality: true
   
-  enum status: { suspended: 2, in_registration: 5, active: 8 }
+  enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
 end

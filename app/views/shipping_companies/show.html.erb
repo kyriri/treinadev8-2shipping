@@ -21,5 +21,6 @@
     <dd><%= @shipping_co.billing_address %></dd>
   </dl>
   <%= link_to 'Voltar', shipping_companies_path %>
+  <%= button_to 'Apagar', fake_delete_shipping_company_path(@shipping_co) %>
   <%= link_to 'Editar', edit_shipping_company_path %>
 </section>

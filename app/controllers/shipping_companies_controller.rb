@@ -1,6 +1,6 @@
 class ShippingCompaniesController < ApplicationController
   def index
-    @shipping_cos = ShippingCompany.order('name')
+    @shipping_cos = ShippingCompany.where.not(status: :deleted).order('name')
   end
 
   def show
@@ -38,6 +38,17 @@ class ShippingCompaniesController < ApplicationController
     else
       flash.now[:alert] = t('shipping_company_update_failed')
       render :edit
+    end
+  end
+
+  def fake_delete
+    @shipping_co = ShippingCompany.find(params[:id])
+    if @shipping_co.update(status: 'deleted')
+      flash[:notice] = t('shipping_company_fakedelete_succesful', name:@shipping_co.name)
+      redirect_to shipping_companies_path
+    else
+      flash[:alert] = t('shipping_company_fakedelete_failed')
+      redirect_to @shipping_co
     end
   end
 

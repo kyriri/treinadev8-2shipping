@@ -7,6 +7,10 @@ en:
 
   shipping_company_registration_succesful: Company succesfully registered. But for the company to turn active, it needs first to send its shipping prices and delays.
   shipping_company_registration_failed: Something went wrong. The shipping company was not saved.
+  shipping_company_update_succesful: Shipping company succesfully updated.
+  shipping_company_update_failed: Something went wrong. The update was aborted.
+  shipping_company_fakedelete_succesful: Shipping company %{name} succesfully deleted.
+  shipping_company_fakedelete_failed: Something went wrong. Shipping company not deleted.
 
   activerecord:
       errors:
