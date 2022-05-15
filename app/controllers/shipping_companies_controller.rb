@@ -13,7 +13,7 @@ class ShippingCompaniesController < ApplicationController
 
   def create
     @shipping_co = ShippingCompany.new(shipping_co_params)
-    @shipping_co.in_registration!
+    @shipping_co.status = :in_registration
     if @shipping_co.save
       flash[:notice] = t('shipping_company_registration_succesful')
       redirect_to @shipping_co

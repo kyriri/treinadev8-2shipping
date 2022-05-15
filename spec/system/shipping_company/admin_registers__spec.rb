@@ -21,6 +21,14 @@ describe 'Admin tries to register a Shipping Company' do
     expect(current_path).to eq(shipping_company_path(ShippingCompany.last))
   end
 
-  xit 'but input is unacceptable' do
+  it 'but receives error msgs because input is unacceptable' do
+    visit new_shipping_company_path
+    fill_in 'CNPJ', with: '1234567890111'
+    click_on 'Cadastrar transportadora'
+
+    expect(page).to have_text('Houve um erro. A transportadora não foi salva.')
+    expect(page).to have_text('não pode ficar em branco')
+    expect(page).to have_css('form')
+    expect(page).to have_field('CNPJ', with:'1234567890111')
   end
 end
