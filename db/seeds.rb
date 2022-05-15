@@ -3,7 +3,7 @@
 ShippingCompany.destroy_all
 
 ShippingCompany.create!(name: 'Transportes Marília',
-                        status: 2,
+                        status: 0,
                         legal_name: 'Transportes Marília Ltda',
                         email_domain: 'tma.com.br',
                         cnpj: 12345678904321,
@@ -14,5 +14,11 @@ ShippingCompany.create!(name: 'Cheirex',
                         email_domain: 'cheirex.com',
                         cnpj: 12345678901234,
                         billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+ShippingCompany.create!(name: 'Ibérica',
+                        status: 5,
+                        legal_name: 'Ibérica dos Transportes Ltda',
+                        email_domain: 'iberica.com.br',
+                        cnpj: 98765432101234,
+                        billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
 
 p "Created #{ShippingCompany.count} shipping companies"
