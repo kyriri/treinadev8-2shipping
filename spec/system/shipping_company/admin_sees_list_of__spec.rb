@@ -3,13 +3,13 @@ require 'rails_helper'
 describe 'Admin visits index for Shipping Companies and' do
   it 'sees a list of them' do
     ShippingCompany.create!(name: 'Transportes Marília',
-                            status: 0,
+                            status: 2,
                             legal_name: 'Transportes Marília Ltda',
                             email_domain: 'tma.com.br',
                             cnpj: 12345678904321,
                             billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
     ShippingCompany.create!(name: 'Cheirex',
-                            status: 9,
+                            status: 8,
                             legal_name: 'Transportes Federais do Brasil S.A.',
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
