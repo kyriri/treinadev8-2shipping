@@ -13,6 +13,6 @@ describe 'Admin lands on homepage and' do
     visit root_path
     click_on 'Transportadoras'
 
-    expect(current_path).to eq(shipping_companies_path)
+    expect(current_path).to eq(shipping_company_index_path)
   end
 end
