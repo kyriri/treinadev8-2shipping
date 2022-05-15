@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# The data can be loaded with the bin/rails db:seed command 
+
+ShippingCompany.destroy_all
+
+ShippingCompany.create!(name: 'Transportes Marília',
+                        status: 0,
+                        legal_name: 'Transportes Marília Ltda',
+                        email_domain: 'tma.com.br',
+                        cnpj: 12345678904321,
+                        billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
+ShippingCompany.create!(name: 'Cheirex',
+                        status: 9,
+                        legal_name: 'Transportes Federais do Brasil S.A.',
+                        email_domain: 'cheirex.com',
+                        cnpj: 12345678901234,
+                        billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+
+p "Created #{ShippingCompany.count} shipping companies"
