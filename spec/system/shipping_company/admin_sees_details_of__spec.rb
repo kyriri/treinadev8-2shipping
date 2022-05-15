@@ -9,7 +9,7 @@ describe 'Admin sees details of a Shipping Company' do
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
       
-    visit shipping_company_index_path
+    visit shipping_companies_path
     click_on 'Cheirex'
     
     expect(page).to have_text('Cheirex')
@@ -28,10 +28,10 @@ describe 'Admin sees details of a Shipping Company' do
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
       
-    visit shipping_company_index_path
+    visit shipping_companies_path
     click_on 'Cheirex'
     click_on 'Voltar'
 
-    expect(current_path).to eq(shipping_company_index_path)
+    expect(current_path).to eq(shipping_companies_path)
   end
 end

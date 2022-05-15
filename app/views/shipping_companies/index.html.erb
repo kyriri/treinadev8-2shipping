@@ -1,6 +1,10 @@
 <h1>Transportadoras</h1>
 
 <div>
+  <%= link_to 'Cadastrar nova transportadora', new_shipping_company_path %>
+</div>
+
+<div>
   <% if @shipping_cos.empty? %>
     Nenhuma transportadora cadastrada.
   <% else %>

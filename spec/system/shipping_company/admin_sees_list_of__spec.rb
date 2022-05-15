@@ -15,7 +15,7 @@ describe 'Admin visits index for Shipping Companies and' do
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
       
-    visit shipping_company_index_path
+    visit shipping_companies_path
 
     expect(page).not_to have_text('Nenhuma transportadora cadastrada')
     expect(page).to have_text('Cheirex')
@@ -24,7 +24,7 @@ describe 'Admin visits index for Shipping Companies and' do
   end
 
   it 'but there are no companies to show' do
-    visit shipping_company_index_path
+    visit shipping_companies_path
 
     expect(page).to have_text('Nenhuma transportadora cadastrada')
   end
