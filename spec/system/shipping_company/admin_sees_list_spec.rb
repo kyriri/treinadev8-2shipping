@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Admin access index for Shipping Companies and' do
+describe 'Admin visits index for Shipping Companies and' do
   it 'sees a list of them' do
-    ShippingCompany.create!(name: 'Transportes Marília Ltda',
+    ShippingCompany.create!(name: 'Transportes Marília',
                             status: 0,
                             legal_name: 'Transportes Marília Ltda',
                             email_domain: 'tma.com.br',
@@ -20,6 +20,7 @@ describe 'Admin access index for Shipping Companies and' do
     expect(page).not_to have_text('Nenhuma transportadora cadastrada')
     expect(page).to have_text('Cheirex')
     expect(page).to have_text('Transportes Marília')
+    expect(page.text.index('Cheirex')).to be < page.text.index('Transportes Marília')
   end
 
   it 'but there are no companies to show' do
