@@ -1,13 +1,6 @@
 pt-BR:
   app_name: East Wing - Departamento de Envios
 
-  shipping_company_registration_succesful: Registro feito com sucesso. Para ativar a transportadora, ela precisa primeiro enviar suas tabelas de preço e de prazos.
-  shipping_company_registration_failed: Houve um erro. A transportadora não foi salva.
-  shipping_company_update_succesful: Dados atualizados com sucesso.
-  shipping_company_update_failed: Houve um erro. A atualização não foi feita.
-  shipping_company_fakedelete_succesful: Transportadora %{name} apagada com sucesso.
-  shipping_company_fakedelete_failed: Houve um erro. A transportadora não foi apagada.
-
   helpers:
     select:
       prompt: Por favor selecione
@@ -15,26 +8,4 @@ pt-BR:
       create: Cadastrar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
-  activerecord:
-    errors:
-      models:
-        shipping_company:
-          attributes:
-            cnpj:
-              invalid: deve ter formato 00.000.000/0000-00
-    models:
-      shipping_company: transportadora
-      package: encomenda
-    attributes:
-      shipping_company:
-        name: nome fantasia
-        status: status
-        legal_name: razão social
-        email_domain: domínio de email
-        cnpj: CNPJ
-        billing_address: endereço de faturamento
-      shipping_company/status:
-        suspended: suspensa
-        in_registration: em processo de cadastro
-        active: ativa
-      package:
+      

@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      shipping_company: transportadora
+    attributes:
+      shipping_company:
+        name: nome fantasia
+        status: status
+        legal_name: razão social
+        email_domain: domínio de email
+        cnpj: CNPJ
+        billing_address: endereço de faturamento
+      shipping_company/status:
+        suspended: suspensa
+        in_registration: em processo de cadastro
+        active: ativa
+    errors:
+      models:
+        shipping_company:
+          attributes:
+            cnpj:
+              wrong_length: deve ter %{count} números

@@ -1,25 +1,2 @@
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-
 en:
   app_name: East Wing - Shipping Department
-
-  shipping_company_registration_succesful: Company succesfully registered. But for the company to turn active, it needs first to send its shipping prices and delays.
-  shipping_company_registration_failed: Something went wrong. The shipping company was not saved.
-  shipping_company_update_succesful: Shipping company succesfully updated.
-  shipping_company_update_failed: Something went wrong. The update was aborted.
-  shipping_company_fakedelete_succesful: Shipping company %{name} succesfully deleted.
-  shipping_company_fakedelete_failed: Something went wrong. Shipping company not deleted.
-
-  activerecord:
-      errors:
-        models:
-          shipping_company:
-            attributes:
-              cnpj:
-                invalid: should have format 00.000.000/0000-00
-      attributes:
-        shipping_company:
-          name: trade name
-          cnpj: CNPJ

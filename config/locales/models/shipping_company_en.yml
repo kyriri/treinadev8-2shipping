@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      shipping_company:
+        name: trade name
+        cnpj: CNPJ
+    errors:
+      models:
+        shipping_company:
+          attributes:
+            cnpj:
+              wrong_length: should have %{count} digits

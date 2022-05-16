@@ -49,7 +49,7 @@ RSpec.describe ShippingCompany, type: :model do
 
       cia.valid?
 
-      expect(cia.errors.full_messages).to include('CNPJ deve ter 14 caracteres')
+      expect(cia.errors.full_messages).to include('CNPJ deve ter 14 números')
     end
   end
 
