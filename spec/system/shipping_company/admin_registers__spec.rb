@@ -31,4 +31,13 @@ describe 'Admin tries to register a Shipping Company' do
     expect(page).to have_css('form')
     expect(page).to have_field('CNPJ', with:'1234567890111')
   end
+
+  it 'but gives up' do
+    visit new_shipping_company_path
+    fill_in 'Nome fantasia', with: 'Cheirex'
+    click_on 'Voltar'
+
+    expect(current_path).to eq(shipping_companies_path)
+    expect(page).not_to have_text('Cheirex')
+  end
 end

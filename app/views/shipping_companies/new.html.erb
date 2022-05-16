@@ -28,6 +28,7 @@
       <dt><%= f.label :billing_address, t('activerecord.attributes.shipping_company.billing_address').capitalize %></dt>
       <dd><%= f.text_area :billing_address %></dd>
     </dl>
+    <%= link_to 'Voltar', shipping_companies_path %>
     <%= f.submit %>
   <% end %>
 </div>
