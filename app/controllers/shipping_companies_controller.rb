@@ -25,11 +25,11 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def edit
-    @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
+    @statuses = form_statusus
   end
 
   def update
-    @statuses = Hash[ShippingCompany.statuses.map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }]
+    @statuses = form_statusus
     if @shipping_co.update(shipping_co_params)
       flash[:notice] = t('shipping_company_update_succesful')
       redirect_to @shipping_co
@@ -58,5 +58,12 @@ class ShippingCompaniesController < ApplicationController
 
   def find_shipping_co
     @shipping_co = ShippingCompany.find(params[:id])
+  end
+
+  def form_statusus
+    Hash[ ShippingCompany.statuses
+      .select { |k,v| k != "deleted" }
+      .map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }
+    ]
   end
 end

@@ -13,6 +13,7 @@ describe 'Admin tries to edit Shipping Company' do
     click_on 'Editar'
 
     expect(page).to have_checked_field('shipping_company_status_active')
+    expect(page).not_to have_field('shipping_company_status_deleted')
   end
 
   it 'and it works' do
@@ -59,6 +60,7 @@ describe 'Admin tries to edit Shipping Company' do
     expect(page).to have_text('já está em uso')
     expect(page).to have_css('form')
     expect(page).to have_field('Domínio de email', with: 'cheirex.com')
+    expect(page).not_to have_field('shipping_company_status_deleted')
   end
 
   it 'but gives up' do
