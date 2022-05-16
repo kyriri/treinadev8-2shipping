@@ -29,12 +29,12 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def update
-    @statuses = form_statusus
     if @shipping_co.update(shipping_co_params)
       flash[:notice] = t('shipping_company_update_succesful')
       redirect_to @shipping_co
     else
       flash.now[:alert] = t('shipping_company_update_failed')
+      @statuses = form_statusus
       render :edit
     end
   end
