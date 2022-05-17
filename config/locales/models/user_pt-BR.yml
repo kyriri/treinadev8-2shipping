@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      user: Usuário
+    attributes:
+      user:
+        name: Nome
+        email: Email
+        password: Senha
+        remember_me: manter sessão
+        
+  helpers:
+    submit:
+      user:
+        create: Entrar

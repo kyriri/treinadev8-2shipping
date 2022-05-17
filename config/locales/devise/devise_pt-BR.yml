@@ -1,5 +1,13 @@
 pt-BR:
-  devise: # TODO improve translation
+
+  devise_log_in: Entrar
+  devise_sign_up: Cadastrar-se
+  devise_forgot_password: Esqueceu a senha?
+  devise_confirmation_email: Não recebeu o email de confirmação?
+  devise_unlock_email: Não recebeu as instruções para desbloquear?
+  devise_omniauth_sign_in: Entrar usando
+
+  devise: # TODO improve translation (english file has more lines)
     failure:
       unauthenticated: 'Para continuar, faça login ou registre-se.'
       unconfirmed: 'Antes de continuar, confirme a sua conta.'

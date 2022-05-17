@@ -1,6 +1,13 @@
 # Additional translations at https://github.com/heartcombo/devise/wiki/I18n
 
 en:
+  devise_log_in: Log in
+  devise_sign_up: Sign up
+  devise_forgot_password: Forgot your password?
+  devise_confirmation_email: Didn't receive confirmation instructions?
+  devise_unlock_email: Didn't receive unlock instructions?
+  devise_omniauth_sign_in: Sign in with
+
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
