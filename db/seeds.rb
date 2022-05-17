@@ -1,6 +1,10 @@
 # The data can be loaded with the bin/rails db:seed command 
 
 ShippingCompany.destroy_all
+User.destroy_all
+
+User.create!(email: 'me@email.com', password: '12345678')
+User.create!(email: 'la-la@courriel.fr', password: 'croissant')
 
 ShippingCompany.create!(name: 'Transportes Marília',
                         status: 0,
@@ -22,3 +26,4 @@ ShippingCompany.create!(name: 'Ibérica',
                         billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
 
 p "Created #{ShippingCompany.count} shipping companies"
+p "Created #{User.count} users"
