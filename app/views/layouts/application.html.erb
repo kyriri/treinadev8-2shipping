@@ -11,7 +11,8 @@
 
   <body>
     <nav>
-      <div><%= t('app_name') %></div>
+      <div><%= link_to t('app_name'), root_path %></div>
+      <div><%= link_to t('log_in'), new_user_session_path %></div>
     </nav>
 
     <% flash.each do |type, message| %> 
