@@ -12,7 +12,14 @@
   <body>
     <nav>
       <div><%= link_to t('app_name'), root_path %></div>
-      <div><%= link_to t('devise_log_in'), new_user_session_path %></div>
+      <% unless user_signed_in? %>
+        <div><%= link_to t('devise_log_in'), new_user_session_path %></div>
+      <% else %>
+        <div><%= current_user.email %></div>
+        <div><%= link_to t('devise_log_out'), '#' %></div>
+      <% end %>
+
+
     </nav>
 
     <% flash.each do |type, message| %> 

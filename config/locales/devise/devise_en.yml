@@ -2,6 +2,7 @@
 
 en:
   devise_log_in: Log in
+  devise_log_out: Log out
   devise_sign_up: Sign up
   devise_forgot_password: Forgot your password?
   devise_confirmation_email: Didn't receive confirmation instructions?
