@@ -1,4 +1,4 @@
-# Warehouses & Inventory
+# Shipping Adm
 **— an application to manage shipping providers for an e-commerce**
 
 :warning:  Project status: ongoing   
@@ -20,10 +20,10 @@
 ![This app requires Ruby v.3.1.1 to be installed](https://img.shields.io/static/v1?label=rubyonrails&message=version%203.1.1&color=B61D1D&style=for-the-badge&logo=rubyonrails)
 
 1 - Clone the repository  
-`$ git clone git@github.com:kyriri/treinadev8-1warehouse.git`
+`$ git clone git@github.com:kyriri/treinadev8-2shipping.git`
 
 2 - Change to the project directory   
-`$ cd treinadev8-1warehouse`
+`$ cd treinadev8-2shipping`
 
 3 - Install the gems / dependencies   
 `$ bin/setup`
