@@ -16,7 +16,7 @@
         <div><%= link_to t('devise.shared.links.log_in'), new_user_session_path %></div>
       <% else %>
         <div><%= current_user.email %></div>
-        <div><%= link_to t('devise.shared.links.log_out'), '#' %></div>
+        <div><%= button_to t('devise.shared.links.log_out'), destroy_user_session_path, method: :delete %></div>
       <% end %>
     </nav>
 
