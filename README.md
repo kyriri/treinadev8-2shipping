@@ -7,7 +7,7 @@
 - [x] Authenticate users  
 - [x] Admin can register, edit and delete a shipping company  
 - [x] Admin can see a list of all shipping companies, and access their details  
-- [ ] Shipping Company users can load their companies prices and delays
+- [ ] Shipping Company users can load their company's prices and delays
 - [ ] Admin can run a quote to choose a shipping company for a certain delivery
 - [ ] Admin can create and destroy a service order to hire a shipping company
 - [ ] Shipping Company users can accept or reject service orders
