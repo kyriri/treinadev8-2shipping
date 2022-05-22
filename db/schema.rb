@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_172534) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_22_173353) do
+  create_table "packages", force: :cascade do |t|
+    t.integer "width_in_cm"
+    t.integer "height_in_cm"
+    t.integer "length_in_cm"
+    t.float "volume_in_m3"
+    t.integer "weight_in_g"
+    t.integer "distance_in_km"
+    t.string "pickup_address"
+    t.string "delivery_address"
+    t.string "delivery_recipient_name"
+    t.string "delivery_recipient_phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "service_orders", force: :cascade do |t|
     t.integer "status"
     t.datetime "created_at", null: false
