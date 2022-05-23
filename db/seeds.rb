@@ -7,19 +7,19 @@ ShippingCompany.destroy_all
 User.destroy_all
 
 sc1 = ShippingCompany.create!(name: 'Transportes Marília',
-                              status: 0,
+                              status: 'deleted',
                               legal_name: 'Transportes Marília Ltda',
                               email_domain: 'tma.com.br',
                               cnpj: 12345678904321,
                               billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
 sc2 = ShippingCompany.create!(name: 'Cheirex',
-                              status: 8,
+                              status: 'active',
                               legal_name: 'Transportes Federais do Brasil S.A.',
                               email_domain: 'cheirex.com',
                               cnpj: 12345678901234,
                               billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
 sc3 = ShippingCompany.create!(name: 'Ibérica',
-                              status: 5,
+                              status: 'in_registration',
                               legal_name: 'Ibérica dos Transportes Ltda',
                               email_domain: 'iberica.com.br',
                               cnpj: 98765432101234,
@@ -55,13 +55,13 @@ ServiceOrder.create!(status: 5, package: Package.new)
 ServiceOrder.create!(status: 7, package: Package.new)
 ServiceOrder.create!(status: 9, package: Package.new)
 
-ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 50, shipping_company: sc1)
-ShippingFee.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 55, shipping_company: sc1)
-ShippingFee.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 60, shipping_company: sc1)
-ShippingFee.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 65, shipping_company: sc1)
+ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 50, shipping_company: sc3)
+ShippingFee.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 55, shipping_company: sc3)
+ShippingFee.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 60, shipping_company: sc3)
+ShippingFee.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 65, shipping_company: sc3)
 
 ShippingFee.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 55, shipping_company: sc2)
-ShippingFee.create!(max_weight_in_kg: 3, cost_per_km_in_cents: 52, shipping_company: sc2)
+ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 52, shipping_company: sc2)
 ShippingFee.create!(max_weight_in_kg: 7, cost_per_km_in_cents: 50, shipping_company: sc2)
 
 User.create!(email: 'me@email.com', password: '12345678')

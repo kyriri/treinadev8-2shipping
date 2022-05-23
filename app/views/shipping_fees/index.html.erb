@@ -1,0 +1,38 @@
+<h1><%= @shipping_company.name %></h1>
+
+<h2>Informações para cálculo de tarifas</h2>
+
+<h3>Fator para cálculo de peso cubado</h3>
+<div>
+  <%# @shipping_company.cubic_weight_const %> kg/m³
+</div>
+
+<h3>Valor mínimo</h3>
+<div>
+  <%# number_to_currency(@shipping_company.min_fee) %>
+</div>
+
+<h3>Tabela de preços</h3>
+
+<% unless @fees.empty? %>
+  <table>
+    <tr>
+      <th>peso</th>
+      <th>preço</th>
+    </tr>
+    <% @fees.each do |tier| %>
+      <tr>
+        <td>
+          até 
+          <% if tier.max_weight_in_kg < 1 %> 
+            <%= number_with_precision(tier.max_weight_in_kg, precision: 1) %>
+          <% else %>
+            <%= number_with_precision(tier.max_weight_in_kg, precision: 0) %>
+          <% end %>
+          kg
+        </td>
+        <td><%= number_to_currency(tier.cost_per_km_in_cents.to_f / 100) %> / km </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

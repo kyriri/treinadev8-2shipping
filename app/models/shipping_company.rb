@@ -5,4 +5,6 @@ class ShippingCompany < ApplicationRecord
   validates_length_of :cnpj, { is: 14 }
   
   enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
+
+  has_many :shipping_fees
 end
