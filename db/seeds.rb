@@ -11,19 +11,28 @@ sc1 = ShippingCompany.create!(name: 'Transportes Marília',
                               legal_name: 'Transportes Marília Ltda',
                               email_domain: 'tma.com.br',
                               cnpj: 12345678904321,
-                              billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
+                              billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP',
+                              cubic_weight_const: 600,
+                              min_fee: 45
+                             )
 sc2 = ShippingCompany.create!(name: 'Cheirex',
                               status: 'active',
                               legal_name: 'Transportes Federais do Brasil S.A.',
                               email_domain: 'cheirex.com',
                               cnpj: 12345678901234,
-                              billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+                              billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP',
+                              cubic_weight_const: 350,
+                              min_fee: 8,
+                             )
 sc3 = ShippingCompany.create!(name: 'Ibérica',
                               status: 'in_registration',
                               legal_name: 'Ibérica dos Transportes Ltda',
                               email_domain: 'iberica.com.br',
                               cnpj: 98765432101234,
-                              billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+                              billing_address: 'Rua da Paz, 34 - Rio Branco, AC',
+                              cubic_weight_const: 300,
+                              min_fee: 10,
+                             )
 Package.create!(width_in_cm: 14,
                 height_in_cm: 6,
                 length_in_cm: 21,
@@ -34,7 +43,8 @@ Package.create!(width_in_cm: 14,
                 delivery_address: 'Av. do Contorno 354 - Belo Horizonte, MG',
                 delivery_recipient_name: 'José Magela Amorim',
                 delivery_recipient_phone: '(31) 9 9453-8890',
-                service_order: ServiceOrder.new(status: 1))
+                service_order: ServiceOrder.new(status: 1),
+               )
 Package.create!(width_in_cm: 100,
                 height_in_cm: 86,
                 length_in_cm: 35,
@@ -45,7 +55,8 @@ Package.create!(width_in_cm: 100,
                 delivery_address: 'Av. Corifeu de Azevedo Marques, 251 / 81',
                 delivery_recipient_name: 'Carla Callegari',
                 delivery_recipient_phone: '(11) 9 8431-9106',
-                service_order: ServiceOrder.new(status: 3))
+                service_order: ServiceOrder.new(status: 3),
+               )
                 
 ServiceOrder.create!(status: 0, package: Package.new)
 ServiceOrder.create!(status: 1, package: Package.new)
