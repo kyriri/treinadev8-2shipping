@@ -1,1 +1,15 @@
 <div><%= link_to 'Transportadoras', shipping_companies_path %></div>
+
+<div>
+  <ul>
+  <% unless @number_unassigned_packages.zero? %>
+    <li>Encomendas novas (sem ordem de serviço): <%= @number_unassigned_packages %></li>
+  <% end %>
+  <% unless @number_rejected_packages.zero? %>
+    <li>Encomendas rejeitadas por transportadoras: <%= @number_rejected_packages %></li>
+  <% end %>
+  <% unless @number_pending_packages.zero? %>
+     <li>Encomendas pendentes de resposta da transportadora: <%= @number_pending_packages %></li>
+  <% end %>
+  </ul>
+</div>

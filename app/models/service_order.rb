@@ -1,4 +1,4 @@
 class ServiceOrder < ApplicationRecord
   belongs_to :package
-  enum status: { unassigned: 0, rejected: 2, pending: 4, accepted: 6, delivered: 8 }
+  enum status: { canceled: 0, unassigned: 1, rejected: 3, pending: 5, accepted: 7, delivered: 9 }
 end
