@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_174507) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_181026) do
   create_table "packages", force: :cascade do |t|
     t.integer "width_in_cm"
     t.integer "height_in_cm"
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_174507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shipping_fees", force: :cascade do |t|
+    t.integer "cost_per_km_in_cents"
+    t.decimal "max_weight_in_kg", precision: 4, scale: 1
+    t.integer "shipping_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shipping_company_id"], name: "index_shipping_fees_on_shipping_company_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -59,4 +68,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_174507) do
   end
 
   add_foreign_key "service_orders", "packages"
+  add_foreign_key "shipping_fees", "shipping_companies"
 end
