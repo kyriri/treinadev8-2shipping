@@ -4,15 +4,15 @@
 
 <h3>Fator para cálculo de peso cubado</h3>
 <div>
-  <%# @shipping_company.cubic_weight_const %> kg/m³
+  <%= @shipping_company.cubic_weight_const %> kg/m³
 </div>
 
 <h3>Valor mínimo</h3>
 <div>
-  <%# number_to_currency(@shipping_company.min_fee) %>
+  <%= number_to_currency(@shipping_company.min_fee) %>
 </div>
 
-<h3>Tabela de preços</h3>
+<h3>Tabela de tarifas</h3>
 
 <% unless @fees.empty? %>
   <table>

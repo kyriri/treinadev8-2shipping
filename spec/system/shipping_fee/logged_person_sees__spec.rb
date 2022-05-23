@@ -7,13 +7,17 @@ describe 'Logged person sees table of fees for a company' do
                                   legal_name: 'Ibérica dos Transportes Ltda',
                                   email_domain: 'iberica.com.br',
                                   cnpj: 98765432101234,
-                                  billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+                                  billing_address: 'Rua da Paz, 34 - Rio Branco, AC',
+                                  cubic_weight_const: 300,
+                                  min_fee: 10)
     sc2 = ShippingCompany.create!(name: 'Cheirex',
                                   status: 'active',
                                   legal_name: 'Transportes Federais do Brasil S.A.',
                                   email_domain: 'cheirex.com',
                                   cnpj: 12345678901234,
-                                  billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')                              
+                                  billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', 
+                                  cubic_weight_const: 350,
+                                  min_fee: 8)                              
     
     ShippingFee.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 60, shipping_company: sc1)
     ShippingFee.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 55, shipping_company: sc1)
@@ -23,7 +27,7 @@ describe 'Logged person sees table of fees for a company' do
       
     visit shipping_company_shipping_fees_path(sc1)
 
-    expect(page).to have_text('Tabela de preços')
+    expect(page).to have_text('Tabela de tarifas')
     expect(page).to have_text('Ibérica')
     expect(page).to have_text('até 0,3 kg')
     expect(page).to have_text('até 1 kg')

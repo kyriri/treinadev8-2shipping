@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_23_181026) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_225107) do
   create_table "packages", force: :cascade do |t|
     t.integer "width_in_cm"
     t.integer "height_in_cm"
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_23_181026) do
     t.string "billing_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "cubic_weight_const", precision: 6, scale: 2
+    t.decimal "min_fee", precision: 5, scale: 2
   end
 
   create_table "shipping_fees", force: :cascade do |t|
