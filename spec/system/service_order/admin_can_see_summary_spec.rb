@@ -1,25 +1,25 @@
 require 'rails_helper'
 
 describe 'Admin visits homepage and' do
-  it 'sees a summary of service orders awaiting assignment' do
-    pack1 = Package.create!(service_order: ServiceOrder.new(status: 1))
-            Package.create!(service_order: ServiceOrder.new(status: 1))
-            Package.create!(service_order: ServiceOrder.new(status: 1))
-    pack3 = Package.create!(service_order: ServiceOrder.new(status: 3))
-            Package.create!(service_order: ServiceOrder.new(status: 3))
-    pack5 = Package.create!(service_order: ServiceOrder.new(status: 5))
+  it 'sees a summary of packages awaiting shipment' do
+    so1 = ServiceOrder.create!(status: 1, package: Package.new)
+          ServiceOrder.create!(status: 1, package: Package.new)
+          ServiceOrder.create!(status: 1, package: Package.new)
+    so3 = ServiceOrder.create!(status: 3, package: Package.new)
+          ServiceOrder.create!(status: 3, package: Package.new)
+    so5 = ServiceOrder.create!(status: 5, package: Package.new)
                   
     visit root_path
 
-    expect(pack1.service_order.status).to eq('unassigned') 
-    expect(pack3.service_order.status).to eq('rejected') 
-    expect(pack5.service_order.status).to eq('pending') 
+    expect(so1.status).to eq('unassigned') 
+    expect(so3.status).to eq('rejected') 
+    expect(so5.status).to eq('pending') 
     expect(page).to have_text('Encomendas novas (sem ordem de serviço): 3')
     expect(page).to have_text('Encomendas rejeitadas por transportadoras: 2')
     expect(page).to have_text('Encomendas pendentes de resposta da transportadora: 1')
   end
 
-  it "doesn't see a summary because no service orders are awaiting assignment" do
+  it "doesn't see a summary because no packages are awaiting shipment" do
     visit root_path
 
     expect(page).not_to have_text('Encomendas novas (sem ordem de serviço)')
