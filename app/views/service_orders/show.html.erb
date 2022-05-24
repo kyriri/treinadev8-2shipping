@@ -1,1 +1,31 @@
 <h1><%= "Ordem de serviço nº #{@service_order.id}" %></h1>
+
+<div class='package_details'>
+  <dl>
+    <dt>Dimensões</dt>
+    <dd><%= "#{@measures[0]} x #{@measures[1]} x #{@measures[2]} cm" %></dd>
+
+    <dt>Volume cúbico</dt>
+    <dd><%= "#{@package.volume_in_m3} m³" %></dd>
+
+    <dt>Peso</dt>
+    <% if @package.weight_in_g < 1000 %>
+      <dd><%= "#{@package.weight_in_g} g" %></dd>
+    <% else %>
+      <dd><%= "#{ number_with_delimiter(@package.weight_in_g.to_f/1000) } kg" %></dd>
+    <% end %>
+
+    <dt>Endereço de retirada</dt>
+    <dd><%= @package.pickup_address %></dd>
+
+    <dt>Dados para entrega</dt>
+    <dd>
+      <%= "#{@package.delivery_recipient_name} - #{@package.delivery_recipient_phone}" %>
+      <br>
+      <%= @package.delivery_address %>
+    </dd>
+
+    <dt>Distância</dt>
+    <dd><%= "#{@package.distance_in_km} km" %></dd>
+  </dl>
+</div>
