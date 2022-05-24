@@ -1,7 +1,7 @@
 # The data can be loaded with the bin/rails db:seed command 
 
 DeliveryTime.destroy_all
-ShippingFee.destroy_all
+ShippingRate.destroy_all
 ServiceOrder.destroy_all
 Package.destroy_all
 ShippingCompany.destroy_all
@@ -67,14 +67,14 @@ ServiceOrder.create!(status: 5, package: Package.new)
 ServiceOrder.create!(status: 7, package: Package.new)
 ServiceOrder.create!(status: 9, package: Package.new)
 
-ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 50, shipping_company: sc3)
-ShippingFee.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 55, shipping_company: sc3)
-ShippingFee.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 60, shipping_company: sc3)
-ShippingFee.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 65, shipping_company: sc3)
+ShippingRate.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 50, shipping_company: sc3)
+ShippingRate.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 55, shipping_company: sc3)
+ShippingRate.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 60, shipping_company: sc3)
+ShippingRate.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 65, shipping_company: sc3)
 
-ShippingFee.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 55, shipping_company: sc2)
-ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 52, shipping_company: sc2)
-ShippingFee.create!(max_weight_in_kg: 7, cost_per_km_in_cents: 50, shipping_company: sc2)
+ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 55, shipping_company: sc2)
+ShippingRate.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 52, shipping_company: sc2)
+ShippingRate.create!(max_weight_in_kg: 7, cost_per_km_in_cents: 50, shipping_company: sc2)
 
 DeliveryTime.create!(max_distance_in_km: 800, delivery_time_in_buss_days: 3, shipping_company: sc2)
 DeliveryTime.create!(max_distance_in_km: 50, delivery_time_in_buss_days: 2, shipping_company: sc2)
@@ -91,5 +91,5 @@ p "Created #{ShippingCompany.count} shipping companies"
 p "Created #{User.count} users"
 p "Created #{Package.count} packages"
 p "Created #{ServiceOrder.count} service orders"
-p "Created price table for #{ShippingFee.select(:shipping_company_id).distinct.count} shipping companies"
+p "Created price table for #{ShippingRate.select(:shipping_company_id).distinct.count} shipping companies"
 p "Created delivery times table for #{DeliveryTime.select(:shipping_company_id).distinct.count} shipping companies"
