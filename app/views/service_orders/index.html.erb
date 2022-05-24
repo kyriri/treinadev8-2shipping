@@ -1,1 +1,29 @@
 <h1>Ordens de Serviço</h1>
+
+<div>
+  <div class='unassigned'>
+    <em>Novas</em>
+    <% if @unassigned_orders.empty? %>
+      Nenhuma ordem de serviço nova
+    <% else %>
+      <ul>
+        <% @unassigned_orders.each do |order| %>
+          <li>ID: <%= order.id %> | <%= link_to 'detalhes', '' %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class='rejected'>
+    <em>Devolvidas</em>
+    <% if @rejected_orders.empty? %>
+      Nenhuma ordem de serviço devolvida
+    <% else %>
+      <ul>
+        <% @rejected_orders.each do |order| %>
+          <li>ID: <%= order.id %> | <%= link_to 'detalhes', '' %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
