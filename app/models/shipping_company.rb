@@ -41,7 +41,33 @@ class ShippingCompany < ApplicationRecord
   end
 
   def calculate_fee(package, rate)
+    return '' if rate.nil?
     fee = (rate * package.distance_in_km).to_f / 1000
     [fee, self.min_fee].max
+  end
+
+  def quote_for(package)
+    delivery_time = find_delivery_time(package)
+    weight = calculate_weight(package)
+    rate = find_rate(weight)
+    fee = calculate_fee(package, rate)
+
+    if (rate.nil? || delivery_time.nil?) 
+      fee = ''
+      delivery_time = ''
+      message = 'Service unavailable for such a package'
+      error = true
+    else
+      message = "Quote created at #{I18n.l(Time.now, locale: 'en')}"
+      error = false
+    end
+
+    { company_id: self.id,
+      package_id: package.id,
+      fee: fee,
+      delivery_time: delivery_time,
+      message: message,
+      error: error,
+    }
   end
 end

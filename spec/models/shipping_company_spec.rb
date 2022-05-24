@@ -208,4 +208,70 @@ RSpec.describe ShippingCompany, type: :model do
       expect(response2).to eq 9.9 # calculated fee
     end
   end
+
+  describe '#quote_for' do
+    it 'returns a valid quote' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                              cubic_weight_const: 300,
+                              min_fee: 5)
+      package = Package.create!(volume_in_m3: 0.01,
+                                weight_in_g: 800,
+                                distance_in_km: 100)
+      ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 5, cost_per_km_in_cents: 99, shipping_company: sc1)
+      DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
+      DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 2, shipping_company: sc1)
+
+      response = sc1.quote_for(package)
+
+      expect(response[:company_id]).to eq sc1.id
+      expect(response[:package_id]).to eq package.id
+      expect(response[:fee]).to eq 9.9 # dead weight: 0.8 | cubic weight: 300 * 0.01 = 3 -> 99 * 100 = 9900 cents
+      expect(response[:delivery_time]).to eq 2
+      expect(response[:message]).to include 'Quote created at'
+      expect(response[:error]).to be false
+    end
+
+    context 'returns an invalid quote' do
+      it 'because package is too heavy' do
+        sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                cubic_weight_const: 300,
+                                min_fee: 5)
+        package = Package.create!(volume_in_m3: 1,
+                                  weight_in_g: 2_000,
+                                  distance_in_km: 100)
+        ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
+        DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
+
+        response = sc1.quote_for(package)
+
+        expect(response[:company_id]).to eq sc1.id
+        expect(response[:package_id]).to eq package.id
+        expect(response[:fee]).to eq ''
+        expect(response[:delivery_time]).to eq ''
+        expect(response[:message]).to eq 'Service unavailable for such a package'
+        expect(response[:error]).to be true
+      end
+
+      it 'because distance is too far' do
+        sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                cubic_weight_const: 1,
+                                min_fee: 5)
+        package = Package.create!(volume_in_m3: 0.001,
+                                  weight_in_g: 750,
+                                  distance_in_km: 1_000)
+        ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
+        DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
+
+        response = sc1.quote_for(package)
+
+        expect(response[:company_id]).to eq sc1.id
+        expect(response[:package_id]).to eq package.id
+        expect(response[:fee]).to eq ''
+        expect(response[:delivery_time]).to eq ''
+        expect(response[:message]).to eq 'Service unavailable for such a package'
+        expect(response[:error]).to be true
+      end
+    end
+  end
 end
