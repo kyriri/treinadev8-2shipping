@@ -22,11 +22,14 @@ describe 'Admin tries to edit Shipping Company' do
                             legal_name: 'Transportes Federais do Brasil S.A.',
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
-                            billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+                            billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP',
+                            cubic_weight_const: 600,
+                            min_fee: 45)
     
     visit shipping_company_path(ShippingCompany.last.id)
     click_on 'Editar'
     fill_in 'Nome fantasia', with: 'Cardboard master'
+    fill_in 'Tarifa mínima', with: '12'
     choose 'suspensa', allow_label_click: true
     click_on 'Salvar'
 
@@ -34,6 +37,7 @@ describe 'Admin tries to edit Shipping Company' do
     expect(page).not_to have_text('Houve um erro. A atualização não foi feita')
     expect(page).to have_text('Cardboard master')
     expect(page).to have_text('Suspensa')
+    expect(page).to have_text('R$ 12,00')
     expect(current_path).to eq(shipping_company_path(ShippingCompany.last.id))
   end
 

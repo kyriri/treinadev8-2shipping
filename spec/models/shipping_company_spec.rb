@@ -20,6 +20,19 @@ RSpec.describe ShippingCompany, type: :model do
       expect(cia.errors.full_messages).to include('endereço de faturamento não pode ficar em branco')
     end
 
+    it 'mandatory fields are nil' do
+      cia = ShippingCompany.new(name: nil,
+                                legal_name: nil,
+                                cnpj: nil,
+                                status: nil,
+                                email_domain: nil,
+                                billing_address: nil)
+      
+      cia.valid?
+
+      expect(cia.errors.full_messages).to include('CNPJ não pode ficar em branco')
+    end
+
     it 'unique fields are repeated' do
       ShippingCompany.create!(name: 'Transportes Marília',
                               status: 'active',
@@ -37,11 +50,15 @@ RSpec.describe ShippingCompany, type: :model do
     end
 
     it 'numerical fields receive other characers' do
-      cia = ShippingCompany.new(cnpj: '123456-8904321')
-
+      cia = ShippingCompany.new(cnpj: '123456-8904321',
+                                cubic_weight_const: 'air cargo',
+                                min_fee: 'twelve',
+                               )
       cia.valid?
 
       expect(cia.errors.full_messages).to include('CNPJ deve conter apenas números')
+      expect(cia.errors.full_messages).to include('fator para cálculo de peso cubado deve conter apenas números')
+      expect(cia.errors.full_messages).to include('tarifa mínima deve conter apenas números')
     end
 
     it 'fields with specific length are not respected' do

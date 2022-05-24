@@ -9,8 +9,11 @@ describe 'Admin tries to register a Shipping Company' do
     fill_in 'CNPJ', with: '12345678901111'
     fill_in 'Domínio de email', with: 'oniberica.com.br'
     fill_in 'Endereço de faturamento', with: 'Rua da Paz 45, Belém - PA'
+    fill_in 'Fator para cálculo de peso cubado (kg/m³)', with: '299.99'
+    fill_in 'Tarifa mínima', with: '10'
     click_on 'Cadastrar transportadora'
 
+    expect(current_path).to eq(shipping_company_path(ShippingCompany.last))
     expect(page).to have_text('Registro feito com sucesso')
     expect(page).to have_text('Para ativar a transportadora, ela precisa primeiro enviar suas tabelas de preço e de prazos')
     expect(page).not_to have_text('Houve um erro. A transportadora não foi salva.')
@@ -18,7 +21,8 @@ describe 'Admin tries to register a Shipping Company' do
     expect(page).to have_text('Transportadora Portuguesa Ltda')
     expect(page).to have_text('oniberica.com.br')
     expect(page).to have_text('Rua da Paz 45, Belém - PA')
-    expect(current_path).to eq(shipping_company_path(ShippingCompany.last))
+    expect(page).to have_text('299,99 kg/m³')
+    expect(page).to have_text('R$ 10,00')
   end
 
   it 'but receives error msgs because input is unacceptable' do

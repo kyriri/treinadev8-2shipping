@@ -4,7 +4,7 @@
 
 <h3>Fator para cálculo de peso cubado</h3>
 <div>
-  <%= @shipping_company.cubic_weight_const %> kg/m³
+  <%= number_with_precision(@shipping_company.cubic_weight_const, precision: 0) %> kg/m³
 </div>
 
 <h3>Valor mínimo</h3>

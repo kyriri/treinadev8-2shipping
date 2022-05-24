@@ -10,6 +10,8 @@ pt-BR:
         email_domain: domínio de email
         cnpj: CNPJ
         billing_address: endereço de faturamento
+        cubic_weight_const: fator para cálculo de peso cubado
+        min_fee: tarifa mínima
       shipping_company/status:
         suspended: suspensa
         in_registration: em processo de cadastro

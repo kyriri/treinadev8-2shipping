@@ -53,7 +53,9 @@ class ShippingCompaniesController < ApplicationController
 
   def shipping_co_params
     params.require(:shipping_company).permit(:name, :status, :legal_name,
-                                            :cnpj, :email_domain, :billing_address)
+                                            :cnpj, :email_domain, :billing_address,
+                                            :cubic_weight_const, :min_fee,
+                                            )
   end
 
   def find_shipping_co

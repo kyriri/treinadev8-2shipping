@@ -27,11 +27,13 @@ describe 'Logged person sees table of fees for a company' do
       
     visit shipping_company_shipping_fees_path(sc1)
 
+    expect(page).to have_text('R$ 10,00')
+    expect(page).to have_text('300 kg/m³')
     expect(page).to have_text('Tabela de tarifas')
     expect(page).to have_text('Ibérica')
     expect(page).to have_text('até 0,3 kg')
+    expect(page).to have_text('R$ 0,50')
     expect(page).to have_text('até 1 kg')
-    expect(page).to have_text('R$ 0,60')
     expect(page).not_to have_text('até 2 kg')
     expect(page.text.index('até 0,5 kg')).to be < page.text.index('até 1 kg')
   end

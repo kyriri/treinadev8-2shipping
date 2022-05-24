@@ -19,7 +19,14 @@
 
     <dt><%= ShippingCompany.human_attribute_name('billing_address').capitalize %></dt>
     <dd><%= @shipping_co.billing_address %></dd>
+
+    <dt><%= ShippingCompany.human_attribute_name('cubic_weight_const').capitalize %></dt>
+    <dd><%= number_with_precision(@shipping_co.cubic_weight_const, precision: 2) %> kg/m³</dd>
+
+    <dt><%= ShippingCompany.human_attribute_name('min_fee').capitalize %></dt>
+    <dd><%= number_to_currency(@shipping_co.min_fee) %></dd>
   </dl>
+  
   <%= link_to 'Voltar', shipping_companies_path %>
   <%= button_to 'Apagar', fake_delete_shipping_company_path(@shipping_co) %>
   <%= link_to 'Editar', edit_shipping_company_path %>

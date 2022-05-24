@@ -27,6 +27,12 @@
 
       <dt><%= f.label :billing_address, t('activerecord.attributes.shipping_company.billing_address').capitalize %></dt>
       <dd><%= f.text_area :billing_address %></dd>
+
+      <dt><%= f.label :cubic_weight_const, t('activerecord.attributes.shipping_company.cubic_weight_const').capitalize.concat(' (kg/m³)') %></dt>
+      <dd><%= f.number_field :cubic_weight_const %></dd>
+
+      <dt><%= f.label :min_fee, t('activerecord.attributes.shipping_company.min_fee').capitalize %></dt>
+      <dd><%= f.number_field :min_fee %></dd>
     </dl>
     <%= link_to 'Voltar', shipping_companies_path %>
     <%= f.submit %>

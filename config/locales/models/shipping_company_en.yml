@@ -4,6 +4,8 @@ en:
       shipping_company:
         name: trade name
         cnpj: CNPJ
+        cubic_weight_const: cubic weight factor
+        min_fee: minimal fee
     errors:
       models:
         shipping_company:
