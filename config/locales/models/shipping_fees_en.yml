@@ -1,0 +1,6 @@
+en:
+  shipping_fees:
+    index:
+      business_days:
+        one: business day
+        other: business days

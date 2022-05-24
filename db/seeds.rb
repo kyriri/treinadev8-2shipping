@@ -1,5 +1,6 @@
 # The data can be loaded with the bin/rails db:seed command 
 
+DeliveryTime.destroy_all
 ShippingFee.destroy_all
 ServiceOrder.destroy_all
 Package.destroy_all
@@ -75,6 +76,14 @@ ShippingFee.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 55, shipping_comp
 ShippingFee.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 52, shipping_company: sc2)
 ShippingFee.create!(max_weight_in_kg: 7, cost_per_km_in_cents: 50, shipping_company: sc2)
 
+DeliveryTime.create!(max_distance_in_km: 800, delivery_time_in_buss_days: 3, shipping_company: sc2)
+DeliveryTime.create!(max_distance_in_km: 50, delivery_time_in_buss_days: 2, shipping_company: sc2)
+DeliveryTime.create!(max_distance_in_km: 20, delivery_time_in_buss_days: 1, shipping_company: sc2)
+DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 3, shipping_company: sc2)
+DeliveryTime.create!(max_distance_in_km: 400, delivery_time_in_buss_days: 4, shipping_company: sc2)
+DeliveryTime.create!(max_distance_in_km: 555, delivery_time_in_buss_days: 8, shipping_company: sc3) # another company
+
+
 User.create!(email: 'me@email.com', password: '12345678')
 User.create!(email: 'la-la@courriel.fr', password: 'croissant')
 
@@ -83,3 +92,4 @@ p "Created #{User.count} users"
 p "Created #{Package.count} packages"
 p "Created #{ServiceOrder.count} service orders"
 p "Created price table for #{ShippingFee.select(:shipping_company_id).distinct.count} shipping companies"
+p "Created delivery times table for #{DeliveryTime.select(:shipping_company_id).distinct.count} shipping companies"

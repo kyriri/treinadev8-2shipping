@@ -36,3 +36,25 @@
     <% end %>
   </table>
 <% end %>
+
+<h3>Tabela de prazos</h3>
+
+<% unless @times.empty? %>
+  <table>
+    <tr>
+      <th>distância</th>
+      <th>tempo</th>
+    </tr>
+    <% @times.each do |tier| %>
+      <tr>
+        <td>
+          <%= "até #{number_with_precision(tier.max_distance_in_km, precision: 0)} km" %>
+        </td>
+        <td>
+          <%=number_with_precision(tier.delivery_time_in_buss_days, precision: 0) %>
+          <%= t('.business_days', count: tier.delivery_time_in_buss_days) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
