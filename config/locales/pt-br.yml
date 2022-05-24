@@ -1,5 +1,8 @@
 pt-BR:
-  app_name: East Wing - Departamento de Envios
+  layouts:
+    application:
+      app_name: East Wing - Departamento de Envios
+      service_orders: Ordens de Serviço
 
   helpers:
     select:

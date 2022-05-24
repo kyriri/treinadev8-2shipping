@@ -1,3 +1,5 @@
 en:
-  app_name: East Wing - Shipping Department
-  log_in: Log in
+  layouts:
+    application:
+      app_name: East Wing - Shipping Department
+      service_orders: Service Orders
