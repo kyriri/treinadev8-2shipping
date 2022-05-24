@@ -80,7 +80,7 @@ RSpec.describe ServiceOrder, type: :model do
       
       filtered_quotes = s_o.select_carriers_with_best(:fee, quotes)
 
-      expect(filtered_quotes).to eq 'Unable to choose best quote from an empty array'
+      expect(filtered_quotes).to eq 'Unable to choose best quote from an empty list'
     end
   end
 end

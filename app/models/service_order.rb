@@ -14,7 +14,7 @@ class ServiceOrder < ApplicationRecord
   end
 
   def select_carriers_with_best(criteria, quotes)
-    return 'Unable to choose best quote from an empty array' if quotes.empty?
+    return 'Unable to choose best quote from an empty list' if quotes.empty?
 
     best_value = quotes.map { |quote| quote.values_at(criteria) }
                        .flatten
