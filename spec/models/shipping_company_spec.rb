@@ -151,4 +151,45 @@ RSpec.describe ShippingCompany, type: :model do
       expect(response2).to eq 1.7
     end
   end
+
+  describe '#find_rate' do
+    it 'selects the right rate' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 350,
+                                    min_fee: 8)
+      ShippingRate.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 5,   shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 66,  shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 0.5, cost_per_km_in_cents: 9,   shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 1  , cost_per_km_in_cents: 33,  shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 10 , cost_per_km_in_cents: 100, shipping_company: sc1)
+      weight1 = 0.25
+      weight2 = 5
+      weight3 = 5.01
+      weight4 = 10
+
+      response1 = sc1.find_rate(weight1)
+      response2 = sc1.find_rate(weight2)
+      response3 = sc1.find_rate(weight3)
+      response4 = sc1.find_rate(weight4)
+
+      expect(response1.class).to be Integer
+      expect(response1).to eq 5
+      expect(response2).to eq 66
+      expect(response3).to eq 100
+      expect(response4).to eq 100
+    end
+    
+    it 'returns error message when weight is too heavy' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 350,
+                                    min_fee: 8)
+      ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 50, shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 5, cost_per_km_in_cents: 70, shipping_company: sc1)
+      weight = 100
+
+      response = sc1.find_rate(weight)
+
+      expect(response).to eq 'Weight outside service range'
+    end
+  end
 end

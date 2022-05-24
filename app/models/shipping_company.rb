@@ -28,4 +28,16 @@ class ShippingCompany < ApplicationRecord
     [dead_weigth, cubic_weight].max
   end
 
+  def find_rate(weight)
+    services = self.shipping_rates
+                   .where('max_weight_in_kg >= ?', weight)
+    if services.empty?
+      'Weight outside service range'
+    else
+      services.order(:max_weight_in_kg)
+              .first
+              .cost_per_km_in_cents
+    end
+  end
+
 end
