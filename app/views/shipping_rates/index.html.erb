@@ -51,7 +51,7 @@
           <%= "até #{number_with_precision(tier.max_distance_in_km, precision: 0)} km" %>
         </td>
         <td>
-          <%=number_with_precision(tier.delivery_time_in_buss_days, precision: 0) %>
+          <%= number_with_precision(tier.delivery_time_in_buss_days, precision: 0) %>
           <%= t('.business_days', count: tier.delivery_time_in_buss_days) %>
         </td>
       </tr>
