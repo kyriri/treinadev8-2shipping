@@ -8,7 +8,7 @@
     <% else %>
       <ul>
         <% @unassigned_orders.each do |order| %>
-          <li>ID: <%= order.id %> | <%= link_to 'detalhes', '' %></li>
+          <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
         <% end %>
       </ul>
     <% end %>
@@ -21,7 +21,7 @@
     <% else %>
       <ul>
         <% @rejected_orders.each do |order| %>
-          <li>ID: <%= order.id %> | <%= link_to 'detalhes', '' %></li>
+          <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
         <% end %>
       </ul>
     <% end %>
