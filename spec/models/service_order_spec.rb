@@ -37,5 +37,23 @@ RSpec.describe ServiceOrder, type: :model do
       expect(range_of_values.last).to be 2
       expect(selected_companies).to eq([1, 2, 5])
     end
+
+    it 'works with a single quote' do
+      s_o = ServiceOrder.new
+      quotes = [ { company_id: 1, package_id: 32, fee: 15.50, delivery_time: 2 } ]
+      
+      filtered_quotes = s_o.select_carriers_with_best(:fee, quotes)
+
+      expect(quotes).to eq filtered_quotes
+    end
+
+    it 'return an error message if no quotes are passed' do #TODO populate the error object for flash messages
+      s_o = ServiceOrder.new
+      quotes = []
+      
+      filtered_quotes = s_o.select_carriers_with_best(:fee, quotes)
+
+      expect(filtered_quotes).to eq 'Unable to choose best quote from an empty array'
+    end
   end
 end
