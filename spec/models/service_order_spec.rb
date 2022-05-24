@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ServiceOrder, type: :model do
-
   context '#select_carriers_with_best' do
     it 'fee finds all the cheapest carriers' do
       s_o = ServiceOrder.new
@@ -11,17 +10,16 @@ RSpec.describe ServiceOrder, type: :model do
                  { company_id: 76, package_id: 32, fee: 7.23, delivery_time: 4 },
                ]
 
-      filtered = s_o.select_carriers_with_best(:fee, quotes)
+      filtered_quotes = s_o.select_carriers_with_best(:fee, quotes)
+      range_of_values = [filtered_quotes.map { |q| q[:fee] }.min, filtered_quotes.map { |q| q[:fee] }.max]
+      selected_companies = filtered_quotes.map { |q| q[:company_id] }
 
-      expect(filtered.length).to be 2
-      expect(filtered[0][:fee]).to be 7.23
-      expect(filtered[0][:company_id]).to be 2
-      expect(filtered[1][:fee]).to be 7.23
-      expect(filtered[1][:company_id]).to be 76
+      expect(filtered_quotes.length).to be 2
+      expect(range_of_values.first).to be 7.23
+      expect(range_of_values.last).to be 7.23
+      expect(selected_companies).to eq([2, 76])
     end
-  end
 
-  context '#select_carriers_with_best' do
     it 'delivery time finds all the fastest carriers' do
       s_o = ServiceOrder.new
       quotes = [ { company_id: 1, package_id: 32, fee: 15.50, delivery_time: 2 }, 
@@ -30,10 +28,14 @@ RSpec.describe ServiceOrder, type: :model do
                  { company_id: 33, package_id: 32, fee: 7.23, delivery_time: 4 },
                ]
 
-      filtered = s_o.select_carriers_with_best(:delivery_time, quotes)
+      filtered_quotes = s_o.select_carriers_with_best(:delivery_time, quotes)
+      range_of_values = [filtered_quotes.map { |q| q[:delivery_time] }.min, filtered_quotes.map { |q| q[:delivery_time] }.max]
+      selected_companies = filtered_quotes.map { |q| q[:company_id] }
 
-      expect(filtered.length).to be 3
-      expect(filtered[0][:delivery_time]).to be 2
+      expect(filtered_quotes.length).to be 3
+      expect(range_of_values.first).to be 2
+      expect(range_of_values.last).to be 2
+      expect(selected_companies).to eq([1, 2, 5])
     end
   end
 end
