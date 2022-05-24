@@ -14,11 +14,18 @@ class ShippingCompany < ApplicationRecord
     services = self.delivery_times
                    .where('max_distance_in_km >= ?', package.distance_in_km)
     if services.empty?
-      'Delivery outside range'
+      'Distance outside service range'
     else
       services.order(:max_distance_in_km)
               .first
               .delivery_time_in_buss_days
     end
   end
+
+  def calculate_weight(package)
+    dead_weigth = package.weight_in_g.to_f / 1000
+    cubic_weight = package.volume_in_m3 * cubic_weight_const
+    [dead_weigth, cubic_weight].max
+  end
+
 end

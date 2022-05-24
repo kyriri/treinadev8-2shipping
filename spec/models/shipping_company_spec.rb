@@ -132,7 +132,23 @@ RSpec.describe ShippingCompany, type: :model do
       response = sc1.find_delivery_time(pack1)
 
       expect(response.class).to be String
-      expect(response).to eq 'Delivery outside range'
+      expect(response).to eq 'Distance outside service range'
+    end
+  end
+
+  describe '#calculate_weight' do
+    it 'returns the biggest of the weights (dead or cubic)' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 300,
+                                    min_fee: 8)
+      pack1 = Package.create!(volume_in_m3: 0.005, weight_in_g: 250)
+      pack2 = Package.create!(volume_in_m3: 0.005, weight_in_g: 1700)
+
+      response1 = sc1.calculate_weight(pack1)
+      response2 = sc1.calculate_weight(pack2)
+
+      expect(response1).to eq 1.5
+      expect(response2).to eq 1.7
     end
   end
 end
