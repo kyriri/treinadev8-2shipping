@@ -23,6 +23,8 @@ class ShippingCompany < ApplicationRecord
   end
 
   def calculate_weight(package)
+    return '' if package.weight_in_g.nil? || cubic_weight_const.nil?
+    
     dead_weigth = package.weight_in_g.to_f / 1000
     cubic_weight = package.volume_in_m3 * cubic_weight_const
     [dead_weigth, cubic_weight].max

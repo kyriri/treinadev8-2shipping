@@ -1,6 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe ServiceOrder, type: :model do
+  context '#get_quotes' do
+    it 'only considers active companies' do
+      sc1 = ShippingCompany.create!(status: 'deleted', name: 'Transportes Marília', legal_name: 'Transportes Marília Ltda', email_domain: 'tma.com.br', cnpj: 12345678904321, billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
+      sc2 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+      sc3 = ShippingCompany.create!(status: 'active', name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+      sc4 = ShippingCompany.create!(status: 'in_registration', name: 'Granelero', legal_name: 'Transportes Graneleros do Brasil S.A.', email_domain: 'br.granelero.com', cnpj: 34259054000134, billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+      s_o = ServiceOrder.create!(package: Package.new)
+
+      results = s_o.get_quotes
+      companies_answering = results.map { |q| q[:company_id] }
+
+      expect(results.size).to be 2
+      expect(companies_answering).to eq [2, 3]
+    end
+
+    it 'returns error message if there are no active companies' do
+      sc1 = ShippingCompany.create!(status: 'deleted', name: 'Transportes Marília', legal_name: 'Transportes Marília Ltda', email_domain: 'tma.com.br', cnpj: 12345678904321, billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
+      sc2 = ShippingCompany.create!(status: 'suspended', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+      sc3 = ShippingCompany.create!(status: 'in_registration', name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+      s_o = ServiceOrder.create!(package: Package.new)
+
+      results = s_o.get_quotes
+
+      expect(results).to eq 'Unable to request quotes because there are no active companies'
+    end
+  end
+
   context '#select_carriers_with_best' do
     it 'fee finds all the cheapest carriers' do
       s_o = ServiceOrder.new
