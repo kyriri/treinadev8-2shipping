@@ -40,4 +40,8 @@ class ShippingCompany < ApplicationRecord
     end
   end
 
+  def calculate_fee(package, rate)
+    fee = (rate * package.distance_in_km).to_f / 1000
+    [fee, self.min_fee].max
+  end
 end

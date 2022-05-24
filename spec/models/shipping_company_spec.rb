@@ -147,8 +147,8 @@ RSpec.describe ShippingCompany, type: :model do
       response1 = sc1.calculate_weight(pack1)
       response2 = sc1.calculate_weight(pack2)
 
-      expect(response1).to eq 1.5
-      expect(response2).to eq 1.7
+      expect(response1).to eq 1.5 # cubic weight = 300 * 0.005
+      expect(response2).to eq 1.7 # dead weight
     end
   end
 
@@ -190,6 +190,23 @@ RSpec.describe ShippingCompany, type: :model do
       response = sc1.find_rate(weight)
 
       expect(response).to eq 'Weight outside service range'
+    end
+  end
+
+  describe '#calculate_fee' do
+    it 'returns the biggest of the rates (minimal or calculated)' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 300,
+                                    min_fee: 5)
+      pack1 = Package.create!(distance_in_km: 2)
+      pack2 = Package.create!(distance_in_km: 100)
+      rate = 99
+
+      response1 = sc1.calculate_fee(pack1, rate)
+      response2 = sc1.calculate_fee(pack2, rate)
+
+      expect(response1).to eq 5   # minimal fee
+      expect(response2).to eq 9.9 # calculated fee
     end
   end
 end
