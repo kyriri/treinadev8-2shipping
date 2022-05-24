@@ -9,4 +9,16 @@ class ShippingCompany < ApplicationRecord
 
   has_many :shipping_rates
   has_many :delivery_times
+
+  def find_delivery_time(package)
+    services = self.delivery_times
+                   .where('max_distance_in_km >= ?', package.distance_in_km)
+    if services.empty?
+      'Delivery outside range'
+    else
+      services.order(:max_distance_in_km)
+              .first
+              .delivery_time_in_buss_days
+    end
+  end
 end

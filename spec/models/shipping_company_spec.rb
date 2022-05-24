@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ShippingCompany, type: :model do
-  describe 'is not valid when' do
+  describe '#valid is false when' do
     it 'mandatory fields are blank' do
       cia = ShippingCompany.new(name: '',
                                 legal_name: '',
@@ -70,7 +70,7 @@ RSpec.describe ShippingCompany, type: :model do
     end
   end
 
-  describe 'is valid when' do
+  describe '#valid is true when' do
     it 'name is repeated from a deleted company' do
       ShippingCompany.create!(name: 'Transportes Marília',
                               status: 'deleted',
@@ -103,6 +103,36 @@ RSpec.describe ShippingCompany, type: :model do
                                     cnpj: 12345678904321,
                                     billing_address: 'Av. do Aeroporto, 10 - Rio de Janeiro, RJ')
       expect(cia.valid?).to be true
+    end
+  end
+
+  describe '#find_delivery_time' do
+    it 'selects the right delivery time' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 350,
+                                    min_fee: 8)
+      pack1 = Package.create!(distance_in_km: 45)
+      DeliveryTime.create!(max_distance_in_km: 50,  delivery_time_in_buss_days: 2, shipping_company: sc1)
+      DeliveryTime.create!(max_distance_in_km: 20,  delivery_time_in_buss_days: 1, shipping_company: sc1)
+
+      response = sc1.find_delivery_time(pack1)
+
+      expect(response.class).to be Integer
+      expect(response).to eq 2
+    end
+
+    it 'return error message when distance is outside delivery range' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
+                                    cubic_weight_const: 350,
+                                    min_fee: 8)
+      pack1 = Package.create!(distance_in_km: 100)
+      DeliveryTime.create!(max_distance_in_km: 50,  delivery_time_in_buss_days: 2, shipping_company: sc1)
+      DeliveryTime.create!(max_distance_in_km: 20,  delivery_time_in_buss_days: 1, shipping_company: sc1)
+
+      response = sc1.find_delivery_time(pack1)
+
+      expect(response.class).to be String
+      expect(response).to eq 'Delivery outside range'
     end
   end
 end
