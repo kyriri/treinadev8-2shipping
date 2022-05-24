@@ -8,4 +8,5 @@ class ShippingCompany < ApplicationRecord
   enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
 
   has_many :shipping_fees
+  has_many :delivery_times
 end
