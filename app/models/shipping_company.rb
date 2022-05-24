@@ -14,7 +14,7 @@ class ShippingCompany < ApplicationRecord
     services = self.delivery_times
                    .where('max_distance_in_km >= ?', package.distance_in_km)
     if services.empty?
-      'Distance outside service range'
+      nil
     else
       services.order(:max_distance_in_km)
               .first
@@ -32,7 +32,7 @@ class ShippingCompany < ApplicationRecord
     services = self.shipping_rates
                    .where('max_weight_in_kg >= ?', weight)
     if services.empty?
-      'Weight outside service range'
+      nil
     else
       services.order(:max_weight_in_kg)
               .first

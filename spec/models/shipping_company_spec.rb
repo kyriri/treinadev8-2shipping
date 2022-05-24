@@ -121,7 +121,7 @@ RSpec.describe ShippingCompany, type: :model do
       expect(response).to eq 2
     end
 
-    it 'return error message when distance is outside delivery range' do
+    it 'return falsey value when distance is too big' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
                                     cubic_weight_const: 350,
                                     min_fee: 8)
@@ -131,8 +131,7 @@ RSpec.describe ShippingCompany, type: :model do
 
       response = sc1.find_delivery_time(pack1)
 
-      expect(response.class).to be String
-      expect(response).to eq 'Distance outside service range'
+      expect(response).to be nil
     end
   end
 
@@ -179,7 +178,7 @@ RSpec.describe ShippingCompany, type: :model do
       expect(response4).to eq 100
     end
     
-    it 'returns error message when weight is too heavy' do
+    it 'returns falsey value when weight is too heavy' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234,
                                     cubic_weight_const: 350,
                                     min_fee: 8)
@@ -189,7 +188,7 @@ RSpec.describe ShippingCompany, type: :model do
 
       response = sc1.find_rate(weight)
 
-      expect(response).to eq 'Weight outside service range'
+      expect(response).to be nil
     end
   end
 
