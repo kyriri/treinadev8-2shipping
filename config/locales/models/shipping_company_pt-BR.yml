@@ -1,4 +1,7 @@
 pt-BR:
+  shipping_companies:
+    index:
+      rates: taxas
   activerecord:
     models:
       shipping_company: transportadora

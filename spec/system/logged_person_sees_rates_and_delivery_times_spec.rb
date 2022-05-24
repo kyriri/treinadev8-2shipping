@@ -11,7 +11,7 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
                                   cubic_weight_const: 300,
                                   min_fee: 10)
     sc2 = ShippingCompany.create!(name: 'Cheirex',
-                                  status: 'active',
+                                  status: 'deleted',
                                   legal_name: 'Transportes Federais do Brasil S.A.',
                                   email_domain: 'cheirex.com',
                                   cnpj: 12345678901234,
@@ -19,13 +19,15 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
                                   cubic_weight_const: 350,
                                   min_fee: 8)                              
     
-    visit shipping_company_shipping_rates_path(sc1)
+    visit shipping_companies_path
+    click_on 'taxas'
 
     expect(page).to have_text('Ibérica')
     expect(page).to have_text('Valor mínimo')
     expect(page).to have_text('R$ 10,00')
     expect(page).to have_text('Fator para cálculo de peso cubado')
     expect(page).to have_text('300 kg/m³')
+    expect(page).not_to have_text('350 kg/m³')
   end
 
   it "sees the company's table of rates" do

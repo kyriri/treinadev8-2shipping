@@ -10,7 +10,11 @@
   <% else %>
     <ul>
       <% @shipping_cos.each do |company| %>
-        <li><%= link_to company.name, company %></li>
+        <li>
+          <%= link_to company.name, company %>
+          |
+          <%= link_to t('.rates'), shipping_company_shipping_rates_path(company) %>
+        </li>
       <% end %>
     </ul>
   <% end %>

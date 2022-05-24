@@ -1,4 +1,7 @@
 en:
+  shipping_companies:
+    index:
+      rates: rates
   activerecord:
     attributes:
       shipping_company:
