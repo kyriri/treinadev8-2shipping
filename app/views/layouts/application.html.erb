@@ -12,15 +12,11 @@
   <body>
     <nav>
       <%= link_to t('.app_name'), root_path %>
-      | 
       <%= link_to t('.service_orders'), service_orders_path %>
       <% unless user_signed_in? %>
-        | 
         <%= link_to t('devise.shared.links.log_in'), new_user_session_path %>
       <% else %>
-        | 
         <%= current_user.email %>
-        | 
         <%= button_to t('devise.shared.links.log_out'), destroy_user_session_path, method: :delete %>
       <% end %>
     </nav>
