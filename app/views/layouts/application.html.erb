@@ -20,9 +20,7 @@
       <% end %>
     </header>
 
-    <nav>
-      <%= link_to t('.service_orders'), service_orders_path %>
-    </nav>
+    <%= render 'layouts/user_navbar' %>
 
     <% flash.each do |type, message| %> 
       <%= content_tag :div, message, class: type %> 

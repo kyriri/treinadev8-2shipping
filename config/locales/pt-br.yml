@@ -2,7 +2,11 @@ pt-BR:
   layouts:
     application:
       app_name: East Wing - Departamento de Envios
-      service_orders: Ordens de Serviço
+    user_navbar:
+      my_profile: Meu Perfil
+      my_service_orders: Minhas Ordens de Serviço
+      my_rates_and_times: Meus Preços e Prazos
+      my_distribution_points: Meus Entrepostos
 
   helpers:
     select:

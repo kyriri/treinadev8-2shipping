@@ -2,4 +2,8 @@ en:
   layouts:
     application:
       app_name: East Wing - Shipping Department
-      service_orders: Service Orders
+    user_navbar:
+      my_profile: My Profile
+      my_service_orders: My Service Orders
+      my_rates_and_times: My Rates & Times
+      my_distribution_points: My Distribution Points
