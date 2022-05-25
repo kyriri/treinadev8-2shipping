@@ -1,0 +1,23 @@
+en:
+  shipping_rates:
+    index:
+      business_days:
+        one: business day
+        other: business days
+        
+  activerecord:
+    models:
+      shipping_rate: shipping rate
+    attributes:
+      shipping_rate:
+        shipping_company: shipping company
+        max_weight_in_kg: max weight
+        cost_per_km_in_cents: cost per km
+    errors:
+      models:
+        shipping_rate:
+          attributes:
+            max_weight_in_kg:
+              taken: already registered
+            shipping_company:
+              required: should be stated for each rate

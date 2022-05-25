@@ -1,6 +1,0 @@
-pt-BR:
-  shipping_rates:
-    index:
-      business_days:
-        one: dia útil
-        other: dias úteis

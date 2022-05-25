@@ -1,0 +1,23 @@
+pt-BR:
+  shipping_rates:
+    index:
+      business_days:
+        one: dia útil
+        other: dias úteis
+
+  activerecord:
+    models:
+      shipping_rate: taxa de envio
+    attributes:
+      shipping_rate:
+        shipping_company: transportadora
+        max_weight_in_kg: peso máximo
+        cost_per_km_in_cents: custo por km
+    errors:
+      models:
+        shipping_rate:
+          attributes:
+            max_weight_in_kg:
+              taken: já cadastrado
+            shipping_company:
+              required: precisa constar na informação da taxa
