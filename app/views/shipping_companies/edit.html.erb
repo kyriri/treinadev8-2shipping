@@ -38,7 +38,7 @@
       <dd><%= f.number_field :min_fee %></dd>
     </dl>
     
-    <%= link_to 'Voltar', shipping_company_path(@shipping_co.id) %>
+    <%= link_to 'Voltar', shipping_company_path(@shipping_co.id), class: 'as_button' %> 
     <%= f.submit 'Salvar' %>
   <% end %>
 </div>

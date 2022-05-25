@@ -34,7 +34,7 @@
       <dt><%= f.label :min_fee, t('activerecord.attributes.shipping_company.min_fee').capitalize %></dt>
       <dd><%= f.number_field :min_fee %></dd>
     </dl>
-    <%= link_to 'Voltar', shipping_companies_path %>
+    <%= link_to 'Voltar', shipping_companies_path, class: 'as_button' %>
     <%= f.submit %>
   <% end %>
 </div>
