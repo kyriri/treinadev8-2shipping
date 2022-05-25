@@ -24,7 +24,7 @@ RSpec.describe ServiceOrder, type: :model do
 
       results = s_o.get_quotes
 
-      expect(results).to eq 'Unable to request quotes because there are no active companies'
+      expect(results).to eq []
     end
   end
 
