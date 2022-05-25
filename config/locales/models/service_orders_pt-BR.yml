@@ -1,0 +1,6 @@
+pt-BR:
+  service_orders:
+    quotes:
+      business_days:
+        one: dia útil
+        other: dias úteis

@@ -1,0 +1,23 @@
+<div class='quotes'>
+  <% if @quotes.empty? || @quotes.map{ |q| q[:error] }.all?(true) %>
+    <b>Orçamentos</b><br>
+    <span class='alert'>Nenhuma transportadora ativa oferece serviços compatíveis.</span>
+  <% else %>
+    <table>
+      <caption>Orçamentos</caption>
+      <tr>
+        <th>empresa</th>
+        <th>preço</th>
+        <th>prazo</th>
+      </tr>
+      <% @quotes.each do |q| %>
+        <%= next if q[:error] %>
+        <tr>
+          <td><%= ShippingCompany.find(q[:company_id]).name %></td>
+          <td><%= number_to_currency(q[:fee]) %></td>
+          <td><%= "#{q[:delivery_time]} #{t('.business_days', count: q[:delivery_time])}" %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

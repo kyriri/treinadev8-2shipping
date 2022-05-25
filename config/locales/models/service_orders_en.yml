@@ -1,0 +1,6 @@
+en:
+  service_orders:
+    quotes:
+      business_days:
+        one: business day
+        other: business days
