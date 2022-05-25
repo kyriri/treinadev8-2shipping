@@ -24,7 +24,7 @@
   --text-light: #585858;
   --border: #d8dae1;
   --accent: #0d47a1;
-  --accent-light: #90caf9;
+  --accent-light: #b2dafa;
   --code: #d81b60;
   --preformatted: #444;
   --marked: #ffdd33;
@@ -309,6 +309,8 @@ tr:nth-child(odd) {
 }
 
 table caption {
+  font-size: 1.05rem;
+  text-align: left;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
@@ -400,10 +402,10 @@ input[type="radio"]:checked::after {
   font-size: 32px;
 }
 
-/* Make the textarea wider than other inputs */
+/* Make the textarea wider than other inputs 
 textarea {
   width: 80%;
-}
+} */
 
 /* Makes input fields wider on smaller screens */
 @media only screen and (max-width: 720px) {
@@ -514,4 +516,20 @@ pre code {
   background: none;
   margin: 0;
   padding: 0;
+}
+
+/* highlight flash messages */
+.alert, .notice {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.5rem 0.7rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.alert {
+  background: var(--marked);
+}
+
+.notice { 
+  background: var(--accent-light);
 }

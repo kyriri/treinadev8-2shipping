@@ -1,21 +1,20 @@
-<h1><%= @shipping_company.name %></h1>
+<h2>
+  <%= @shipping_company.name %>
+  <br>
+  <span style='font-size: 0.7em'>— Informações para cálculo de tarifas</span>
+</h2>
 
-<h2>Informações para cálculo de tarifas</h2>
+<dl>
+  <dt>Fator para cálculo de peso cubado</dt>
+  <dd><%= number_with_precision(@shipping_company.cubic_weight_const, precision: 0) %> kg/m³</dd>
 
-<h3>Fator para cálculo de peso cubado</h3>
-<div>
-  <%= number_with_precision(@shipping_company.cubic_weight_const, precision: 0) %> kg/m³
-</div>
-
-<h3>Valor mínimo</h3>
-<div>
-  <%= number_to_currency(@shipping_company.min_fee) %>
-</div>
-
-<h3>Tabela de tarifas</h3>
+  <dt>Valor mínimo</dt>
+  <dd><%= number_to_currency(@shipping_company.min_fee) %></dd>
+</dl>
 
 <% unless @fees.empty? %>
   <table>
+    <caption>Tabela de tarifas</caption>
     <tr>
       <th>peso</th>
       <th>preço</th>
@@ -37,10 +36,9 @@
   </table>
 <% end %>
 
-<h3>Tabela de prazos</h3>
-
 <% unless @times.empty? %>
   <table>
+    <caption>Tabela de prazos</caption>
     <tr>
       <th>distância</th>
       <th>tempo</th>
