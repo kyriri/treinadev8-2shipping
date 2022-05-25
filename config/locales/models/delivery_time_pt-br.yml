@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      delivery_time: prazo
+    attributes:
+      delivery_time:
+        shipping_company: transportadora
+        max_distance_in_km: distância máxima
+        delivery_time_in_buss_days: prazo
+    errors:
+      models:
+        delivery_time:
+          attributes:
+            max_distance_in_km:
+              taken: já cadastrada
+            shipping_company:
+              required: precisa constar na informação da taxa

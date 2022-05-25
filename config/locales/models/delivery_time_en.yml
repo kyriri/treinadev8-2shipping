@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      delivery_time: delivery time
+    attributes:
+      delivery_time:
+        shipping_company: transportadora
+        max_distance_in_km: max distance
+        delivery_time_in_buss_days: delivery time
+    errors:
+      models:
+        delivery_time:
+          attributes:
+            max_distance_in_km:
+              taken: already registered
+            shipping_company:
+              required: should be stated for each delivery time
+              
