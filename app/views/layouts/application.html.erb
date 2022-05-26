@@ -12,13 +12,16 @@
   <body>
     <header>
       <%= link_to t('.app_name'), root_path %>
+
+    </header>
+
+    <nav>
+      <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 
       <% if user_signed_in? %>
         <%= current_user.email %>
         <%= button_to t('devise.shared.links.log_out'), destroy_user_session_path, method: :delete %>
       <% end %>
-    </header>
-
-    <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 
+    </nav>
 
     <% flash.each do |type, message| %> 
       <%= content_tag :div, message, class: type %> 

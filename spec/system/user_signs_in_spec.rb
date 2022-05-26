@@ -12,7 +12,7 @@ describe 'User signs in' do
     end
 
     expect(page).to have_text('Login efetuado com sucesso')
-    expect(page).to have_css('header', text: 'me@email.com')
+    expect(page).to have_text('me@email.com')
     expect(page).to have_button('Sair')
   end
 
