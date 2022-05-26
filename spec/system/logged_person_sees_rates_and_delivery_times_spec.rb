@@ -1,7 +1,37 @@
 require 'rails_helper'
 
-describe 'On visiting the Shipping Rates page of a company, a logged person' do
-  it "sees the company's variables" do
+describe 'Normal user can see rates & times' do
+  it 'of its own company' do
+    sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', cubic_weight_const: 35, min_fee: 8, legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+    ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 60, shipping_company: sc1)
+    DeliveryTime.create!(max_distance_in_km: 20, delivery_time_in_buss_days: 1, shipping_company: sc1)
+    user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
+    
+    login_as(user)
+    visit root_path
+    click_on 'Meus Preços & Prazos'
+
+    expect(current_path).to eq shipping_company_shipping_rates_path(sc1)
+    expect(page).to have_text('Cheirex')
+    expect(page).to have_text('Informações para cálculo de tarifas')
+    expect(page).to have_text('até 1 kg')
+    expect(page).to have_text('R$ 0,60')
+  end
+
+  it 'but not of other companies' do
+    another_sc = ShippingCompany.create!(status: 'active', name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC', cubic_weight_const: 30, min_fee: 10)
+    user_sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+    user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: user_sc)
+
+    login_as(user)
+    visit shipping_company_shipping_rates_path(another_sc)
+
+    expect(current_path).to eq root_path
+  end
+end
+
+describe 'Admin access rates & times' do
+  it "and sees the company's variables" do
     sc1 = ShippingCompany.create!(name: 'Ibérica',
                                   status: 'in_registration',
                                   legal_name: 'Ibérica dos Transportes Ltda',
@@ -17,8 +47,10 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
                                   cnpj: 12345678901234,
                                   billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', 
                                   cubic_weight_const: 350,
-                                  min_fee: 8)                              
-    
+                                  min_fee: 8)           
+    admin = User.create!(admin:true, email: 'me@email.com', password: '12345678')
+
+    login_as(admin)
     visit shipping_companies_path
     click_on 'taxas'
 
@@ -27,6 +59,7 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
     expect(page).to have_text('R$ 10,00')
     expect(page).to have_text('Fator para cálculo de peso cubado')
     expect(page).to have_text('300 kg/m³')
+    expect(page).not_to have_text('Cheirex')
     expect(page).not_to have_text('350 kg/m³')
   end
 
@@ -49,7 +82,9 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
     ShippingRate.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 50, shipping_company: sc1)
     ShippingRate.create!(max_weight_in_kg: 6  , cost_per_km_in_cents: 65, shipping_company: sc1)
     ShippingRate.create!(max_weight_in_kg: 2  , cost_per_km_in_cents: 51, shipping_company: sc2) # another company
-      
+    admin = User.create!(admin:true, email: 'me@email.com', password: '12345678')
+
+    login_as(admin)  
     visit shipping_company_shipping_rates_path(sc1)
 
     expect(page).to have_text('Tabela de tarifas')
@@ -73,7 +108,9 @@ describe 'On visiting the Shipping Rates page of a company, a logged person' do
                                   email_domain: 'cheirex.com',
                                   cnpj: 12345678901234,
                                   billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')                              
-    
+    admin = User.create!(admin:true, email: 'me@email.com', password: '12345678')
+
+    login_as(admin)
     DeliveryTime.create!(max_distance_in_km: 800, delivery_time_in_buss_days: 3, shipping_company: sc1)
     DeliveryTime.create!(max_distance_in_km: 50, delivery_time_in_buss_days: 2, shipping_company: sc1)
     DeliveryTime.create!(max_distance_in_km: 20, delivery_time_in_buss_days: 1, shipping_company: sc1)
