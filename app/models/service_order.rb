@@ -6,7 +6,7 @@ class ServiceOrder < ApplicationRecord
 
   def get_quotes
     active_companies = ShippingCompany.where(status: 'active')
-    return active_companies if active_companies.empty?
+    return 'no active companies' if active_companies.empty?
     quote_group = get_code 
     active_companies.map do |company|
       company.quote_for(self.package, quote_group)

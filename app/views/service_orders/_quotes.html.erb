@@ -1,5 +1,8 @@
 <div class='quotes'>
-  <% if @quotes.empty? || @quotes.map{ |q| q[:error] }.all?(true) %>
+  <% if @quotes.class == String %>
+    <b>Orçamentos</b><br>
+    <span class='alert'>Não existem transportadoras ativas.</span>
+  <% elsif @quotes.map{ |q| q.is_valid }.all?(false) %>
     <b>Orçamentos</b><br>
     <span class='alert'>Nenhuma transportadora ativa oferece serviços compatíveis.</span>
   <% else %>
@@ -11,11 +14,11 @@
         <th>prazo</th>
       </tr>
       <% @quotes.each do |q| %>
-        <%= next if q[:error] %>
+        <%= next if q.is_valid == false %>
         <tr>
-          <td><%= ShippingCompany.find(q[:company_id]).name %></td>
-          <td><%= number_to_currency(q[:fee]) %></td>
-          <td><%= "#{q[:delivery_time]} #{t('.business_days', count: q[:delivery_time])}" %></td>
+          <td><%= q.shipping_company.name %></td>
+          <td><%= number_to_currency(q.fee) %></td>
+          <td><%= "#{q.delivery_time} #{t('.business_days', count: q.delivery_time)}" %></td>
         </tr>
       <% end %>
     </table>
