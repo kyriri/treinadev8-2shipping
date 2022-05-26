@@ -34,7 +34,7 @@ describe 'Logged user visits homepage' do
     end
   end
 
-  context 'as a normal user' do
+  xcontext 'as a normal user' do # TODO homepage for normal users 
     it 'and sees a summary of service orders to accept/reject' do
       user = User.create!(email: 'me@email.com', password: '12345678')
 
