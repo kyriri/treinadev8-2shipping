@@ -17,5 +17,3 @@ class ShippingRatesController < ApplicationController
     end 
   end
 end
-
-# TODO issue: admin receives error message login - transportadoras - erro -> actually, error is permanent for admin on shipping company area

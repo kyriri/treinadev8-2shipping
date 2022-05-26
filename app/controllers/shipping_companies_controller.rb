@@ -73,8 +73,7 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def auth_admin
-    flash[:alert] = t('shipping_company_auth_error')
-    redirect_to root_path unless current_user.admin?
+    redirect_to root_path, alert: t('shipping_company_auth_error') unless current_user.admin?
   end
 
   def verify_user_is_from_the_target_company

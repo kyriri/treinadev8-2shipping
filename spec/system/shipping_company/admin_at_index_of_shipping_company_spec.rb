@@ -20,6 +20,7 @@ describe 'Admin visits index for Shipping Companies and' do
     visit shipping_companies_path
 
     expect(page).not_to have_text('Nenhuma transportadora cadastrada')
+    expect(page).not_to have_text('Houve um erro. Sua requisição não pode ser completada.')
     expect(page).to have_text('Cheirex')
     expect(page).to have_text('Transportes Marília')
     expect(page.text.index('Cheirex')).to be < page.text.index('Transportes Marília')
