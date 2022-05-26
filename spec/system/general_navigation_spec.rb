@@ -8,7 +8,7 @@ describe 'Unlogged user lands on homepage and' do
   end
 end
 
-describe 'Admin lands on homepage and' do
+xdescribe 'Admin lands on homepage and' do
   it 'can reach area for Shipping Companies' do
     visit root_path
     click_on 'Transportadoras'
