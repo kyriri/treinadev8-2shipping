@@ -3,9 +3,9 @@
 <div class='container'>
   <% @building_blocks.each do |box| %>
     <div class='<%= box[:css_class] %>'> 
-      <em><%= box[:title] %></em>
+      <h4><%= box[:title] %></h4>
       <% if box[:collection].empty? %>
-        Nenhuma ordem de serviço.
+        <p>Nenhuma ordem de serviço.</p>
       <% else %>
         <ul>
           <% box[:collection].each do |order| %>
