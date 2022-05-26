@@ -88,7 +88,31 @@ describe 'Admin' do
       expect(page).to have_button('Obter novos orçamentos')
     end
 
-    xit 'sees the latest set of quotes if there are many' do
+    it 'sees the latest set of quotes if there are many' do
+      serv_order = ServiceOrder.create!(status: 'unassigned', package: Package.new(distance_in_km: 34))
+      sc1 = ShippingCompany.create!(status: 'active', cubic_weight_const: 10, min_fee: 5, name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234)
+      sc2 = ShippingCompany.create!(status: 'active', cubic_weight_const: 30, min_fee: 10, name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC')
+      sc3 = ShippingCompany.create!(status: 'active', cubic_weight_const: 600, min_fee: 45, name: 'Air Cargo', legal_name: 'Empresa Brasileira de Transporte de Cargas Ltda', email_domain: 'aircargo.com.br', cnpj: 54321678900011, billing_address: 'Av. Atlântica, Rio de Janeiro - RJ')
+      ShippingRate.create!(max_weight_in_kg: 2, cost_per_km_in_cents: 60, shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 3, cost_per_km_in_cents: 55, shipping_company: sc2)
+      DeliveryTime.create!(max_distance_in_km: 550, delivery_time_in_buss_days: 2, shipping_company: sc1)
+      DeliveryTime.create!(max_distance_in_km: 1_000, delivery_time_in_buss_days: 8, shipping_company: sc2)
+      admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+      Quote.create!(fee: 45, delivery_time: 1, quote_group: "AXG-NTQ", shipping_company: sc3, service_order: serv_order, is_valid: true)
+      Quote.create!(fee: 10, delivery_time: 5, quote_group: "AXG-NTQ", shipping_company: sc2, service_order: serv_order, is_valid: true)
+      Quote.create!(fee: 21.24, delivery_time: 2, quote_group: "WYV-UUG", shipping_company: sc1, service_order: serv_order, is_valid: true)
+      Quote.create!(fee: 19.47, delivery_time: 8, quote_group: "WYV-UUG", shipping_company: sc2, service_order: serv_order, is_valid: true)
+     
+      login_as(admin)
+      visit service_order_path(serv_order)
+
+      expect(page).not_to have_text('Air Cargo') # participated only on the older quote group
+      expect(page).to have_text('Cheirex')
+      expect(page).to have_text('R$ 21,24')
+      expect(page).to have_text('2 dias úteis')
+      expect(page).to have_text('Ibérica')
+      expect(page).to have_text('R$ 19,47')
+      expect(page).to have_text('8 dias úteis')
     end
   end
 

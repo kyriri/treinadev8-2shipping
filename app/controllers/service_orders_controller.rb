@@ -9,7 +9,10 @@ class ServiceOrdersController < ApplicationController
     @service_order = ServiceOrder.find(params[:id])
     @package = @service_order.package
     @measures = [@package.width_in_cm, @package.length_in_cm, @package.height_in_cm].sort.reverse
-    @quotes = @service_order.quotes #.sort(:created_at :desc).
+    
+    return @quotes = [] if @service_order.quotes.empty?
+    newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group
+    @quotes = @service_order.quotes.where(quote_group: newest_quote_group)
   end
 
   def obtain_quotes
