@@ -28,7 +28,7 @@ describe 'User signs in' do
     end
     click_on 'Sair'
 
-    expect(page).to have_text('Logout efetuado com sucesso')
+    expect(current_path).to eq new_user_session_path
     expect(page).not_to have_css('header', text: 'me@email.com')
     expect(page).to have_link('Entrar')
     expect(page).not_to have_link('Sair')
