@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Logged user visits homepage' do
+describe 'Someone visits homepage' do
   context 'as an admin' do
     it 'and sees a summary of packages awaiting handling' do
       admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
