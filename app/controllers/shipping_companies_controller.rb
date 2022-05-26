@@ -1,5 +1,7 @@
 class ShippingCompaniesController < ApplicationController
   before_action :find_shipping_co, only: [:show, :edit, :update, :fake_delete]
+  before_action :auth_admin, only: [:index, :new, :create, :fake_delete]
+  before_action :verify_users_company, only: [:show, :edit, :update]
 
   def index
     @shipping_cos = ShippingCompany.where.not(status: :deleted).order('name')
@@ -29,6 +31,7 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def update
+    shipping_co_params.delete(:status) unless current_user.admin?
     if @shipping_co.update(shipping_co_params)
       flash[:notice] = t('shipping_company_update_succesful')
       redirect_to @shipping_co
@@ -67,5 +70,18 @@ class ShippingCompaniesController < ApplicationController
       .select { |k,v| k != "deleted" }
       .map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }
     ]
+  end
+
+  def auth_admin
+    flash[:alert] = t('shipping_company_auth_error')
+    redirect_to root_path unless current_user.admin?
+  end
+
+  def verify_users_company
+    unless current_user.admin?
+      if current_user.shipping_company != @shipping_co
+        return redirect_to root_path, alert: t('shipping_company_auth_error')
+      end
+    end 
   end
 end

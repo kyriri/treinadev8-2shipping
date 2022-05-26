@@ -28,6 +28,6 @@
   </dl>
   
   <%= link_to 'Voltar', shipping_companies_path, class: 'as_button' %>
-  <%= button_to 'Apagar', fake_delete_shipping_company_path(@shipping_co) %>
+  <%= button_to 'Apagar', fake_delete_shipping_company_path(@shipping_co) if current_user.admin? %>
   <%= link_to 'Editar', edit_shipping_company_path, class: 'as_button' %>
 </section>

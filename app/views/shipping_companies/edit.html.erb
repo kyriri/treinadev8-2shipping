@@ -16,8 +16,10 @@
       <dt><%= f.label :name, t('activerecord.attributes.shipping_company.name').capitalize %></dt>
       <dd><%= f.text_field :name %></dd>
 
-      <dt><%= f.label :status, t('activerecord.attributes.shipping_company.status').capitalize %></dt>
-      <dd><%= f.collection_radio_buttons :status, @statuses, :first, :second %></dd>
+      <% if current_user.admin? %>
+        <dt><%= f.label :status, t('activerecord.attributes.shipping_company.status').capitalize %></dt>
+        <dd><%= f.collection_radio_buttons :status, @statuses, :first, :second %></dd>
+      <% end %>
 
       <dt><%= f.label :legal_name, t('activerecord.attributes.shipping_company.legal_name').capitalize %></dt>
       <dd><%= f.text_field :legal_name %></dd>

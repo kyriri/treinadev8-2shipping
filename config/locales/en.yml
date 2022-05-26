@@ -3,7 +3,7 @@ en:
     application:
       app_name: East Wing - Shipping Department
     user_navbar:
-      my_profile: My Profile
+      my_company: My Company
       my_service_orders: My Service Orders
       my_rates_and_times: My Rates & Times
       my_distribution_points: My Distribution Points

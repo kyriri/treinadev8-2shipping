@@ -9,7 +9,7 @@ describe 'User logs in and' do
       visit root_path
 
       within 'nav' do
-        expect(page).to have_link('Meu Perfil')
+        expect(page).to have_link('Minha Empresa')
         expect(page).to have_link('Minhas Ordens de Serviço')
         expect(page).to have_link('Meus Preços & Prazos')
         expect(page).to have_link('Meus Entrepostos')

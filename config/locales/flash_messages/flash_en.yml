@@ -5,3 +5,4 @@ en:
   shipping_company_update_failed: Something went wrong. The update was aborted.
   shipping_company_fakedelete_succesful: Shipping company %{name} succesfully deleted.
   shipping_company_fakedelete_failed: Something went wrong. Shipping company not deleted.
+  shipping_company_auth_error: Something went wrong.

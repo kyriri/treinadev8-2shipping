@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to t('.my_profile'), '#' %>
+  <%= link_to t('.my_company'), current_user.shipping_company ? shipping_company_path(current_user.shipping_company) : '#' %>
   <%= link_to t('.my_service_orders'), '#' %>
   <%= link_to t('.my_rates_and_times'), '#' %>
   <%= link_to t('.my_distribution_points'), '#' %>

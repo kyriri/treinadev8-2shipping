@@ -20,7 +20,7 @@
       <% end %>
     </header>
 
-    <%= current_user.try(:admin?) ? render('layouts/admin_navbar') : render('layouts/user_navbar') %>
+    <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 
 
     <% flash.each do |type, message| %> 
       <%= content_tag :div, message, class: type %> 
