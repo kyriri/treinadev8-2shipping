@@ -14,7 +14,9 @@ describe 'Admin visits index for Shipping Companies and' do
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-      
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit shipping_companies_path
 
     expect(page).not_to have_text('Nenhuma transportadora cadastrada')
@@ -24,6 +26,9 @@ describe 'Admin visits index for Shipping Companies and' do
   end
 
   it 'but there are no companies to show' do
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit shipping_companies_path
 
     expect(page).to have_text('Nenhuma transportadora cadastrada')

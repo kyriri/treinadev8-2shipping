@@ -2,6 +2,9 @@ require 'rails_helper'
 
 describe 'Admin tries to register a Shipping Company' do
   it 'and it works' do
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit shipping_companies_path
     click_on 'Cadastrar nova transportadora'
     fill_in 'Nome fantasia', with: 'Ibérica'
@@ -26,6 +29,9 @@ describe 'Admin tries to register a Shipping Company' do
   end
 
   it 'but receives error msgs because input is unacceptable' do
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit new_shipping_company_path
     fill_in 'CNPJ', with: '1234567890111'
     click_on 'Cadastrar transportadora'
@@ -37,6 +43,9 @@ describe 'Admin tries to register a Shipping Company' do
   end
 
   it 'but gives up' do
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit new_shipping_company_path
     fill_in 'Nome fantasia', with: 'Cheirex'
     click_on 'Voltar'

@@ -8,13 +8,15 @@ describe 'Admin pushes delete button at a Shipping Company' do
                                   email_domain: 'tma.com.br',
                                   cnpj: 12345678904321,
                                   billing_address: 'Av. Getúlio Vargas, 32 - Marília, SP')
-  
-  visit shipping_company_path(cia.id)
-  click_on 'Apagar'
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
 
-  expect(page).to have_text('Transportadora Transportes Marília apagada com sucesso')
-  expect(page).not_to have_css('ul', text: 'Transportes Marília')
-  expect(current_path).to eq(shipping_companies_path)
-  expect(ShippingCompany.find(cia.id).status).to eq('deleted')
+    login_as(admin)
+    visit shipping_company_path(cia.id)
+    click_on 'Apagar'
+
+    expect(page).to have_text('Transportadora Transportes Marília apagada com sucesso')
+    expect(page).not_to have_css('ul', text: 'Transportes Marília')
+    expect(current_path).to eq(shipping_companies_path)
+    expect(ShippingCompany.find(cia.id).status).to eq('deleted')
   end
 end

@@ -8,7 +8,9 @@ describe 'Admin tries to edit Shipping Company' do
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-    
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit shipping_company_path(ShippingCompany.last.id)
     click_on 'Editar'
 
@@ -25,7 +27,9 @@ describe 'Admin tries to edit Shipping Company' do
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP',
                             cubic_weight_const: 600,
                             min_fee: 45)
-    
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit shipping_company_path(ShippingCompany.last.id)
     click_on 'Editar'
     fill_in 'Nome fantasia', with: 'Cardboard master'
@@ -54,7 +58,9 @@ describe 'Admin tries to edit Shipping Company' do
                                   email_domain: 'cheirex.com',
                                   cnpj: 12345678901234,
                                   billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-    
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit edit_shipping_company_path(cia.id)
     fill_in 'Nome fantasia', with: 'Transportes Marília'
     click_on 'Salvar'
@@ -74,7 +80,9 @@ describe 'Admin tries to edit Shipping Company' do
                                   email_domain: 'cheirex.com',
                                   cnpj: 12345678901234,
                                   billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-    
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit edit_shipping_company_path(cia.id)
     fill_in 'Nome fantasia', with: 'Transportes Marília'
     click_on 'Voltar'

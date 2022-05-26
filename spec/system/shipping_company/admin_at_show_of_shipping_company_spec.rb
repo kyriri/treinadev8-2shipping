@@ -8,7 +8,9 @@ describe 'Admin sees details of a Shipping Company' do
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-      
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)  
     visit shipping_companies_path
     click_on 'Cheirex'
     
@@ -27,7 +29,9 @@ describe 'Admin sees details of a Shipping Company' do
                             email_domain: 'cheirex.com',
                             cnpj: 12345678901234,
                             billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
-      
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)  
     visit shipping_companies_path
     click_on 'Cheirex'
     click_on 'Voltar'
