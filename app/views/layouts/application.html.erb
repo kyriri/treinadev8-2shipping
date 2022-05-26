@@ -9,13 +9,13 @@
     <%= stylesheet_link_tag "application" %>
   </head>
 
+  <%# TODO bring content of partials back here %>
   <body>
     <header>
       <%= link_to t('.app_name'), root_path %>
-
     </header>
 
-    <nav>
+    <nav> 
       <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 
       <% if user_signed_in? %>
         <%= current_user.email %>
