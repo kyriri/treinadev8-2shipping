@@ -13,7 +13,6 @@ describe 'User signs in' do
 
     expect(page).to have_text('Login efetuado com sucesso')
     expect(page).to have_css('header', text: 'me@email.com')
-    expect(page).not_to have_link('Entrar')
     expect(page).to have_button('Sair')
   end
 
@@ -29,8 +28,7 @@ describe 'User signs in' do
     click_on 'Sair'
 
     expect(current_path).to eq new_user_session_path
-    expect(page).not_to have_css('header', text: 'me@email.com')
-    expect(page).to have_link('Entrar')
+    expect(page).not_to have_text('me@email.com')
     expect(page).not_to have_link('Sair')
   end
 end
