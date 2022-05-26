@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Admin visits index of service orders and' do
-  it 'see all new service orders' do
+  it 'see lists of service orders, divided by status' do
     ServiceOrder.create!(status: 'canceled', package: Package.new)
     ServiceOrder.create!(status: 'unassigned', package: Package.new)
     ServiceOrder.create!(status: 'unassigned', package: Package.new)
@@ -22,18 +22,8 @@ describe 'Admin visits index of service orders and' do
       expect(page).to have_text('ID: 2 | detalhes')
       expect(page).to have_link('detalhes')
     end
-  end
-
-  it 'see rejected service orders' do
-    ServiceOrder.create!(status: 'rejected', package: Package.new)
-    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
-
-    login_as(admin)
-    visit service_orders_path
-
-    expect(page).to have_css('.rejected', text: 'Devolvidas')
     within '.rejected' do
-      expect(page).to have_text('ID: 1 | detalhes')
+      expect(page).to have_text('ID: 4 | detalhes')
     end
   end
 
