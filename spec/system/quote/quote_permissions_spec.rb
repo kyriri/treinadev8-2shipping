@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe 'Admin' do
   context 'sees' do
-    it 'a button to get quotes' do
+    it 'notice if no quotes were get yet' do
     end
 
-    it 'notice if no quotes were get yet' do
+    it 'a button to get quotes' do
     end
 
     it 'all quotes at a service order page' do
@@ -75,15 +75,26 @@ end
 
 describe 'User' do
   context 'sees' do
-    it 'only their quote at a service order page' do
+    it 'the quote value of the moment the admin chose it' do
     end
 
     it 'button that accepts/rejects service order' do
+      # expect(page).to have_text('Valor do serviço')
     end
   end
 
   context "doesn't see" do
-    it 'button that get quotes' do
+    it 'quotes' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234, cubic_weight_const: 10, min_fee: 5)
+      s_o = ServiceOrder.create!(shipping_company: sc1, status: 'pending', package: Package.new)
+      
+      user = User.create!(shipping_company: sc1, email: 'me@email.com', password: '12345678')
+
+      login_as(user)
+      visit service_orders_path
+      click_on 'detalhes'
+
+      expect(page).not_to have_text('Orçamento')
     end
   end
 end

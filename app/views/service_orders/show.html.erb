@@ -30,4 +30,4 @@
   </dl>
 </div>
 
-<%= render 'quotes' %>
+<%= render 'quotes' if current_user.admin? %> 
