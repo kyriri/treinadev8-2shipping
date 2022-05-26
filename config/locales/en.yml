@@ -7,3 +7,7 @@ en:
       my_service_orders: My Service Orders
       my_rates_and_times: My Rates & Times
       my_distribution_points: My Distribution Points
+    admin_navbar:
+      shipping_companies: Shipping Companies
+      service_orders: Service Orders
+      rates_and_times: Rates & Times

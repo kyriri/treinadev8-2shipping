@@ -11,7 +11,7 @@ describe 'User logs in and' do
       within 'nav' do
         expect(page).to have_link('Meu Perfil')
         expect(page).to have_link('Minhas Ordens de Serviço')
-        expect(page).to have_link('Meus Preços e Prazos')
+        expect(page).to have_link('Meus Preços & Prazos')
         expect(page).to have_link('Meus Entrepostos')
       end
     end
@@ -51,7 +51,7 @@ describe 'User logs in and' do
   end
 end
 
-xdescribe 'Admin logs in and' do
+describe 'Admin logs in and' do
   context 'their home page' do
     it 'has a navbar with certain links' do
       admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
@@ -61,8 +61,8 @@ xdescribe 'Admin logs in and' do
 
       within 'nav' do
         expect(page).to have_link('Transportadoras')
-        expect(page).to have_link('Ordens de serviço')
-        expect(page).to have_link('Preços e Prazos')
+        expect(page).to have_link('Ordens de Serviço')
+        expect(page).to have_link('Preços & Prazos')
       end
     end
     # navbar: 

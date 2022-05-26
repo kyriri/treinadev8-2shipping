@@ -103,7 +103,8 @@ DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 3, shi
 DeliveryTime.create!(max_distance_in_km: 555, delivery_time_in_buss_days: 8, shipping_company: sc3) # another company
 
 
-User.create!(email: 'me@email.com', password: '12345678')
+User.create!(email: 'user@email.com', password: '12345678')
+User.create!(email: 'admin@e.com', password: '12345678', admin: true)
 User.create!(email: 'la-la@courriel.fr', password: 'croissant')
 
 p "Created #{ShippingCompany.count} shipping companies"
