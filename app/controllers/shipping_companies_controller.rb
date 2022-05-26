@@ -1,7 +1,7 @@
 class ShippingCompaniesController < ApplicationController
   before_action :find_shipping_co, only: [:show, :edit, :update, :fake_delete]
   before_action :auth_admin, only: [:index, :new, :create, :fake_delete]
-  before_action :verify_users_company, only: [:show, :edit, :update]
+  before_action :verify_user_is_from_the_target_company, only: [:show, :edit, :update]
 
   def index
     @shipping_cos = ShippingCompany.where.not(status: :deleted).order('name')
@@ -77,7 +77,7 @@ class ShippingCompaniesController < ApplicationController
     redirect_to root_path unless current_user.admin?
   end
 
-  def verify_users_company
+  def verify_user_is_from_the_target_company
     unless current_user.admin?
       if current_user.shipping_company != @shipping_co
         return redirect_to root_path, alert: t('shipping_company_auth_error')

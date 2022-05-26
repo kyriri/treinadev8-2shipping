@@ -1,4 +1,6 @@
 class ServiceOrdersController < ApplicationController
+  before_action :verify_user_and_order_are_from_same_company, only: [:show]
+
   def index
     @building_blocks = get_building_blocks
   end
@@ -11,6 +13,14 @@ class ServiceOrdersController < ApplicationController
   end
 
   private
+
+  def verify_user_and_order_are_from_same_company
+    unless current_user.admin?
+      if current_user.shipping_company != ServiceOrder.find(params[:id]).shipping_company
+        return redirect_to root_path, alert: t('shipping_company_auth_error')
+      end
+    end 
+  end
 
   def get_building_blocks
     if current_user.admin?
