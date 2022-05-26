@@ -48,11 +48,11 @@ class ShippingCompany < ApplicationRecord
     [fee, self.min_fee].max
   end
 
-  def quote_for(package, code)
-    delivery_time = find_delivery_time(package)
-    weight = calculate_weight(package)
+  def quote_for(service_order, code)
+    delivery_time = find_delivery_time(service_order.package)
+    weight = calculate_weight(service_order.package)
     rate = find_rate(weight)
-    fee = calculate_fee(package, rate)
+    fee = calculate_fee(service_order.package, rate)
 
     if (rate.nil? || delivery_time.nil?)
       is_valid = false
@@ -64,7 +64,7 @@ class ShippingCompany < ApplicationRecord
 
     Quote.create!(quote_group: code,
                   shipping_company: self,
-                  package: package,
+                  service_order: service_order,
                   fee: fee,
                   delivery_time: delivery_time,
                   is_valid: is_valid,

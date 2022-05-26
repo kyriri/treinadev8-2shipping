@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     # the route below goes unnested so that "fake_delete" doesn't appear on URL
     post '/shipping_companies/:id', to: 'shipping_companies#fake_delete', as: 'fake_delete_shipping_company'
 
-    resources :service_orders, only: [:index, :show]
+    resources :service_orders, only: [:index, :show] do
+      post 'obtain_quotes', on: :member
+    end
   end
 end

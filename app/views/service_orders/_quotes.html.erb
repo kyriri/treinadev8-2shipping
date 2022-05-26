@@ -1,13 +1,13 @@
 <div class='quotes'>
-  <% if @quotes.class == String %>
-    <b>Orçamentos</b><br>
-    <span class='alert'>Não existem transportadoras ativas.</span>
+  <b>Orçamentos</b><br>
+  <%= button_to "Obter #{"novos " if @quotes.any?}orçamentos", obtain_quotes_service_order_path %>
+  <% if @quotes.empty? %>
+    Nenhum orçamento feito até agora.
   <% elsif @quotes.map{ |q| q.is_valid }.all?(false) %>
     <b>Orçamentos</b><br>
     <span class='alert'>Nenhuma transportadora ativa oferece serviços compatíveis.</span>
   <% else %>
     <table>
-      <caption>Orçamentos</caption>
       <tr>
         <th>empresa</th>
         <th>preço</th>

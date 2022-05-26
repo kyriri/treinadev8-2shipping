@@ -9,7 +9,17 @@ class ServiceOrdersController < ApplicationController
     @service_order = ServiceOrder.find(params[:id])
     @package = @service_order.package
     @measures = [@package.width_in_cm, @package.length_in_cm, @package.height_in_cm].sort.reverse
+    @quotes = @service_order.quotes #.sort(:created_at :desc).
+  end
+
+  def obtain_quotes
+    @service_order = ServiceOrder.find(params[:id])
     @quotes = @service_order.get_quotes
+    if @quotes == 'no active companies'
+      redirect_to @service_order, alert: 'Não existem transportadoras ativas'
+    else
+      redirect_to @service_order, notice: 'Rodada de orçamentos obtida com sucesso'
+    end
   end
 
   private
