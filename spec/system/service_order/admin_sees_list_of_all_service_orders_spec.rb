@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Admin visits index of service orders and' do
-  it 'see new service orders' do
+  it 'see all new service orders' do
     ServiceOrder.create!(status: 'canceled', package: Package.new)
     ServiceOrder.create!(status: 'unassigned', package: Package.new)
     ServiceOrder.create!(status: 'unassigned', package: Package.new)
@@ -9,7 +9,9 @@ describe 'Admin visits index of service orders and' do
     ServiceOrder.create!(status: 'pending', package: Package.new)
     ServiceOrder.create!(status: 'accepted', package: Package.new)
     ServiceOrder.create!(status: 'delivered', package: Package.new)
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
 
+    login_as(admin)
     visit root_path
     click_on 'Ordens de Serviço'
 
@@ -24,7 +26,9 @@ describe 'Admin visits index of service orders and' do
 
   it 'see rejected service orders' do
     ServiceOrder.create!(status: 'rejected', package: Package.new)
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
 
+    login_as(admin)
     visit service_orders_path
 
     expect(page).to have_css('.rejected', text: 'Devolvidas')
@@ -34,6 +38,9 @@ describe 'Admin visits index of service orders and' do
   end
 
   it 'sees nothing because there are no new or reject orders' do
+    admin = User.create!(email: 'me@email.com', password: '12345678', admin: true)
+
+    login_as(admin)
     visit service_orders_path
      expect(page).to have_text('Nenhuma ordem de serviço nova')
      expect(page).to have_text('Nenhuma ordem de serviço devolvida')

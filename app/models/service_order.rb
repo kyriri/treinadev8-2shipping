@@ -1,9 +1,11 @@
 class ServiceOrder < ApplicationRecord
-  belongs_to :package
   enum status: { canceled: 0, unassigned: 1, rejected: 3, pending: 5, accepted: 7, delivered: 9 }
+  
+  belongs_to :package
+  belongs_to :shipping_company, optional: true
 
   def get_quotes
-    active_companies = ShippingCompany.where(status: 'active')
+    active_companies = ShippingCompany.where(status: 'active') # TODO return active_companies if empty
     if active_companies.empty?
       []
     else

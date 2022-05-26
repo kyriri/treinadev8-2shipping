@@ -1,7 +1,13 @@
 class ServiceOrdersController < ApplicationController
   def index
-    @unassigned_orders = ServiceOrder.where(status: 'unassigned')
-    @rejected_orders = ServiceOrder.where(status: 'rejected')
+    if current_user.admin?
+      @all_unassigned_orders = ServiceOrder.where(status: 'unassigned')
+      @all_rejected_orders = ServiceOrder.where(status: 'rejected')
+    else
+      @company = ShippingCompany.find(current_user.shipping_company.id)
+      @companys_pending_orders = ServiceOrder.where(shipping_company_id: @company.id).pending
+      @companys_accepted_orders = ServiceOrder.where(shipping_company_id: @company.id).accepted
+    end
   end
 
   def show

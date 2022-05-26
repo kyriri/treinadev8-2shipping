@@ -31,7 +31,7 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def update
-    shipping_co_params.delete(:status) unless current_user.admin?
+    shipping_co_params.delete(:status) unless current_user.admin? # TODO test this line
     if @shipping_co.update(shipping_co_params)
       flash[:notice] = t('shipping_company_update_succesful')
       redirect_to @shipping_co
