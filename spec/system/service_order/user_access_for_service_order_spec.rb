@@ -36,8 +36,7 @@ describe 'Logged user' do
       login_as(user)
       visit service_orders_path
 
-      expect(page).to have_css('.pending', text: 'Novas Nenhuma ordem de serviço')
-      expect(page).to have_css('.accepted', text: 'Em processo de entrega Nenhuma ordem de serviço')
+      expect(page).to have_text('Nenhuma ordem de serviço', count: 2)
     end
 
     it "details of one of its company's order" do
