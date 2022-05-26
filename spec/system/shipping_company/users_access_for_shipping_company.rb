@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Logged user tries to' do
-  context 'access details' do
+describe 'Logged user' do
+  context 'accesses details' do
     it 'of their own company and it works' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
@@ -23,9 +23,22 @@ describe 'Logged user tries to' do
 
       expect(current_path).to eq root_path
     end
+
+    it 'and then goes back to homepage' do
+      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+      user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
+
+      login_as(user)
+      visit root_path
+      click_on 'Minha Empresa'
+      click_on 'Voltar'
+
+      expect(current_path).to eq root_path
+      expect(page).not_to have_text('Houve um erro. Sua requisição não pode ser completada.')
+    end
   end
 
-  context 'edit details' do
+  context 'edits details' do
     it 'but cannot edit status' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)

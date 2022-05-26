@@ -15,6 +15,4 @@ xdescribe 'Admin lands on homepage and' do
 
     expect(current_path).to eq(shipping_companies_path)
   end
-
-  #TODO check button 'Voltar' on Shipping Company details page when user is logged in
 end
