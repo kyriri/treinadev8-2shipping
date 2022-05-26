@@ -5,14 +5,16 @@ class ServiceOrder < ApplicationRecord
   belongs_to :shipping_company, optional: true
 
   def get_quotes
-    active_companies = ShippingCompany.where(status: 'active') # TODO return active_companies if empty
-    if active_companies.empty?
-      []
-    else
-      active_companies.map do |company|
-        company.quote_for(self.package)
-      end
+    active_companies = ShippingCompany.where(status: 'active')
+    return active_companies if active_companies.empty?
+    quote_group = get_code 
+    active_companies.map do |company|
+      company.quote_for(self.package, quote_group)
     end
+  end
+
+  def get_code # TODO test this method
+    "#{SecureRandom.alphanumeric(3).upcase}-#{SecureRandom.alphanumeric(3).upcase}"
   end
 
   def select_carriers_with_best(criteria, quotes)

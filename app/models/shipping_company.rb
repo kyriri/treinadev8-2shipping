@@ -48,28 +48,26 @@ class ShippingCompany < ApplicationRecord
     [fee, self.min_fee].max
   end
 
-  def quote_for(package)
+  def quote_for(package, code)
     delivery_time = find_delivery_time(package)
     weight = calculate_weight(package)
     rate = find_rate(weight)
     fee = calculate_fee(package, rate)
 
-    if (rate.nil? || delivery_time.nil?) 
+    if (rate.nil? || delivery_time.nil?)
+      is_valid = false
       fee = ''
       delivery_time = ''
-      message = 'Service unavailable for such a package'
-      error = true
     else
-      message = "Quote created at #{I18n.l(Time.now, locale: 'en')}"
-      error = false
+      is_valid = true
     end
 
-    { company_id: self.id,
-      package_id: package.id,
-      fee: fee,
-      delivery_time: delivery_time,
-      message: message,
-      error: error,
-    }
+    Quote.create!(quote_group: code,
+                  shipping_company: self,
+                  package: package,
+                  fee: fee,
+                  delivery_time: delivery_time,
+                  is_valid: is_valid,
+                 )
   end
 end

@@ -10,7 +10,7 @@ RSpec.describe ServiceOrder, type: :model do
       s_o = ServiceOrder.create!(package: Package.new)
 
       results = s_o.get_quotes
-      companies_answering = results.map { |q| q[:company_id] }
+      companies_answering = results.map { |q| q.shipping_company_id }
 
       expect(results.size).to be 2
       expect(companies_answering).to eq [2, 3]

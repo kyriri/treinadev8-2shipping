@@ -222,14 +222,13 @@ RSpec.describe ShippingCompany, type: :model do
       DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
       DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 2, shipping_company: sc1)
 
-      response = sc1.quote_for(package)
+      response = sc1.quote_for(package, 'AAV-546')
 
-      expect(response[:company_id]).to eq sc1.id
-      expect(response[:package_id]).to eq package.id
-      expect(response[:fee]).to eq 9.9 # dead weight: 0.8 | cubic weight: 300 * 0.01 = 3 -> 99 * 100 = 9900 cents
-      expect(response[:delivery_time]).to eq 2
-      expect(response[:message]).to include 'Quote created at'
-      expect(response[:error]).to be false
+      expect(response.shipping_company).to eq sc1
+      expect(response.package).to eq package
+      expect(response.fee).to eq 9.9 # dead weight: 0.8 | cubic weight: 300 * 0.01 = 3 -> 99 * 100 = 9900 cents
+      expect(response.delivery_time).to eq 2
+      expect(response.is_valid).to be true
     end
 
     context 'returns an invalid quote' do
@@ -243,14 +242,13 @@ RSpec.describe ShippingCompany, type: :model do
         ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
         DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
 
-        response = sc1.quote_for(package)
+        response = sc1.quote_for(package, 'AAV-546')
 
-        expect(response[:company_id]).to eq sc1.id
-        expect(response[:package_id]).to eq package.id
-        expect(response[:fee]).to eq ''
-        expect(response[:delivery_time]).to eq ''
-        expect(response[:message]).to eq 'Service unavailable for such a package'
-        expect(response[:error]).to be true
+        expect(response.shipping_company).to eq sc1
+        expect(response.package).to eq package
+        expect(response.fee).to be nil
+        expect(response.delivery_time).to be nil
+        expect(response.is_valid).to be false
       end
 
       it 'because distance is too far' do
@@ -263,14 +261,13 @@ RSpec.describe ShippingCompany, type: :model do
         ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
         DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
 
-        response = sc1.quote_for(package)
+        response = sc1.quote_for(package, 'TH-0875')
 
-        expect(response[:company_id]).to eq sc1.id
-        expect(response[:package_id]).to eq package.id
-        expect(response[:fee]).to eq ''
-        expect(response[:delivery_time]).to eq ''
-        expect(response[:message]).to eq 'Service unavailable for such a package'
-        expect(response[:error]).to be true
+        expect(response.shipping_company).to eq sc1
+        expect(response.package).to eq package
+        expect(response.fee).to be nil
+        expect(response.delivery_time).to be nil
+        expect(response.is_valid).to be false
       end
     end
   end
