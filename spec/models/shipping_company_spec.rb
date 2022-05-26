@@ -217,15 +217,16 @@ RSpec.describe ShippingCompany, type: :model do
       package = Package.create!(volume_in_m3: 0.01,
                                 weight_in_g: 800,
                                 distance_in_km: 100)
+      serv_order = ServiceOrder.create!(status: 'pending', package: package, shipping_company: sc1)
       ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
       ShippingRate.create!(max_weight_in_kg: 5, cost_per_km_in_cents: 99, shipping_company: sc1)
       DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
       DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 2, shipping_company: sc1)
 
-      response = sc1.quote_for(package, 'AAV-546')
+      response = sc1.quote_for(serv_order, 'AAV-546')
 
       expect(response.shipping_company).to eq sc1
-      expect(response.package).to eq package
+      expect(response.service_order).to eq serv_order
       expect(response.fee).to eq 9.9 # dead weight: 0.8 | cubic weight: 300 * 0.01 = 3 -> 99 * 100 = 9900 cents
       expect(response.delivery_time).to eq 2
       expect(response.is_valid).to be true
@@ -239,13 +240,14 @@ RSpec.describe ShippingCompany, type: :model do
         package = Package.create!(volume_in_m3: 1,
                                   weight_in_g: 2_000,
                                   distance_in_km: 100)
+        serv_order = ServiceOrder.create!(status: 'pending', package: package, shipping_company: sc1)
         ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
         DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
 
-        response = sc1.quote_for(package, 'AAV-546')
+        response = sc1.quote_for(serv_order, 'AAV-546')
 
         expect(response.shipping_company).to eq sc1
-        expect(response.package).to eq package
+        expect(response.service_order).to eq serv_order
         expect(response.fee).to be nil
         expect(response.delivery_time).to be nil
         expect(response.is_valid).to be false
@@ -258,13 +260,14 @@ RSpec.describe ShippingCompany, type: :model do
         package = Package.create!(volume_in_m3: 0.001,
                                   weight_in_g: 750,
                                   distance_in_km: 1_000)
+        serv_order = ServiceOrder.create!(status: 'pending', package: package, shipping_company: sc1)
         ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 10, shipping_company: sc1)
         DeliveryTime.create!(max_distance_in_km: 40, delivery_time_in_buss_days: 1, shipping_company: sc1)
 
-        response = sc1.quote_for(package, 'TH-0875')
+        response = sc1.quote_for(serv_order, 'TH-0875')
 
         expect(response.shipping_company).to eq sc1
-        expect(response.package).to eq package
+        expect(response.service_order).to eq serv_order
         expect(response.fee).to be nil
         expect(response.delivery_time).to be nil
         expect(response.is_valid).to be false
