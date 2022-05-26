@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Logged user' do
+describe 'Normal user' do
   context 'can see' do
     it "a list of their company's orders" do
       another_sc = ShippingCompany.create!(status: 'active', name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC', cubic_weight_const: 30, min_fee: 10)
@@ -38,7 +38,7 @@ describe 'Logged user' do
       expect(page).to have_text('Nenhuma ordem de serviço', count: 2)
     end
 
-    it "details of one of its company's order" do
+    it "details of a order for their company" do
       package1 = Package.create!(width_in_cm: 14,
                                 height_in_cm: 6,
                                 length_in_cm: 21,
@@ -51,7 +51,7 @@ describe 'Logged user' do
                                 delivery_recipient_phone: '(31) 9 9453-8890',
                               )
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
-      s_o = ServiceOrder.create!(status: 'unassigned', package: package1, shipping_company: sc1)
+      s_o = ServiceOrder.create!(status: 'pending', package: package1, shipping_company: sc1)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
 
       login_as(user)
@@ -89,12 +89,5 @@ describe 'Logged user' do
 
       expect(current_path).to eq root_path
     end
-  end
-end
-
-
-xdescribe 'Logged person visits details of a service order' do
-  it 'succesfully' do
-    
   end
 end
