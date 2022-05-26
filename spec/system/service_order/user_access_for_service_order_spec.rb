@@ -46,7 +46,7 @@ describe 'Logged user' do
 end
 
 
-describe 'Logged person visits details of a service order' do
+xdescribe 'Logged person visits details of a service order' do
   it 'succesfully' do
     package1 = Package.create!( width_in_cm: 14,
                                 height_in_cm: 6,

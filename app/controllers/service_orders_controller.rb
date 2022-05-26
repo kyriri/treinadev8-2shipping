@@ -1,12 +1,24 @@
 class ServiceOrdersController < ApplicationController
   def index
     if current_user.admin?
-      @all_unassigned_orders = ServiceOrder.where(status: 'unassigned')
-      @all_rejected_orders = ServiceOrder.where(status: 'rejected')
+      @building_blocks = [{ title: 'Novas',
+                            css_class: 'unassigned',
+                            collection: ServiceOrder.where(status: 'unassigned'),
+                          }, {
+                            title: 'Devolvidas',
+                            css_class: 'rejected',
+                            collection: ServiceOrder.where(status: 'rejected'),
+                          }]
     else
-      @company = ShippingCompany.find(current_user.shipping_company.id)
-      @companys_pending_orders = ServiceOrder.where(shipping_company_id: @company.id).pending
-      @companys_accepted_orders = ServiceOrder.where(shipping_company_id: @company.id).accepted
+      company = ShippingCompany.find(current_user.shipping_company.id)
+      @building_blocks = [{ title: 'Novas',
+                            css_class: 'pending',
+                            collection: ServiceOrder.where(shipping_company_id: company.id).pending,
+                          }, {
+                            title: 'Em processo de entrega',
+                            css_class: 'accepted',
+                            collection: ServiceOrder.where(shipping_company_id: company.id).accepted,
+                          }]
     end
   end
 

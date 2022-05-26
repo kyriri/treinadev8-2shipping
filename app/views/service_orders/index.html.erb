@@ -1,62 +1,21 @@
 <h1>Ordens de Serviço</h1>
 
 <%# #TODO the code below is symetric, can be made DRYer %>
-<% if current_user.admin? %>
-  <div>
-    <div class='unassigned'>
-      <em>Novas</em>
-      <% if @all_unassigned_orders.empty? %>
-        Nenhuma ordem de serviço nova
-      <% else %>
-        <ul>
-          <% @all_unassigned_orders.each do |order| %>
-            <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
 
-    <div class='rejected'>
-      <em>Devolvidas</em>
-      <% if @all_rejected_orders.empty? %>
-        Nenhuma ordem de serviço devolvida
-      <% else %>
-        <ul>
-          <% @all_rejected_orders.each do |order| %>
-            <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-<% else %>
-  <div>
-    <div class='pending'>
-      <em>Novas</em>
-      <% if @companys_pending_orders.empty? %>
+
+<div class='container'>
+  <% @building_blocks.each do |box| %>
+    <div class='<%= box[:css_class] %>'> 
+      <em><%= box[:title] %></em>
+      <% if box[:collection].empty? %>
         Nenhuma ordem de serviço.
       <% else %>
         <ul>
-          <% @companys_pending_orders.each do |order| %>
+          <% box[:collection].each do |order| %>
             <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
           <% end %>
         </ul>
       <% end %>
     </div>
-
-    <div class='accepted'>
-      <em>Em processo de entrega</em>
-      <% if @companys_accepted_orders.empty? %>
-        Nenhuma ordem de serviço.
-      <% else %>
-        <ul>
-          <% @companys_accepted_orders.each do |order| %>
-            <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-
+  <% end %>
+</div>

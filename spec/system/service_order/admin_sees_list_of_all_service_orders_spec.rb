@@ -42,7 +42,6 @@ describe 'Admin visits index of service orders and' do
 
     login_as(admin)
     visit service_orders_path
-     expect(page).to have_text('Nenhuma ordem de serviço nova')
-     expect(page).to have_text('Nenhuma ordem de serviço devolvida')
+     expect(page).to have_text('Nenhuma ordem de serviço', count: 2)
   end
 end
