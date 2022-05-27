@@ -5,12 +5,11 @@
 
 ### Features
 - [x] Authenticate users  
-- [x] Admin can register, edit and delete a shipping company  
-- [x] Admin can see a list of all shipping companies, and access their details  
+- [x] Admin can register, view, edit and delete a Shipping Company  
+- [x] User can edit some info about their own company  
 - [ ] Shipping Company users can load their company's prices and delays
-- [ ] Admin can run a quote to choose a shipping company for a certain delivery
-- [ ] Admin can create and destroy a service order to hire a shipping company
-- [ ] Shipping Company users can accept or reject service orders
+- [x] Admin can request quotes and choose a shipping company for a certain delivery
+- [x] Shipping Company users can accept or reject service orders
 - [ ] Shipping Company users can create, edit and destroy their logistic outposts
 - [ ] Shipping Company users can create shipment updates for a certain package
 - [ ] Guest users can track a shipment with only a tracking code
@@ -36,11 +35,17 @@ The app will become available at the web address http://localhost:3000/ and can 
   
 To stop the application, go back to the command line and press `control + C` (or `^ + C` for Mac users).
 
-### Database 
+### Demo
 
-For demonstration purposes, the app comes with some examples already registered on the database. They can be deleted by running the command below on the project directory:   
+For demonstration purposes, this app comes with some pre-loaded examples. These credentials can be used to access the app:  
+- admin: admin@email.com, password: 123456  
+- user :  user@email.com, password: 123456  
+ 
+### Database
+
+The pre-loaded examples mentioned above can be deleted by running the following command on the project directory:   
 `$ rails db:reset`   
-(please note this will clean all data, not only the pre-loaded items)
+(please note this will clean all data, not only the demo items)
 
 ### Test suit
 
