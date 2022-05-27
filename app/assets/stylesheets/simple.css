@@ -79,6 +79,7 @@ body {
 header {
   background: var(--accent-bg);
   border-bottom: 1px solid var(--border);
+  font-family: var(--mono-font);
   text-align: center;
   padding: 2rem 0.5rem;
   width: 100vw;
@@ -94,6 +95,11 @@ header {
 header h1,
 header p {
   margin: 0;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--accent);
 }
 
 /* Add a little padding to ensure spacing is correct between content and nav */
