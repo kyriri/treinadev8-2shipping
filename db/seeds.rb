@@ -4,9 +4,10 @@ Quote.destroy_all
 DeliveryTime.destroy_all
 ShippingRate.destroy_all
 ServiceOrder.destroy_all
+Outpost.destroy_all
+User.destroy_all
 Package.destroy_all
 ShippingCompany.destroy_all
-User.destroy_all
 
 sc1 = ShippingCompany.create!(status: 'active',
                               name: 'Air Cargo',
@@ -120,7 +121,13 @@ DeliveryTime.create!(max_distance_in_km: 20, delivery_time_in_buss_days: 1, ship
 DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 3, shipping_company: sc2)
 DeliveryTime.create!(max_distance_in_km: 555, delivery_time_in_buss_days: 8, shipping_company: sc3) # another company
 
-
+Outpost.create!(shipping_company: sc2, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de coleta')
+Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'São Paulo, SP', category: 'centro de envios aéreos')
+Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
+Outpost.create!(shipping_company: sc2, name: 'Pampulha', city_state: 'Belo Horizonte, MG', category: 'centro de distribuição')
+Outpost.create!(shipping_company: sc2, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')
+Outpost.create!(shipping_company: sc3, name: 'Foro', city_state: 'Teresina, PI', category: 'regional II')
+    
 User.create!(email: 'user@email.com', password: '123456', shipping_company: sc2)
 User.create!(email: 'admin@email.com', password: '123456', admin: true)
 User.create!(email: 'la-la@courriel.fr', password: 'croissant')
@@ -129,6 +136,7 @@ p "Created #{ShippingCompany.count} shipping companies"
 p "Created #{User.count} users"
 p "Created #{Package.count} packages"
 p "Created #{ServiceOrder.count} service orders"
+p "Created #{Quote.count} quotes"
 p "Created price table for #{ShippingRate.select(:shipping_company_id).distinct.count} shipping companies"
 p "Created delivery times table for #{DeliveryTime.select(:shipping_company_id).distinct.count} shipping companies"
-p "Created #{Quote.count} quotes"
+p "Created #{Outpost.count} outposts for #{Outpost.select(:shipping_company_id).distinct.count} shipping companies"
