@@ -41,7 +41,6 @@ describe 'Admin tries to edit Shipping Company' do
     expect(page).not_to have_text('Houve um erro. A atualização não foi feita')
     expect(page).to have_text('Cardboard master')
     expect(page).to have_text('Suspensa')
-    expect(page).to have_text('R$ 12,00')
     expect(current_path).to eq(shipping_company_path(ShippingCompany.last.id))
   end
 

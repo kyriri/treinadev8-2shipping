@@ -24,8 +24,6 @@ describe 'Admin tries to register a Shipping Company' do
     expect(page).to have_text('Transportadora Portuguesa Ltda')
     expect(page).to have_text('oniberica.com.br')
     expect(page).to have_text('Rua da Paz 45, Belém - PA')
-    expect(page).to have_text('299,99 kg/m³')
-    expect(page).to have_text('R$ 10,00')
   end
 
   it 'but receives error msgs because input is unacceptable' do
