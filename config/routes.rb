@@ -17,5 +17,7 @@ Rails.application.routes.draw do
       post 'attribute_to_carrier', on: :member
       post 'update_status', on: :member
     end
+
+    post '/deliveries/:id', to: 'deliveries#add_step', as: 'add_step_to_delivery'
   end
 end

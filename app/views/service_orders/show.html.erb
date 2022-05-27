@@ -55,4 +55,5 @@
   </dl>
 </div>
 
+<%= render 'delivery' if !current_user.admin? && @service_order.status == 'accepted'  %> 
 <%= render 'quotes' if current_user.admin? %> 

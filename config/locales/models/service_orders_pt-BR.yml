@@ -8,6 +8,11 @@ pt-BR:
       business_days:
         one: dia útil
         other: dias úteis
+    delivery:
+      no_outposts: Nenhum entreposto cadastrado.
+      delivery_details: Detalhes da entrega
+      date: data
+      place: lugar
   
   activerecord:
       models:

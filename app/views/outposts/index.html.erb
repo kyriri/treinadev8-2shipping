@@ -7,7 +7,9 @@
   <% else %>
     <% @outposts.each do |outpost| %>
       <div class="outposts_card">
-        <figure style="text-align: center;"><img src="<%= Rails.root.join('app', 'assets', 'images', 'outposts', '1.png') %>" alt="<%= t('.standard_icon_alt') %>"></figure>
+        <figure style="text-align: center;">
+          <%= image_tag('outposts/1.png', size: "130", alt: "#{t('.standard_icon_alt')}") %>
+        </figure>
         <figcaption>
           <b><%= "#{outpost.name} - #{outpost.city_state}" %></b>
           <br><%= outpost.category %>

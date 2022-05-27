@@ -9,6 +9,7 @@ class ServiceOrdersController < ApplicationController
     @service_order = ServiceOrder.find(params[:id])
     @package = @service_order.package
     @measures = [@package.width_in_cm, @package.length_in_cm, @package.height_in_cm].sort.reverse
+    @outposts = @service_order.shipping_company.outposts if @service_order.shipping_company
     if current_user.admin?
       return @quotes = [] if @service_order.quotes.empty?
       newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group
@@ -50,12 +51,12 @@ class ServiceOrdersController < ApplicationController
 
   private
 
-  def create_delivery(service_order) # test this
+  def create_delivery(service_order) # TODO test this
     code = ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**8).to_i.to_s + 'BR'
     Delivery.create!(service_order: service_order, tracking_code: code)
   end
   
-  def verify_user_and_order_are_from_same_company
+  def verify_user_and_order_are_from_same_company # TODO test this
     unless current_user.admin?
       if current_user.shipping_company != ServiceOrder.find(params[:id]).shipping_company
         return redirect_to root_path, alert: t('shipping_company_auth_error')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_182749) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_222450) do
   create_table "deliveries", force: :cascade do |t|
     t.integer "service_order_id", null: false
     t.string "tracking_code"
@@ -99,14 +99,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_182749) do
     t.index ["shipping_company_id"], name: "index_shipping_rates_on_shipping_company_id"
   end
 
-  create_table "steps", force: :cascade do |t|
+  create_table "stages", force: :cascade do |t|
     t.integer "delivery_id"
     t.integer "outpost_id"
     t.datetime "when"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["delivery_id"], name: "index_steps_on_delivery_id"
-    t.index ["outpost_id"], name: "index_steps_on_outpost_id"
+    t.index ["delivery_id"], name: "index_stages_on_delivery_id"
+    t.index ["outpost_id"], name: "index_stages_on_outpost_id"
   end
 
   create_table "users", force: :cascade do |t|
