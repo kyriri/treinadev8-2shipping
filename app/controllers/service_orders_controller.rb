@@ -9,10 +9,13 @@ class ServiceOrdersController < ApplicationController
     @service_order = ServiceOrder.find(params[:id])
     @package = @service_order.package
     @measures = [@package.width_in_cm, @package.length_in_cm, @package.height_in_cm].sort.reverse
-    
-    return @quotes = [] if @service_order.quotes.empty?
-    newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group
-    @quotes = @service_order.quotes.where(quote_group: newest_quote_group)
+    if current_user.admin?
+      return @quotes = [] if @service_order.quotes.empty?
+      newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group
+      @quotes = @service_order.quotes.where(quote_group: newest_quote_group)
+    else
+      @winning_quote = @service_order.quotes.where(chosen: true).last
+    end
   end
 
   def obtain_quotes
@@ -27,10 +30,21 @@ class ServiceOrdersController < ApplicationController
 
   def attribute_to_carrier
     service_order = ServiceOrder.find(params[:id])
+    quote = Quote.find(params[:id])
     shipping_company = ShippingCompany.find(params[:carrier])
     service_order.shipping_company = shipping_company
     service_order.pending!
+    quote.chosen = true
+    quote.save!
     redirect_to service_order, notice: "Ordem de serviço enviada para #{shipping_company.name}"
+  end
+
+  def update_status
+    service_order = ServiceOrder.find(params[:id])
+    new_status = params[:status]
+    service_order.status = new_status
+    service_order.save!
+    redirect_to service_orders_path, notice: 'Atualização feita com sucesso.'
   end
 
   private

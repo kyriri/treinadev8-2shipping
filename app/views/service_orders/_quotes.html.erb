@@ -22,7 +22,7 @@
           <td><%= "#{quote.delivery_time} #{t('.business_days', count: quote.delivery_time)}" %></td>
           <td>
             <% if @service_order.unassigned? %>
-              <%= button_to 'escolher', attribute_to_carrier_service_order_path, params: { carrier: quote.shipping_company.id } %>
+              <%= button_to 'escolher', attribute_to_carrier_service_order_path, params: { carrier: quote.shipping_company.id, quote: quote.id } %>
             <% elsif quote.shipping_company == @service_order.shipping_company %>
               <div class='order_status'><%= ServiceOrder.human_attribute_name("status.#{@service_order.status}") %></div>
             <% end %>

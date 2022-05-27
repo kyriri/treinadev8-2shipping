@@ -1,5 +1,30 @@
 <h1><%= "Ordem de serviço nº #{@service_order.id}" %></h1>
 
+<% unless current_user.admin? %>
+  <div class='winning_quote'>
+    <% if @service_order.pending? %>
+      <%= button_to 'rejeitar', update_status_service_order_path, params: { status: 'rejected'} %>
+      <%= button_to 'aceitar', update_status_service_order_path, params: { status: 'accepted'} %>
+    <% else %>
+      <div class='order_status' style='font-size: 1rem; width: auto'>
+        <%= ServiceOrder.human_attribute_name("status.#{@service_order.status}") %>
+      </div>
+    <% end %>
+    <table>
+      <tr>
+        <th>Valor do serviço</th>
+        <th>Prazo de entrega</th>
+      </tr>
+      <tr>
+        <td><%= number_to_currency(@winning_quote.fee) %></td>
+        <td><%= "#{@winning_quote.delivery_time} #{t('.business_days', count: @winning_quote.delivery_time)}" %></td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+
+
+
 <div class='package_details'>
   <dl>
     <dt>Dimensões</dt>

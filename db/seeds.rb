@@ -1,5 +1,6 @@
 # The data can be loaded with the bin/rails db:seed command 
 
+Quote.destroy_all
 DeliveryTime.destroy_all
 ShippingRate.destroy_all
 ServiceOrder.destroy_all
@@ -93,9 +94,9 @@ simple_package5 = Package.create!(volume_in_m3: 0.0105, weight_in_g: 3276, dista
 ServiceOrder.create!(status: 'unassigned', package: simple_package1)
 ServiceOrder.create!(status: 'unassigned', package: simple_package2)
 ServiceOrder.create!(status: 'rejected', package: simple_package3, shipping_company: sc2)
-ServiceOrder.create!(status: 'pending', package: complete_package1, shipping_company: sc2)
-ServiceOrder.create!(status: 'pending', package: complete_package2, shipping_company: sc2)
-ServiceOrder.create!(status: 'accepted', package: complete_package3, shipping_company: sc2)
+serv_order1 = ServiceOrder.create!(status: 'pending', package: complete_package1, shipping_company: sc2)
+serv_order2 = ServiceOrder.create!(status: 'pending', package: complete_package2, shipping_company: sc2)
+serv_order3 = ServiceOrder.create!(status: 'accepted', package: complete_package3, shipping_company: sc2)
 ServiceOrder.create!(status: 'canceled', package: simple_package4)
 ServiceOrder.create!(status: 'delivered', package: simple_package5)
 
@@ -107,6 +108,10 @@ ShippingRate.create!(max_weight_in_kg: 5  , cost_per_km_in_cents: 65, shipping_c
 ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 55, shipping_company: sc2)
 ShippingRate.create!(max_weight_in_kg: 0.3, cost_per_km_in_cents: 52, shipping_company: sc2)
 ShippingRate.create!(max_weight_in_kg: 7, cost_per_km_in_cents: 50, shipping_company: sc2)
+
+Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc2, service_order: serv_order1, is_valid: true)
+Quote.create!(fee: 27.24, delivery_time: 1, chosen: true,  quote_group: "90A-P4B", shipping_company: sc2, service_order: serv_order2, is_valid: true)
+Quote.create!(fee: 10.00, delivery_time: 3, chosen: true,  quote_group: "MNH-BL0", shipping_company: sc2, service_order: serv_order3, is_valid: true)
 
 DeliveryTime.create!(max_distance_in_km: 400, delivery_time_in_buss_days: 4, shipping_company: sc2)
 DeliveryTime.create!(max_distance_in_km: 800, delivery_time_in_buss_days: 3, shipping_company: sc2)
@@ -126,3 +131,4 @@ p "Created #{Package.count} packages"
 p "Created #{ServiceOrder.count} service orders"
 p "Created price table for #{ShippingRate.select(:shipping_company_id).distinct.count} shipping companies"
 p "Created delivery times table for #{DeliveryTime.select(:shipping_company_id).distinct.count} shipping companies"
+p "Created #{Quote.count} quotes"

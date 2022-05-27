@@ -51,7 +51,8 @@ describe 'Normal user' do
                                 delivery_recipient_phone: '(31) 9 9453-8890',
                               )
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
-      s_o = ServiceOrder.create!(status: 'pending', package: package1, shipping_company: sc1)
+      serv_order = ServiceOrder.create!(status: 'pending', package: package1, shipping_company: sc1)
+      Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc1, service_order: serv_order, is_valid: true)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
 
       login_as(user)
@@ -59,7 +60,7 @@ describe 'Normal user' do
       click_on 'detalhes'
 
       expect(page).to have_text('Ordem de serviço nº 1')
-      expect(current_path).to eq service_order_path(s_o)
+      expect(current_path).to eq service_order_path(serv_order)
       within '.package_details' do
         expect(page).to have_text('Dimensões')
         expect(page).to have_text('21 x 14 x 6 cm')

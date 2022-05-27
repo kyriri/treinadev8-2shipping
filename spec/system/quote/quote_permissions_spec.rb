@@ -3,8 +3,8 @@ require 'rails_helper'
 describe  "User doesn't see" do
   it 'quotes' do
     sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234, cubic_weight_const: 10, min_fee: 5)
-    s_o = ServiceOrder.create!(shipping_company: sc1, status: 'pending', package: Package.new)
-    
+    serv_order = ServiceOrder.create!(shipping_company: sc1, status: 'pending', package: Package.new)
+    Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc1, service_order: serv_order, is_valid: true)
     user = User.create!(shipping_company: sc1, email: 'me@email.com', password: '12345678')
 
     login_as(user)

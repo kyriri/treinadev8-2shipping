@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :service_orders, only: [:index, :show] do
       post 'obtain_quotes', on: :member
       post 'attribute_to_carrier', on: :member
+      post 'update_status', on: :member
     end
   end
 end
