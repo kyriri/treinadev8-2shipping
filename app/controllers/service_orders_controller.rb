@@ -25,6 +25,14 @@ class ServiceOrdersController < ApplicationController
     end
   end
 
+  def attribute_to_carrier
+    service_order = ServiceOrder.find(params[:id])
+    shipping_company = ShippingCompany.find(params[:carrier])
+    service_order.shipping_company = shipping_company
+    service_order.pending!
+    redirect_to service_order, notice: "Ordem de serviço enviada para #{shipping_company.name}"
+  end
+
   private
 
   def verify_user_and_order_are_from_same_company

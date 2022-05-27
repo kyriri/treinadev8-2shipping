@@ -538,3 +538,15 @@ pre code {
 .notice { 
   background: var(--accent-light);
 }
+
+.order_status {
+  font-size: 0.5rem; 
+  font-family: var(--mono-font);
+  text-align: center;
+  width: 4rem; 
+  background-color: #ffecb3;
+  border: 1px solid var(--text-light);
+  border-radius: 5px;
+  padding: 0.1rem 0.1rem;
+  margin: 0.1rem;
+}

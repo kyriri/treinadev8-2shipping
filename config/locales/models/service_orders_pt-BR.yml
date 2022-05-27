@@ -4,3 +4,21 @@ pt-BR:
       business_days:
         one: dia útil
         other: dias úteis
+  
+  activerecord:
+      models:
+        service_order: 
+      attributes:
+        service_order:
+          shipping_company: transportadora
+          shipping_company_id: transportadora
+          package: encomenda
+          package_id: encomenda
+          status: status
+        service_order/status:
+          canceled: cancelada
+          unassigned: não atribuída
+          rejected: devolvida
+          pending: aguardando confirmação
+          accepted: aceita
+          delivered: entregue

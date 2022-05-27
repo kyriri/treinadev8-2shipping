@@ -12,13 +12,21 @@
         <th>empresa</th>
         <th>preço</th>
         <th>prazo</th>
+        <th></th>
       </tr>
-      <% @quotes.each do |q| %>
-        <%= next if q.is_valid == false %>
-        <tr>
-          <td><%= q.shipping_company.name %></td>
-          <td><%= number_to_currency(q.fee) %></td>
-          <td><%= "#{q.delivery_time} #{t('.business_days', count: q.delivery_time)}" %></td>
+      <% @quotes.each do |quote| %>
+        <%= next if quote.is_valid == false %>
+        <tr data-carrier='<%= quote.shipping_company.id %>'>
+          <td><%= quote.shipping_company.name %></td>
+          <td><%= number_to_currency(quote.fee) %></td>
+          <td><%= "#{quote.delivery_time} #{t('.business_days', count: quote.delivery_time)}" %></td>
+          <td>
+            <% if @service_order.unassigned? %>
+              <%= button_to 'escolher', attribute_to_carrier_service_order_path, params: { carrier: quote.shipping_company.id } %>
+            <% elsif quote.shipping_company == @service_order.shipping_company %>
+              <div class='order_status'><%= ServiceOrder.human_attribute_name("status.#{@service_order.status}") %></div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
