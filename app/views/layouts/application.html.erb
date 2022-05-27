@@ -11,9 +11,18 @@
 
   <%# TODO bring content of partials back here %>
   <body>
-    <header>
+    <header><div style='max-width: 45rem; margin: 0 auto'>
       <h1><%= link_to t('.app_name'), root_path %></h1>
-    </header>
+      
+      <%# TODO test switch below %>
+      <div class='language_switcher'>
+        <% if I18n.locale == :en %>
+          <%= link_to 'pt-BR', root_path(locale: 'pt-BR') %>
+        <% else %>
+          <%= link_to 'en', root_path(locale: 'en') %>
+        <% end %>
+      </div>
+    </div></header>
 
     <nav> 
       <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 

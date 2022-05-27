@@ -10,6 +10,7 @@
 
   <dt>Valor mínimo</dt>
   <dd><%= number_to_currency(@shipping_company.min_fee) %></dd>
+  <%# TODO values in BRL should be in BRL even if locale = en %>
 </dl>
 
 <% unless @fees.empty? %>

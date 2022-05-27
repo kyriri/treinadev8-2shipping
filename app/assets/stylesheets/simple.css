@@ -556,3 +556,10 @@ pre code {
   padding: 0.1rem 0.1rem;
   margin: 0.1rem;
 }
+
+.language_switcher {
+  border: 1px solid var(--accent);
+  width: fit-content;
+  padding: 0 0.2rem;
+  float: right;
+}
