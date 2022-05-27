@@ -4,6 +4,7 @@ class ServiceOrder < ApplicationRecord
   belongs_to :package
   belongs_to :shipping_company, optional: true
   has_many :quotes
+  has_one :delivery
 
   def get_quotes
     active_companies = ShippingCompany.where(status: 'active')

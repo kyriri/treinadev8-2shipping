@@ -33,6 +33,7 @@ describe 'The order status is updated correctly' do
       expect(page).to have_text('A ordem foi aceita com sucesso.')
       expect(ServiceOrder.last.status).to eq 'accepted'
       expect(serv_order.delivery).to be
+      expect(serv_order.delivery.tracking_code).to be
     end
 
     it 'rejects an order' do
@@ -48,6 +49,7 @@ describe 'The order status is updated correctly' do
       expect(current_path).to eq service_orders_path
       expect(page).to have_text('A ordem foi devolvida com sucesso.')
       expect(ServiceOrder.last.status).to eq 'rejected'
+      expect(serv_order.delivery).not_to be
     end
 
     xit 'marks a Delivery as completed' do

@@ -1,12 +1,6 @@
 require 'rails_helper'
 
-xdescribe 'User accepts an order delivery' do
-  xit 'it creates a new Delivery' do
-  end
-end
-
-
-xdescribe 'User updates delivery status' do
+describe 'User updates delivery history' do
   xit 'clicking on buttons' do
     sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
     serv_order = ServiceOrder.create!(shipping_company: sc1, status: 'accepted', package: Package.new)
@@ -32,5 +26,6 @@ xdescribe 'User updates delivery status' do
   end
 
   xit 'and if marked as delivered, it also changes the service order status' do
+    #also on file user_causes_status_to_update_spec.rb
   end
 end
