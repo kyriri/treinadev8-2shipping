@@ -1,0 +1,18 @@
+<h2><%= t('.title').titleize %></h2>
+
+<div id='outposts_container'>
+
+  <% if @outposts.empty? %>
+    <%= t('.no_outposts') %>
+  <% else %>
+    <% @outposts.each do |outpost| %>
+      <div class="outposts_card">
+        <figure style="text-align: center;"><img src="<%= Rails.root.join('app', 'assets', 'images', 'outposts', '1.png') %>" alt="<%= t('.standard_icon_alt') %>"></figure>
+        <figcaption>
+          <b><%= "#{outpost.name} - #{outpost.city_state}" %></b>
+          <br><%= outpost.category %>
+        </figcaption>
+      </div>
+    <% end %>
+  <% end %>
+</div>

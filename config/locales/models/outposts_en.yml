@@ -1,0 +1,17 @@
+en:
+  outposts:
+    index:
+      title: my outposts 
+      standard_icon_alt: a truck going fast
+      no_outposts: No outposts to show.
+
+  activerecord:
+    models:
+      outpost: outpost
+    attributes:
+      outpost:
+        name: name
+        city_state: city, state
+        category: category
+        shipping_company: shipping company
+        shipping_company_id: shipping company

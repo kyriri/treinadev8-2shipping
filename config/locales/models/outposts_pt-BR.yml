@@ -1,0 +1,17 @@
+pt-BR:
+  outposts:
+    index:
+      title: meus entrepostos 
+      standard_icon_alt: um caminhão andando rápido
+      no_outposts: Nenhum entreposto cadastrado.
+
+  activerecord:
+    models:
+      outpost: entreposto
+    attributes:
+      outpost:
+        name: nome
+        city_state: cidade, estado
+        category: categoria
+        shipping_company: transportadora
+        shipping_company_id: transportadora

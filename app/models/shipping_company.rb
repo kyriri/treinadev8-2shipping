@@ -9,6 +9,7 @@ class ShippingCompany < ApplicationRecord
 
   has_many :shipping_rates
   has_many :delivery_times
+  has_many :outposts
 
   def find_delivery_time(package)
     services = self.delivery_times

@@ -122,7 +122,7 @@ DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 3, shi
 DeliveryTime.create!(max_distance_in_km: 555, delivery_time_in_buss_days: 8, shipping_company: sc3) # another company
 
 Outpost.create!(shipping_company: sc2, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de coleta')
-Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'São Paulo, SP', category: 'centro de envios aéreos')
+Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Guarulhos, SP', category: 'centro de envios aéreos')
 Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
 Outpost.create!(shipping_company: sc2, name: 'Pampulha', city_state: 'Belo Horizonte, MG', category: 'centro de distribuição')
 Outpost.create!(shipping_company: sc2, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')

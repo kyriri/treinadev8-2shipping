@@ -6,7 +6,7 @@ en:
       my_company: My Company
       my_service_orders: My Service Orders
       my_rates_and_times: My Rates & Times
-      my_distribution_points: My Distribution Points
+      my_distribution_points: My Outposts
     admin_navbar:
       shipping_companies: Shipping Companies
       service_orders: Service Orders
