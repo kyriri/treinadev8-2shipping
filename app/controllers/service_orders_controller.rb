@@ -44,7 +44,7 @@ class ServiceOrdersController < ApplicationController
     new_status = params[:status]
     service_order.status = new_status
     service_order.save!
-    redirect_to service_orders_path, notice: 'Atualização feita com sucesso.'
+    redirect_to service_orders_path, notice: "A ordem foi #{ServiceOrder.human_attribute_name("status.#{service_order.status}")} com sucesso."
   end
 
   private
