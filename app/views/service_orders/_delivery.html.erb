@@ -21,7 +21,7 @@
 <% if @service_order.delivery && @service_order.delivery.stages.any? %>
   <div>
     <table>
-      <caption><%= t('.delivery_details') %></caption>
+      <caption><%= "#{t('.delivery_details')} (código de rastreio: #{@service_order.delivery.tracking_code})" %></caption>
       <tr>
         <th><%= t('.date') %></th>
         <th><%= t('.place') %></th>

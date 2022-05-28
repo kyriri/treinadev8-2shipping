@@ -21,6 +21,7 @@ describe 'User updates delivery history' do
     expect(current_path).to eq service_order_path(serv_order)
     expect(page).to have_text('Passo de entrega cadastrado com sucesso.')
     expect(page).to have_text('Detalhes da entrega')
+    expect(page).to have_text('HU876592369BR')
     expect(page).to have_text('posto de entrega')
     expect(page).to have_text('Savassi - Belo Horizonte, MG')
     # expect(page).to have_text('27/05/2022 13:57')
