@@ -5,7 +5,7 @@ class ShippingCompany < ApplicationRecord
   validates_numericality_of :cubic_weight_const, :min_fee, allow_nil: true
   validates_length_of :cnpj, { is: 14 }
   
-  after_save :create_default_outposts
+  after_create :create_default_outposts
 
   enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
 
