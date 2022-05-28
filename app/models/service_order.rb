@@ -19,6 +19,12 @@ class ServiceOrder < ApplicationRecord
     "#{SecureRandom.alphanumeric(3).upcase}-#{SecureRandom.alphanumeric(3).upcase}"
   end
 
+
+  def create_delivery # TODO test this
+    code = ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**8).to_i.to_s + 'BR'
+    Delivery.create!(service_order: self, tracking_code: code)
+  end
+
   def select_carriers_with_best(criteria, quotes)
     return 'Unable to choose best quote from an empty list' if quotes.empty?
 

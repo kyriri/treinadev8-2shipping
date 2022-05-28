@@ -33,3 +33,6 @@ rspec_results.txt
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# working file
+/db/seeds-tentative.rb

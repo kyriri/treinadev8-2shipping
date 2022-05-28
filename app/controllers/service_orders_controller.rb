@@ -43,18 +43,13 @@ class ServiceOrdersController < ApplicationController
   def update_status
     service_order = ServiceOrder.find(params[:id])
     new_status = params[:status]
-    create_delivery(service_order) if new_status == 'accepted'
+    service_order.create_delivery if new_status == 'accepted'
     service_order.status = new_status
     service_order.save!
     redirect_to service_orders_path, notice: "A ordem foi #{ServiceOrder.human_attribute_name("status.#{service_order.status}")} com sucesso."
   end
 
   private
-
-  def create_delivery(service_order) # TODO test this
-    code = ('a'..'z').to_a.shuffle[0..1].join.upcase + (SecureRandom.random_number * 10**8).to_i.to_s + 'BR'
-    Delivery.create!(service_order: service_order, tracking_code: code)
-  end
   
   def verify_user_and_order_are_from_same_company # TODO test this
     unless current_user.admin?
