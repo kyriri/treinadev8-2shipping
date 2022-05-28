@@ -6,7 +6,7 @@
       <%= button_to add_step_to_delivery_path, params: { outpost_id: outpost.id, delivery_id: @service_order.delivery.id } do %>
         <div class="outposts_card">
           <figure style="text-align: center;">
-            <%= image_tag('outposts/1.png', size: "130", alt: "#{t('.standard_icon_alt')}") %>
+            <%= image_tag('outposts/1.png', size: "50", alt: "") %>
           </figure>
           <figcaption>
             <b><%= "#{outpost.name} - #{outpost.city_state}" %></b>
