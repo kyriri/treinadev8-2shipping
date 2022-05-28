@@ -4,7 +4,7 @@
 :warning:  Project status: ongoing   
 
 ### Features
-- [x] Authenticate users  
+- [x] Users and admins can log in  
 - [x] Admin can register, view, edit and delete a Shipping Company  
 - [x] User can edit some info about their own company  
 - [ ] Shipping Company users can load their company's prices and delays
@@ -16,7 +16,7 @@
 
 ### Installation
 
-![This app requires Ruby v.3.1.1 to be installed](https://img.shields.io/static/v1?label=rubyonrails&message=version%203.1.1&color=B61D1D&style=for-the-badge&logo=rubyonrails)
+![This app requires Ruby 3.1.1 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.1&color=B61D1D&style=for-the-badge&logo=ruby)
 
 1 - Clone the repository  
 `$ git clone git@github.com:kyriri/treinadev8-2shipping.git`
@@ -30,29 +30,30 @@
 ### Running the application
 
 To start the application, on the project directory run:  
-`$ rails server`  
+`$ bin/rails server`  
 The app will become available at the web address http://localhost:3000/ and can be accessed from any browser.  
   
-To stop the application, go back to the command line and press `control + C` (or `^ + C` for Mac users).
+To stop the application, go back to the window where you started the application and press `control + C` (or `^ + C` for Mac users).  
 
 ### Demo
 
-For demonstration purposes, this app comes with some pre-loaded examples. These credentials can be used to access the app:  
+If you want to see the application running with some mock data, go to the project directory and run  
+`$ bin/rails db:seed`  
+  
+This will acivate the following credentials:   
 - admin: admin@email.com, password: 123456  
 - user :  user@email.com, password: 123456  
-
-And this is an example of a tracking link accessible by an unlogged person: http://localhost:3000/deliveries/HU876592369BR  
- 
-### Database
-
-The pre-loaded examples mentioned above can be deleted by running the following command on the project directory:   
-`$ rails db:reset`   
-(please note this will clean all data, not only the demo items)
+  
+And also creates some packages already in process of delivery, such as: http://localhost:3000/deliveries/HU876592369BR  
+  
+If you want to clean the mock data, you can go to the project directory and run  
+`$ bin/rails db:reset`  
+(please note this delete all data, not only the demo items)  
 
 ### Test suit
 
 On the project directory, run   
-`$ rspec`   
+`$ bin/bundle exec rspec`   
   
 ### Other info
 App developed in the context of the [Treinadev](https://treinadev.com.br/) bootcamp
