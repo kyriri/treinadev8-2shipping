@@ -24,10 +24,21 @@ describe 'User updates delivery history' do
     expect(page).to have_text('HU876592369BR')
     expect(page).to have_text('posto de entrega')
     expect(page).to have_text('Savassi - Belo Horizonte, MG')
-    # expect(page).to have_text('27/05/2022 13:57')
+    # TODO expect(page).to have_text('27/05/2022 13:57')
   end
 
-  xit 'but buttons appear only for accepted service orders' do
+  it 'but buttons appear only for accepted service orders' do
+    sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+    serv_order = ServiceOrder.create!(shipping_company: sc1, status: 'delivered', package: Package.new)
+    Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc1, service_order: serv_order, is_valid: true)
+    outpost = Outpost.create!(shipping_company: sc1, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
+    delivery = Delivery.create!(service_order: serv_order, tracking_code: 'HU876592369BR')
+    user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
+
+    login_as(user)
+    visit service_order_path(serv_order)
+    
+    expect(page).not_to have_css('#outposts_container')
   end
 
   xit 'and if marked as delivered, it also changes the service order status' do

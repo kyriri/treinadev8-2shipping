@@ -21,7 +21,7 @@ describe 'Unlogged user has a link' do
     expect(page).to have_text('posto de entrega')
     expect(page).to have_text('Savassi - Belo Horizonte, MG')
     expect(page.text.index('coletado')).to be < page.text.index('entregue')
-    # expect(page).to have_text('27/05/2022')
+    # TODO expect(page).to have_text('27/05/2022')
   end
 
   it 'but the code is wrong' do
