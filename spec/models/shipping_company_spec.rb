@@ -274,4 +274,16 @@ RSpec.describe ShippingCompany, type: :model do
       end
     end
   end
+
+  describe '#create_default_outposts' do
+    it 'works' do
+      sc1 = ShippingCompany.new(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234)
+      
+      sc1.save
+
+      expect(sc1.outposts.size).to be 2
+      expect(sc1.outposts.first.category).to eq 'coletado'
+      expect(sc1.outposts.last.category).to eq 'entregue'
+    end
+  end
 end

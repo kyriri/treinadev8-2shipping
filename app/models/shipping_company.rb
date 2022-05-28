@@ -5,11 +5,18 @@ class ShippingCompany < ApplicationRecord
   validates_numericality_of :cubic_weight_const, :min_fee, allow_nil: true
   validates_length_of :cnpj, { is: 14 }
   
+  after_save :create_default_outposts
+
   enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
 
   has_many :shipping_rates
   has_many :delivery_times
   has_many :outposts
+
+  def create_default_outposts
+    Outpost.create!(category: 'coletado', name: '', city_state: '', shipping_company: self)
+    Outpost.create!(category: 'entregue', name: '', city_state: '', shipping_company: self)
+  end
 
   def find_delivery_time(package)
     services = self.delivery_times

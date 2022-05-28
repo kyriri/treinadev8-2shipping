@@ -32,14 +32,15 @@ describe 'User visits page listing' do
       expect(page).not_to have_content('regional II')
     end
 
-    it 'but there is nothing to show' do
+    it 'or at least their default outposts' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
 
       login_as(user)
       visit shipping_company_outposts_path(sc1)
 
-      expect(page).to have_content('Nenhum entreposto cadastrado.')
+      expect(page).to have_content('coletado')
+      expect(page).to have_content('entregue')
     end
   end
 
