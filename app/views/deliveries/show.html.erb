@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t('.page_title') %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+  </head>
+
+  <body>
+    <header>
+      <div style='max-width: 45rem; margin: 0 auto'>
+        <h1><%= t('.page_title') %></h1>
+      </div>
+    </header>
+
+    <%# TODO the code below also appears at service orders / show. Make it DRYer %>
+    <section>
+      <div>
+        <table>
+          <caption><%= t('.delivery_details') %></caption>
+          <tr>
+            <th><%= t('.date') %></th>
+            <th><%= t('.place') %></th>
+          </tr>
+          <% @stages.each do |stage| %>
+          <tr>
+            <td><%= stage.when %></td>
+            <td><%= "#{stage.outpost.category}, #{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

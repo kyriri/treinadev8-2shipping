@@ -9,7 +9,7 @@ class ServiceOrdersController < ApplicationController
     @service_order = ServiceOrder.find(params[:id])
     @package = @service_order.package
     @measures = [@package.width_in_cm, @package.length_in_cm, @package.height_in_cm].sort.reverse
-    @outposts = @service_order.shipping_company.outposts if @service_order.shipping_company
+    @outposts = @service_order.shipping_company.outposts.order(:when) if @service_order.shipping_company
     if current_user.admin?
       return @quotes = [] if @service_order.quotes.empty?
       newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group

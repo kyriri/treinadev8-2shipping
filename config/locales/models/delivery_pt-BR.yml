@@ -1,0 +1,7 @@
+pt-BR:
+  deliveries:
+    show:
+      page_title: East Wing - Rastreamento 
+      delivery_details: Detalhes da entrega
+      date: data
+      place: lugar

@@ -1,6 +1,8 @@
 # The data can be loaded with the bin/rails db:seed command 
 
 Quote.destroy_all
+Delivery.destroy_all
+Stage.destroy_all
 DeliveryTime.destroy_all
 ShippingRate.destroy_all
 ServiceOrder.destroy_all
@@ -121,16 +123,22 @@ DeliveryTime.create!(max_distance_in_km: 20, delivery_time_in_buss_days: 1, ship
 DeliveryTime.create!(max_distance_in_km: 150, delivery_time_in_buss_days: 3, shipping_company: sc2)
 DeliveryTime.create!(max_distance_in_km: 555, delivery_time_in_buss_days: 8, shipping_company: sc3) # another company
 
-Outpost.create!(shipping_company: sc2, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de coleta')
-Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Guarulhos, SP', category: 'centro de envios aéreos')
-Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
+outpost0 = Outpost.create!(shipping_company: sc2, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de coleta')
+outpost1 = Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Guarulhos, SP', category: 'centro de envios aéreos')
+outpost2 = Outpost.create!(shipping_company: sc2, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
 Outpost.create!(shipping_company: sc2, name: 'Pampulha', city_state: 'Belo Horizonte, MG', category: 'centro de distribuição')
-Outpost.create!(shipping_company: sc2, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')
+outpost3 = Outpost.create!(shipping_company: sc2, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')
 Outpost.create!(shipping_company: sc3, name: 'Foro', city_state: 'Teresina, PI', category: 'regional II')
     
 User.create!(email: 'user@email.com', password: '123456', shipping_company: sc2)
 User.create!(email: 'admin@email.com', password: '123456', admin: true)
 User.create!(email: 'la-la@courriel.fr', password: 'croissant')
+
+delivery = Delivery.create!(service_order: serv_order3, tracking_code: 'HU876592369BR')
+Stage.create!(delivery: delivery, outpost: outpost3, when: 1.days.ago)
+Stage.create!(delivery: delivery, outpost: outpost1, when: 5.days.ago)
+Stage.create!(delivery: delivery, outpost: outpost0, when: 6.day.ago)
+Stage.create!(delivery: delivery, outpost: outpost2, when: 2.day.ago)
 
 p "Created #{ShippingCompany.count} shipping companies"
 p "Created #{User.count} users"
@@ -140,3 +148,4 @@ p "Created #{Quote.count} quotes"
 p "Created price table for #{ShippingRate.select(:shipping_company_id).distinct.count} shipping companies"
 p "Created delivery times table for #{DeliveryTime.select(:shipping_company_id).distinct.count} shipping companies"
 p "Created #{Outpost.count} outposts for #{Outpost.select(:shipping_company_id).distinct.count} shipping companies"
+p "Created #{Delivery.count} delivery with #{Stage.count} stages"

@@ -1,4 +1,10 @@
 class DeliveriesController < ApplicationController
+  def show
+    delivery = Delivery.find(params[:id])
+    @stages = delivery.stages.order(:when)
+    render layout: false
+  end
+
   def add_step
     delivery = Delivery.find(params[:delivery_id])
     outpost = Outpost.find(params[:outpost_id])
