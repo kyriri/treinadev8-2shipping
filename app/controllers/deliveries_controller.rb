@@ -12,6 +12,7 @@ class DeliveriesController < ApplicationController
     date = Time.now if params[:when].nil? 
     stage = Stage.new(delivery_id: delivery.id, outpost_id: outpost.id, when: date)
     if stage.save
+      delivery.service_order.delivered! if stage.outpost.category == 'entregue'
       redirect_to service_order_path(delivery.service_order), notice: 'Passo de entrega cadastrado com sucesso.'
     else
       redirect_to service_order_path(delivery.service_order), alert: 'Houve um erro no cadastro de passo de entrega.'

@@ -51,8 +51,5 @@ describe 'The order status is updated correctly' do
       expect(ServiceOrder.last.status).to eq 'rejected'
       expect(serv_order.delivery).not_to be
     end
-
-    xit 'marks a Delivery as completed' do
-    end
   end
 end
