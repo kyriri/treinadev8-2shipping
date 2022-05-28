@@ -21,5 +21,5 @@ Rails.application.routes.draw do
     post '/deliveries/:id', to: 'deliveries#add_step', as: 'add_step_to_delivery'
   end
 
-  resources :deliveries, only: [:show]
+  resources :deliveries, only: [:show], param: :tracking_code
 end

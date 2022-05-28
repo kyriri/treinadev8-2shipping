@@ -19,19 +19,23 @@
     <%# TODO the code below also appears at service orders / show. Make it DRYer %>
     <section>
       <div>
-        <table>
-          <caption><%= t('.delivery_details') %></caption>
-          <tr>
-            <th><%= t('.date') %></th>
-            <th><%= t('.place') %></th>
-          </tr>
-          <% @stages.each do |stage| %>
-          <tr>
-            <td><%= stage.when %></td>
-            <td><%= "#{stage.outpost.category}, #{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
-          </tr>
-          <% end %>
-        </table>
+        <% if @delivery.nil? %>
+          <%= t('.not_found', code: @code) %> 
+        <% else %>
+          <table>
+            <caption><%= "#{t('.delivery_details')} #{@delivery.tracking_code}" %></caption>
+            <tr>
+              <th><%= t('.date') %></th>
+              <th><%= t('.place') %></th>
+            </tr>
+            <% @stages.each do |stage| %>
+            <tr>
+              <td><%= stage.when %></td>
+              <td><%= "#{stage.outpost.category}, #{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
+            </tr>
+            <% end %>
+          </table>
+        <% end %>
       </div>
     </section>
   </body>

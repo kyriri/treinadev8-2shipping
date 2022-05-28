@@ -11,8 +11,8 @@
 - [x] Admin can request quotes and choose a shipping company for a certain delivery
 - [x] Shipping Company users can accept or reject service orders
 - [ ] Shipping Company users can create, edit and destroy their logistic outposts
-- [ ] Shipping Company users can create shipment updates for a certain package
-- [ ] Guest users can track a shipment with only a tracking code
+- [x] Shipping Company users can create shipment updates for a certain package
+- [x] Guest users can track a shipment with only a tracking code
 
 ### Installation
 
@@ -40,6 +40,8 @@ To stop the application, go back to the command line and press `control + C` (or
 For demonstration purposes, this app comes with some pre-loaded examples. These credentials can be used to access the app:  
 - admin: admin@email.com, password: 123456  
 - user :  user@email.com, password: 123456  
+
+And this is an example of a tracking link accessible by an unlogged person: http://localhost:3000/deliveries/HU876592369BR  
  
 ### Database
 

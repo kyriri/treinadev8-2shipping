@@ -5,3 +5,4 @@ pt-BR:
       delivery_details: Detalhes da entrega
       date: data
       place: lugar
+      not_found: Código de rastreio %{code} não encontrado.

@@ -1,7 +1,8 @@
 class DeliveriesController < ApplicationController
   def show
-    delivery = Delivery.find(params[:id])
-    @stages = delivery.stages.order(:when)
+    @code = params[:tracking_code]
+    @delivery = Delivery.find_by(tracking_code: @code)
+    @stages = @delivery.stages.order(:when) unless @delivery.nil?
     render layout: false
   end
 
