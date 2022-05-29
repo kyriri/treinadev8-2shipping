@@ -3,7 +3,7 @@ class OutpostsController < ApplicationController
   
   def index
     shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @outposts = shipping_company.outposts
+    @outposts = shipping_company.outposts.where(standard: false).order(:city_state)
   end
   
   private

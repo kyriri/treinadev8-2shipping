@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_222450) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_172617) do
   create_table "deliveries", force: :cascade do |t|
     t.integer "service_order_id", null: false
     t.string "tracking_code"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_222450) do
     t.integer "shipping_company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "standard", default: false
     t.index ["shipping_company_id"], name: "index_outposts_on_shipping_company_id"
   end
 

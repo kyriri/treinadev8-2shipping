@@ -14,8 +14,8 @@ class ShippingCompany < ApplicationRecord
   has_many :outposts
 
   def create_default_outposts
-    Outpost.create!(category: 'coletado', name: '', city_state: '', shipping_company: self)
-    Outpost.create!(category: 'entregue', name: '', city_state: '', shipping_company: self)
+    Outpost.create!(standard: true, category: 'coletado', shipping_company: self, name: '', city_state: '')
+    Outpost.create!(standard: true, category: 'entregue', shipping_company: self, name: '', city_state: '')
   end
 
   def find_delivery_time(package)
