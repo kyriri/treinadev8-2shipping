@@ -15,15 +15,6 @@ describe 'User logs in and' do
         expect(page).to have_link('Meus Entrepostos')
       end
     end
-    # navbar: 
-    # my service orders
-    # my logistic bases (replaces trucks)
-    # my profile (ie: shipping_company show) with option to edit
-    # my prices and delivery times
-
-    # body
-    # orders to accept
-    # orders to update tracking
   end
 
   xcontext 'cannot visit' do
@@ -62,16 +53,7 @@ describe 'Admin logs in and' do
       within 'nav' do
         expect(page).to have_link('Transportadoras')
         expect(page).to have_link('Ordens de Serviço')
-        expect(page).to have_link('Preços & Prazos')
       end
     end
-    # navbar: 
-    # all service orders
-    # all previous quotes
-    # all shipping companies
-    # all prices and delivery times
-
-    # body
-    # orders to handle
   end
 end
