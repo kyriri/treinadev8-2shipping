@@ -3,7 +3,24 @@ class OutpostsController < ApplicationController
   
   def index
     shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @outposts = shipping_company.outposts
+    @outposts = shipping_company.outposts.order(:city_state)
+  end
+
+  def new
+    shipping_company = ShippingCompany.find(params[:shipping_company_id])
+    @outpost = Outpost.new(shipping_company: shipping_company)
+  end
+
+  def create
+    outpost_params = params.require(:outpost).permit(:name, :city_state, :category)
+    outpost_params.merge!({ shipping_company_id: params[:shipping_company_id] })
+    @outpost = Outpost.new(outpost_params)
+    if @outpost.save
+      redirect_to shipping_company_outposts_path(@outpost.shipping_company), notice: t('.success', name: @outpost.name)
+    else
+      flash.now[:alert] = t('.error')
+      render :new 
+    end
   end
   
   private

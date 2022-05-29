@@ -4,14 +4,21 @@ en:
       title: my outposts 
       standard_icon_alt: a truck going fast
       no_outposts: No outposts to show.
+      new_outpost: Register new outpost
+    new: 
+      title: Register new outpost 
+      city_state_explanation: 'ex: Rio de Janeiro, RJ'
+    create:
+      success: Outpost %{name} was succesfully recorded.
+      error: Something went wrong. The outpost was not saved.
 
   activerecord:
     models:
       outpost: outpost
     attributes:
       outpost:
-        name: name
-        city_state: city, state
-        category: category
+        name: Name
+        city_state: Place
+        category: Category
         shipping_company: shipping company
         shipping_company_id: shipping company
