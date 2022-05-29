@@ -24,5 +24,7 @@
       <dt><%= f.label :category %></dt>
       <dd><%= f.text_field :category %></dd>
     </dl>
+
+    <%= f.hidden_field :page_of_origin, value: @page_of_origin %>
     <%= f.submit %>
 <% end %>

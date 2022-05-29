@@ -16,8 +16,10 @@
         <th>Prazo de entrega</th>
       </tr>
       <tr>
-        <td><%= number_to_currency(@winning_quote.fee) %></td>
-        <td><%= "#{@winning_quote.delivery_time} #{t('.business_days', count: @winning_quote.delivery_time)}" %></td>
+        <% if @winning_quote.present? %>
+          <td><%= number_to_currency(@winning_quote.fee) %></td>
+          <td><%= "#{@winning_quote.delivery_time} #{t('.business_days', count: @winning_quote.delivery_time)}" %></td>
+        <% end %>
       </tr>
     </table>
   </div>

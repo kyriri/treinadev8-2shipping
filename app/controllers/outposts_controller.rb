@@ -7,16 +7,17 @@ class OutpostsController < ApplicationController
   end
 
   def new
-    shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @outpost = Outpost.new(shipping_company: shipping_company)
+    @outpost = Outpost.new(shipping_company_id: params[:shipping_company_id])
+    @page_of_origin = params[:page_of_origin]
   end
 
   def create
     outpost_params = params.require(:outpost).permit(:name, :city_state, :category)
     outpost_params.merge!({ shipping_company_id: params[:shipping_company_id] })
     @outpost = Outpost.new(outpost_params)
+    address = params[:outpost][:page_of_origin].present? ? params[:outpost][:page_of_origin] : shipping_company_outposts_path(@outpost.shipping_company)
     if @outpost.save
-      redirect_to shipping_company_outposts_path(@outpost.shipping_company), notice: t('.success', name: @outpost.name)
+      redirect_to address, notice: t('.success', name: @outpost.name)
     else
       flash.now[:alert] = t('.error')
       render :new 

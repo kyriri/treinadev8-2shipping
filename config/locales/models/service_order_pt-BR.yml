@@ -9,9 +9,10 @@ pt-BR:
         one: dia útil
         other: dias úteis
     delivery:
-      no_outposts: Nenhum entreposto cadastrado.
-      delivery_details: Detalhes da entrega
       date: data
+      delivery_details: Detalhes da entrega
+      no_outposts: Nenhum entreposto cadastrado.
+      new_outpost: Cadastrar novo entreposto
       place: lugar
   
   activerecord:

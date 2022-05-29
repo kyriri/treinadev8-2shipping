@@ -1,6 +1,6 @@
 <h2><%= t('.title').titleize %></h2>
 
-<%= link_to t('.new_outpost'), new_shipping_company_outpost_path %>
+<%= link_to t('.new_outpost'), new_shipping_company_outpost_path, class: 'as_button' %>
 
 <div id='outposts_container'>
   <% if @outposts.empty? %>

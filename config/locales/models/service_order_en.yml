@@ -8,3 +8,9 @@ en:
       business_days:
         one: business day
         other: business days
+    delivery:
+      date: when
+      delivery_details: Delivery details
+      new_outpost: Add outpost
+      no_outposts: No outposts to show.
+      place: place

@@ -1,3 +1,5 @@
+<%= link_to t('.new_outpost'), new_shipping_company_outpost_path({ page_of_origin: request.path, shipping_company_id: @service_order.shipping_company.id }) %>
+
 <div id='outposts_container'>
   <% if @outposts.nil? %>
     <%= t('.no_outposts') %>
