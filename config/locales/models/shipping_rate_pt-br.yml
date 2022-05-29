@@ -1,6 +1,7 @@
 pt-BR:
   shipping_rates:
     index:
+      button_go_back: Voltar
       business_days:
         one: dia útil
         other: dias úteis

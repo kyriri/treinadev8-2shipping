@@ -1,6 +1,7 @@
 en:
   shipping_rates:
     index:
+      button_go_back: Go back
       business_days:
         one: business day
         other: business days

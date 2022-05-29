@@ -57,3 +57,5 @@
     <% end %>
   </table>
 <% end %>
+
+<%= link_to t('.button_go_back'), current_user.admin ? shipping_companies_path : root_path, class: 'as_button' %>

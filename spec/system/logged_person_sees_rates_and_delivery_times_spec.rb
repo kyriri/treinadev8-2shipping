@@ -28,6 +28,18 @@ describe 'Normal user can see rates & times' do
 
     expect(current_path).to eq root_path
   end
+
+  it 'and then go back to the previous page' do
+    user_sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+    user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: user_sc)
+
+    login_as(user)
+    visit root_path
+    click_on 'Meus Preços & Prazos'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
+  end
 end
 
 describe 'Admin access rates & times' do
@@ -127,4 +139,17 @@ describe 'Admin access rates & times' do
     expect(page).not_to have_text('até 555 km')
     expect(page.text.index('até 20 km')).to be < page.text.index('até 800 km')
   end
+
+  it 'and go back to the previous page' do
+    sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', cubic_weight_const: 35, min_fee: 8, legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+    admin = User.create!(admin:true, email: 'me@email.com', password: '12345678')
+
+    login_as(admin)
+    visit root_path
+    click_on 'Transportadoras'
+    click_on 'taxas'
+    click_on 'Voltar'
+
+    expect(current_path).to eq shipping_companies_path
+  end 
 end
