@@ -1,3 +1,13 @@
+<div id='error_msgs'>
+  <% if @outpost.errors.any? %>
+    <ul>
+      <% @outpost.errors.full_messages.sort_by!{ |e| e.downcase }.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
 <h2><%= t('.title') %></h2>
 
 <%= form_with model: @outpost, url: shipping_company_outposts_path do |f| %> 

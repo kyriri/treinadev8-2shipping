@@ -8,18 +8,30 @@ describe 'User tries to create new outpost' do
     visit root_path
     click_on 'Meus Entrepostos'
     click_on 'Cadastrar novo entreposto'
-    # TODO it is failling at form creation, probably because it's a nested route
     fill_in 'Nome', with: 'Loja III'
     fill_in 'Localidade', with: 'Porto Alegre, RS'
     fill_in 'Categoria', with: 'posto de coleta'
     click_on 'Cadastrar entreposto'
 
     expect(current_path).to eq shipping_company_outposts_path(user.shipping_company)
-    expect(page).to have_text('Loja III')
-    expect(page).to have_text('Porto Alegre, RS')
-    expect(page).to have_text('posto de coleta')
+    expect(page).to have_text('O entreposto Loja III foi salvo com sucesso.')
+    within '#outposts_container' do
+      expect(page).to have_text('Loja III')
+      expect(page).to have_text('Porto Alegre, RS')
+      expect(page).to have_text('posto de coleta')
+    end
   end
 
-  xit "and it doesn't work because there's already a similar active outpost" do
+  it "but receives error message because input is unacceptable" do
+    sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+    Outpost.create!(shipping_company: sc1, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de distribuição')
+    user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
+
+    login_as(user)
+    visit new_shipping_company_outpost_path(user.shipping_company)
+    click_on 'Cadastrar entreposto'
+
+    expect(page).to have_text('Houve um erro. O entreposto não foi salvo.')
+    expect(page).to have_text('Nome não pode ficar em branco')
   end
 end
