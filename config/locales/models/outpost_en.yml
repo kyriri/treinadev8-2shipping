@@ -14,11 +14,16 @@ en:
 
   activerecord:
     models:
-      outpost: outpost
+      outpost: Outpost
     attributes:
       outpost:
+        outpost_: Outpost # for error msg on custom validation
         name: Name
         city_state: Place
         category: Category
-        shipping_company: shipping company
-        shipping_company_id: shipping company
+        shipping_company: Shipping company
+        shipping_company_id: Shipping company
+    errors:
+      models:
+        outpost:
+          not_unique: already exists        

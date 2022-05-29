@@ -17,8 +17,13 @@ pt-BR:
       outpost: entreposto
     attributes:
       outpost:
+        outpost_: Entreposto # for error msg on custom validation
         name: Nome
         city_state: Localidade
         category: Categoria
-        shipping_company: transportadora
-        shipping_company_id: transportadora
+        shipping_company: Transportadora
+        shipping_company_id: Transportadora
+    errors:
+      models:
+        outpost:
+          not_unique: já existe
