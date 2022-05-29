@@ -1,7 +1,8 @@
 <h2><%= t('.title').titleize %></h2>
 
-<div id='outposts_container'>
+<%= link_to t('.new_outpost'), new_shipping_company_outpost_path %>
 
+<div id='outposts_container'>
   <% if @outposts.empty? %>
     <%= t('.no_outposts') %>
   <% else %>

@@ -4,14 +4,21 @@ pt-BR:
       title: meus entrepostos 
       standard_icon_alt: um caminhão andando rápido
       no_outposts: Nenhum entreposto cadastrado.
+      new_outpost: Cadastrar novo entreposto
+    new: 
+      title: Cadastrar novo entreposto 
+      city_state_explanation: 'ex: Salvador, BA'
+    create:
+      success: O entreposto %{name} foi salvo com sucesso.
+      error: Houve um erro. O entreposto não foi salvo.
 
   activerecord:
     models:
       outpost: entreposto
     attributes:
       outpost:
-        name: nome
-        city_state: cidade, estado
-        category: categoria
+        name: Nome
+        city_state: Localidade
+        category: Categoria
         shipping_company: transportadora
         shipping_company_id: transportadora

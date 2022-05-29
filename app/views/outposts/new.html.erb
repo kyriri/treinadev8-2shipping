@@ -1,0 +1,18 @@
+<h2><%= t('.title') %></h2>
+
+<%= form_with model: @outpost, url: shipping_company_outposts_path do |f| %> 
+    <dl>
+      <dt><%= f.label :name %></dt>
+      <dd><%= f.text_field :name %></dd>
+
+      <dt><%= f.label :city_state %></dt>
+      <dd>
+        <%= t('.city_state_explanation') %>
+        <br><%= f.text_field :city_state %>
+      </dd>
+
+      <dt><%= f.label :category %></dt>
+      <dd><%= f.text_field :category %></dd>
+    </dl>
+    <%= f.submit %>
+<% end %>
