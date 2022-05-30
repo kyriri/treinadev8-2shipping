@@ -23,14 +23,14 @@ When a shipping company accepts a service order, a **Delivery** is created, whic
 
 - [x] App supports authentication for users
 - [x] Users can choose between two languages
-- [x] e-commerce users (`admin: true`) can register, view, edit and delete a Shipping Company
-- [x] Shipping company users (`admin: false`) can edit select data about their own company
+- [x] E-commerce users (`admin: true`) can register, view, edit and delete a Shipping Company
+- [x] Shipping company users (`admin: false`) can edit some data about their own company
 - [ ] Shipping Company users can load their company's prices and delivery times
-- [x] e-commerce users can request quotes and choose a shipping company for a certain  delivery
+- [x] E-commerce users can request quotes and choose a shipping company for a certain  delivery
 - [x] Shipping Company users can accept or reject service orders
 - [x] Shipping Company users can create, view and delete their logistic outposts
 - [x] Shipping Company users can create delivery updates for a certain package
-- [x] Unlogged users can track a deliver with a link
+- [x] Unlogged users can track a delivery with a link
 
 ### Installation
 
