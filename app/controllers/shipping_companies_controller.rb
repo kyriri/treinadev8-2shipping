@@ -27,7 +27,7 @@ class ShippingCompaniesController < ApplicationController
   end
 
   def edit
-    @statuses = form_statusus
+    @statuses = form_statuses
   end
 
   def update
@@ -37,7 +37,7 @@ class ShippingCompaniesController < ApplicationController
       redirect_to @shipping_co
     else
       flash.now[:alert] = t('shipping_company_update_failed')
-      @statuses = form_statusus
+      @statuses = form_statuses
       render :edit
     end
   end
@@ -65,7 +65,7 @@ class ShippingCompaniesController < ApplicationController
     @shipping_co = ShippingCompany.find(params[:id])
   end
 
-  def form_statusus
+  def form_statuses
     Hash[ ShippingCompany.statuses
       .select { |k,v| k != "deleted" }
       .map { |k,v| [k, ShippingCompany.human_attribute_name("status.#{k}")] }
