@@ -1,4 +1,20 @@
-<%= link_to t('.new_outpost'), new_shipping_company_outpost_path({ page_of_origin: request.path, shipping_company_id: @service_order.shipping_company.id }) %>
+<% if @service_order.delivery && @service_order.delivery.stages.any? %>
+  <div>
+    <table>
+      <caption><%= "#{t('.delivery_details')} (código de rastreio: #{@service_order.delivery.tracking_code})" %></caption>
+      <tr>
+        <th><%= t('.date') %></th>
+        <th><%= t('.place') %></th>
+      </tr>
+      <%  @service_order.delivery.stages.each do |stage| %>
+      <tr>
+        <td><%= stage.when %></td>
+        <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
 
 <div id='outposts_container'>
   <% if @outposts.nil? %>
@@ -20,20 +36,4 @@
   <% end %>
 </div>
 
-<% if @service_order.delivery && @service_order.delivery.stages.any? %>
-  <div>
-    <table>
-      <caption><%= "#{t('.delivery_details')} (código de rastreio: #{@service_order.delivery.tracking_code})" %></caption>
-      <tr>
-        <th><%= t('.date') %></th>
-        <th><%= t('.place') %></th>
-      </tr>
-      <%  @service_order.delivery.stages.each do |stage| %>
-      <tr>
-        <td><%= stage.when %></td>
-        <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-<% end %>
+<%= link_to t('.new_outpost'), new_shipping_company_outpost_path({ page_of_origin: request.path, shipping_company_id: @service_order.shipping_company.id }) %>

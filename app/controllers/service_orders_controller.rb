@@ -15,7 +15,7 @@ class ServiceOrdersController < ApplicationController
       newest_quote_group = @service_order.quotes.order(created_at: :desc).first.quote_group
       @quotes = @service_order.quotes.where(quote_group: newest_quote_group)
     else
-      @winning_quote = @service_order.quotes.where(chosen: true).last
+      @winning_quote = @service_order.quotes.where(chosen: true, shipping_company: @service_order.shipping_company).order(:created_at).last
     end
   end
 
@@ -31,7 +31,7 @@ class ServiceOrdersController < ApplicationController
 
   def attribute_to_carrier
     service_order = ServiceOrder.find(params[:id])
-    quote = Quote.find(params[:id])
+    quote = Quote.find(params[:quote])
     shipping_company = ShippingCompany.find(params[:carrier])
     service_order.shipping_company = shipping_company
     service_order.pending!

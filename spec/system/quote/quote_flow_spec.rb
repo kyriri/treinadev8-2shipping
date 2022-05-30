@@ -9,6 +9,10 @@ describe 'Admin get quotes, chooses one' do
             ShippingRate.create!(shipping_company: sc2, max_weight_in_kg: 3, cost_per_km_in_cents: 55)
             DeliveryTime.create!(shipping_company: sc2, max_distance_in_km: 1_000, delivery_time_in_buss_days: 8)
       package = Package.new(distance_in_km: 50, weight_in_g: 1_000, volume_in_m3: 0.005)
+      ServiceOrder.create!(status: 'unassigned', package: Package.new)
+      ServiceOrder.create!(status: 'unassigned', package: Package.new)
+      ServiceOrder.create!(status: 'unassigned', package: Package.new)
+      ServiceOrder.create!(status: 'unassigned', package: Package.new)
       serv_order = ServiceOrder.create!(status: 'unassigned', package: package)
       user = User.create!(email: 'user@email.com', password: '123456', shipping_company: sc1)
       admin = User.create!(admin: true, email: 'admin@email.com', password: '123456')
@@ -16,7 +20,7 @@ describe 'Admin get quotes, chooses one' do
       login_as(admin)
       visit root_path
       click_on 'Ordens de Serviço'
-      click_on 'detalhes'
+      find("a[href^='/service_orders/#{serv_order.id}']").click
       click_on 'Obter orçamentos'
       # sc1: cubic weight: 0.005 * 100 = 0.5 kg | weight for calculus: 1 kg   | rate: R$ 0,60/km | fee: 50 * 0.60 = R$ 30    | min fee 33.33 | fee 33.33
       # sc2: cubic weight: 0.005 * 300 = 1.5 kg | weight for calculus: 1.5 kg | rate: R$ 0,55/km | fee: 50 * 0.55 = R$ 27,50 | min fee 10    | fee: 27.5

@@ -15,7 +15,7 @@
         <th></th>
       </tr>
       <% @quotes.each do |quote| %>
-        <%= next if quote.is_valid == false %>
+        <%= next unless quote.is_valid %>
         <tr data-carrier='<%= quote.shipping_company.id %>'>
           <td><%= quote.shipping_company.name %></td>
           <td><%= number_to_currency(quote.fee) %></td>
