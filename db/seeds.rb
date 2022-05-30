@@ -123,27 +123,44 @@ simple_package4 = Package.create!(volume_in_m3: 0.004, weight_in_g: 1750, distan
 simple_package5 = Package.create!(volume_in_m3: 0.0105, weight_in_g: 3276, distance_in_km: 39)
 
                 
-ServiceOrder.create!(status: 'unassigned', package: simple_package1)
-ServiceOrder.create!(status: 'unassigned', package: simple_package2)
-ServiceOrder.create!(status: 'rejected',   package: simple_package3, shipping_company: sc2)
-serv_order1 = ServiceOrder.create!(status: 'pending',  package: complete_package1, shipping_company: sc2)
-serv_order2 = ServiceOrder.create!(status: 'pending',  package: complete_package2, shipping_company: sc2)
-serv_order3 = ServiceOrder.create!(status: 'accepted', package: complete_package3, shipping_company: sc2)
-ServiceOrder.create!(status: 'canceled',  package: simple_package4)
-ServiceOrder.create!(status: 'delivered', package: simple_package5)
+serv_order4 = ServiceOrder.create!(status: 'unassigned', package: complete_package1)
+              ServiceOrder.create!(status: 'unassigned', package: complete_package2)
+              ServiceOrder.create!(status: 'unassigned', package: complete_package3)
+serv_order5 = ServiceOrder.create!(status: 'unassigned', package: simple_package4)
+              ServiceOrder.create!(status: 'unassigned', package: simple_package5)
+              ServiceOrder.create!(status: 'rejected',   package: Package.new, shipping_company: sc2)
+serv_order1 = ServiceOrder.create!(status: 'pending',    package: simple_package1, shipping_company: sc2)
+serv_order2 = ServiceOrder.create!(status: 'pending',    package: simple_package2, shipping_company: sc2)
+serv_order3 = ServiceOrder.create!(status: 'accepted',   package: simple_package3, shipping_company: sc2)
+              ServiceOrder.create!(status: 'canceled',   package: Package.new)
+serv_order6 = ServiceOrder.create!(status: 'delivered',  package: Package.new, shipping_company: sc2)
 
 Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc2, service_order: serv_order1, is_valid: true)
 Quote.create!(fee: 27.24, delivery_time: 1, chosen: true, quote_group: "90A-P4B", shipping_company: sc2, service_order: serv_order2, is_valid: true)
 Quote.create!(fee: 10.00, delivery_time: 3, chosen: true, quote_group: "MNH-BL0", shipping_company: sc2, service_order: serv_order3, is_valid: true)
+Quote.create!(fee: 4.67 , delivery_time: 5, chosen: true, quote_group: "G5U-BL0", shipping_company: sc2, service_order: serv_order6, is_valid: true)
+
+Quote.create!(fee: 10.00, delivery_time: 3, quote_group: "MNH-NSR", shipping_company: sc1, service_order: serv_order4, is_valid: true)
+Quote.create!(fee: 11.34, delivery_time: 2, quote_group: "MNH-NSR", shipping_company: sc2, service_order: serv_order4, is_valid: true)
+Quote.create!(fee: 13.09, delivery_time: 1, quote_group: "MNH-NSR", shipping_company: sc3, service_order: serv_order4, is_valid: true)
+
+Quote.create!(fee: 9.99,  delivery_time: 3, quote_group: "3YB-BL0", shipping_company: sc1, service_order: serv_order5, is_valid: true)
+Quote.create!(fee: 10.90, delivery_time: 3, quote_group: "3YB-BL0", shipping_company: sc2, service_order: serv_order5, is_valid: true)
+Quote.create!(fee: 8.45,  delivery_time: 3, quote_group: "3YB-BL0", shipping_company: sc3, service_order: serv_order5, is_valid: true)
 
 User.create!(email: 'user@email.com', password: '123456', shipping_company: sc2)
 User.create!(email: 'admin@email.com', password: '123456', admin: true)
 
-delivery = Delivery.create!(service_order: serv_order3, tracking_code: 'HU876592369BR')
-Stage.create!(delivery: delivery, outpost: outpost7, when: 1.days.ago)
-Stage.create!(delivery: delivery, outpost: outpost4, when: 2.day.ago)
-Stage.create!(delivery: delivery, outpost: outpost3, when: 5.days.ago)
-Stage.create!(delivery: delivery, outpost: outpost1, when: 6.day.ago)
+delivery3 = Delivery.create!(service_order: serv_order3, tracking_code: 'HU876592369BR')
+Stage.create!(delivery: delivery3, outpost: outpost7, when: 26.hours.ago)
+Stage.create!(delivery: delivery3, outpost: outpost4, when: 52.hours.ago)
+Stage.create!(delivery: delivery3, outpost: outpost3, when: 5.days.ago)
+Stage.create!(delivery: delivery3, outpost: outpost1, when: 6.day.ago)
+
+delivery6 = Delivery.create!(service_order: serv_order6, tracking_code: 'PK859592393BR')
+Stage.create!(delivery: delivery6, outpost: outpost2, when: 6.day.ago)
+Stage.create!(delivery: delivery6, outpost: outpost3, when: 28.hours.ago)
+Stage.create!(delivery: delivery6, outpost: outpost5, when: 1.hour.ago)
 
 p "Created #{ShippingCompany.count} shipping companies"
 p "Created #{User.count} users"
