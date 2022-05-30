@@ -11,3 +11,14 @@ en:
       shipping_companies: Shipping Companies
       service_orders: Service Orders
       rates_and_times: Rates & Times
+
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%n %u"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: BRL # all prices in this app are BRL values

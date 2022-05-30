@@ -1,15 +1,15 @@
-<h1>Ordens de Serviço</h1>
+<h1><%= t('.title') %></h1>
 
 <div class='container'>
   <% @building_blocks.each do |box| %>
     <div class='<%= box[:css_class] %>'> 
       <h4><%= box[:title] %></h4>
       <% if box[:collection].empty? %>
-        <p>Nenhuma ordem de serviço.</p>
+        <p><%= t('.no_service_orders') %></p>
       <% else %>
         <ul>
           <% box[:collection].each do |order| %>
-            <li>ID: <%= order.id %> | <%= link_to 'detalhes', order %></li>
+            <li>ID: <%= order.id %> | <%= link_to t('.details'), order %></li>
           <% end %>
         </ul>
       <% end %>

@@ -1,5 +1,9 @@
 en:
   service_orders:
+    index:
+      details: details
+      no_service_orders: No service orders to show.
+      title: Service Orders
     show:
       accept: accept
       business_days:

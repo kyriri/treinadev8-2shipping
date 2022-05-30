@@ -1,5 +1,9 @@
 pt-BR:
   service_orders:
+    index:
+      details: detalhes
+      no_service_orders: Nenhuma ordem de serviço.
+      title: Ordens de Serviço
     show:
       accept: aceitar
       business_days:
