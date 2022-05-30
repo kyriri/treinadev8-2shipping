@@ -15,16 +15,18 @@ describe 'User updates delivery history' do
     visit root_path
     click_on 'Minhas Ordens de Serviço'
     click_on 'detalhes'
-    click_on 'Aeroporto'
+    click_on 'Savassi'
 
     expect(delivery.stages).to be
     expect(current_path).to eq service_order_path(serv_order)
     expect(page).to have_text('Passo de entrega cadastrado com sucesso.')
     expect(page).to have_text('Detalhes da entrega')
     expect(page).to have_text('HU876592369BR')
-    expect(page).to have_text('posto de entrega')
-    expect(page).to have_text('Savassi Belo Horizonte, MG')
-    expect(page).to have_text('27/05/2022, 13:57')
+    within '#delivery_stages' do
+      expect(page).to have_text('posto de entrega')
+      expect(page).to have_text('Savassi - Belo Horizonte, MG')
+      expect(page).to have_text('27/05/2022, 13:57')
+    end
   end
 
   it 'but buttons appear only for accepted service orders' do

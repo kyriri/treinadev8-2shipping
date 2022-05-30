@@ -1,6 +1,6 @@
 <% if @service_order.delivery.present? %>
   <div>
-    <table>
+    <table id='delivery_stages'>
       <caption><%= "#{t('.delivery_details')} (código de rastreio: #{@service_order.delivery.tracking_code})" %></caption>
       <% if @delivery_stages.present? %>
         <tr>
@@ -11,7 +11,7 @@
           <%= next if stage.nil? %>
           <tr>
             <td><%= l(stage.when) %></td>
-            <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
+            <td><%= "#{stage.outpost.category} #{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
           </tr>
         <% end %>
       <% end %>
