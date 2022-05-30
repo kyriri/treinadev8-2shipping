@@ -17,8 +17,8 @@ en:
         other: business days
       no_quotes_yet: Nenhum orçamento feito até agora.
       no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
-      
     delivery:
+      button_title: click to add delivery step
       date: when
       delivery_details: Delivery details
       new_outpost: Add outpost

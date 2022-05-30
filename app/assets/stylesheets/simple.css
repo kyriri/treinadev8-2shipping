@@ -82,10 +82,7 @@ body {
  */
 
  button,
- input,
- optgroup,
- select,
- textarea {
+ input {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
@@ -98,7 +95,7 @@ body {
  }
 
 form {
- display: inline-flex;
+ display: inline;
 }
 
 /* Make the header bg full width, but the content inline with body */
@@ -234,6 +231,7 @@ input[type="button"],
 .as_button,
 a:visited.as_button {
   width: auto;
+  height: 100%;
   float: left;
   border-radius: 5px;
   background: var(--accent);
@@ -604,6 +602,8 @@ pre code {
   padding: 0.2rem;
   border-radius: 5px;
   position: relative;
+  text-align: center;
+  color: var(--text);
 }
 
 .delete_form {
@@ -620,4 +620,13 @@ pre code {
 
 .delete_button:hover {
   background: var(--border);
+}
+
+.login_form {
+  display: inline-flex;
+}
+
+.add_outpost_button {
+  padding: 0.1rem;
+  margin: 0;
 }

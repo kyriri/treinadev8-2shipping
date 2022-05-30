@@ -23,7 +23,7 @@ describe 'User updates delivery history' do
     expect(page).to have_text('Detalhes da entrega')
     expect(page).to have_text('HU876592369BR')
     expect(page).to have_text('posto de entrega')
-    expect(page).to have_text('Savassi - Belo Horizonte, MG')
+    expect(page).to have_text('Savassi Belo Horizonte, MG')
     # TODO expect(page).to have_text('27/05/2022 13:57')
   end
 

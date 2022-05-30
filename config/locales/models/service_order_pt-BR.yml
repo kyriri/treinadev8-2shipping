@@ -30,6 +30,7 @@ pt-BR:
       no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
       quotes: Orçamentos
     delivery:
+      button_title: clique para adicionar passo de entrega
       date: data
       delivery_details: Detalhes da entrega
       no_outposts: Nenhum entreposto cadastrado.
