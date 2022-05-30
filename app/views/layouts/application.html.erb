@@ -9,24 +9,36 @@
     <%= stylesheet_link_tag "application" %>
   </head>
 
-  <%# TODO bring content of partials back here %>
   <body>
-    <header><div style='max-width: 45rem; margin: 0 auto'>
-      <h1><%= link_to t('.app_name'), root_path %></h1>
-      
-      <div class='language_switcher'>
-        <% if I18n.locale == :en %>
-          <%= link_to 'pt-BR', request.path.concat('?locale=pt-BR'), title: 'trocar para português' %>
-        <% else %>
-          <%= link_to 'en', request.path.concat('?locale=en'), title: 'switch to English' %>
-        <% end %>
+    <header>
+      <div style='max-width: 45rem; margin: 0 auto'>
+        <h1><%= link_to t('.app_name'), root_path %></h1>
+        
+        <div class='language_switcher'>
+          <% if I18n.locale == :en %>
+            <%= link_to 'pt-BR', request.path.concat('?locale=pt-BR'), title: 'trocar para português' %>
+          <% else %>
+            <%= link_to 'en', request.path.concat('?locale=en'), title: 'switch to English' %>
+          <% end %>
+        </div>
       </div>
-    </div></header>
+    </header>
 
     <nav> 
-      <%= current_user.admin ? render('layouts/admin_navbar') : render('layouts/user_navbar') if current_user %> 
+      <% if current_user %>
+        <% if current_user.admin %>
+          <%= link_to t('.shipping_companies'), shipping_companies_path %>
+          <%= link_to t('.service_orders'), service_orders_path %>
+        <% else %>
+            <%= link_to t('.my_company'), current_user.shipping_company ? shipping_company_path(current_user.shipping_company) : '#' %>
+            <%= link_to t('.my_service_orders'), service_orders_path %>
+            <%= link_to t('.my_rates_and_times'), current_user.shipping_company ? shipping_company_shipping_rates_path(current_user.shipping_company) : '#' %>
+            <%= link_to t('.my_distribution_points'), current_user.shipping_company ? shipping_company_outposts_path(current_user.shipping_company) : '#' %>
+        <% end %>
+      <% end %>
       <% if user_signed_in? %>
-        <%= current_user.email %>
+        <%# TODO direct link below to the user profile page %>
+        <%= link_to current_user.email, '' %>
         <%= button_to t('devise.shared.links.log_out'), destroy_user_session_path, method: :delete %>
       <% end %>
     </nav>

@@ -76,6 +76,31 @@ body {
   overflow-wrap: break-word;
 }
 
+/** FROM CSS Normalize
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+  border-width: 0;
+  border-style: none;
+  border-color: white;
+  border-image: none;
+  display: inline-flex;
+ }
+
+form {
+ display: inline-flex;
+}
+
 /* Make the header bg full width, but the content inline with body */
 header {
   background: var(--accent-bg);
@@ -210,13 +235,13 @@ input[type="button"],
 a:visited.as_button {
   width: auto;
   float: left;
-  border: none;
   border-radius: 5px;
   background: var(--accent);
   font-size: 1rem;
   color: var(--bg);
   text-decoration: none;
-  padding: 0.7rem 0.9rem;
+  line-height: var(--line-height);
+  padding: 0.2rem 0.9rem;
   margin: 0.5rem;
   transition: 0.4s;
 }
