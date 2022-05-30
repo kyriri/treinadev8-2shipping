@@ -1,38 +1,42 @@
-<% if @service_order.delivery && @service_order.delivery.stages.any? %>
+<% if @service_order.delivery.present? %>
   <div>
     <table>
       <caption><%= "#{t('.delivery_details')} (código de rastreio: #{@service_order.delivery.tracking_code})" %></caption>
-      <tr>
-        <th><%= t('.date') %></th>
-        <th><%= t('.place') %></th>
-      </tr>
-      <% @delivery_stages.each do |stage| %>
-      <tr>
-        <td><%= l(stage.when, locale: :'pt-BR') %></td>
-        <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
-      </tr>
+      <% if @delivery_stages.present? %>
+        <tr>
+          <th><%= t('.date') %></th>
+          <th><%= t('.place') %></th>
+        </tr>
+        <% @delivery_stages.each do |stage| %>
+          <%= next if stage.nil? %>
+          <tr>
+            <td><%= l(stage.when, locale: :'pt-BR') %></td>
+            <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>
 <% end %>
 
-<div id='outposts_container'>
-  <% if @outposts.nil? %>
-    <%= t('.no_outposts') %>
-  <% else %>
-    <% @outposts.each do |outpost| %>
-      <%= button_to add_step_to_delivery_path, 
-                    params: { outpost_id: outpost.id, delivery_id: @service_order.delivery.id },
-                    class: 'add_outpost_button',
-                    title: t('.button_title') do %>
-        <div class="outpost_card">
-          <b style='color: var(--accent)'><%= outpost.name %></b>
-          <b><%= outpost.city_state %></b>
-          <br><%= outpost.category %>
-        </div>
+<% unless @service_order.delivered? %>
+  <div id='outposts_container'>
+    <% if @outposts.nil? %>
+      <%= t('.no_outposts') %>
+    <% else %>
+      <% @outposts.each do |outpost| %>
+        <%= button_to add_step_to_delivery_path, 
+                      params: { outpost_id: outpost.id, delivery_id: @service_order.delivery.id },
+                      class: 'add_outpost_button',
+                      title: t('.button_title') do %>
+          <div class="outpost_card">
+            <b style='color: var(--accent)'><%= outpost.name %></b>
+            <b><%= outpost.city_state %></b>
+            <br><%= outpost.category %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
-
-<h4><%= link_to t('.new_outpost'), new_shipping_company_outpost_path({ page_of_origin: request.path, shipping_company_id: @service_order.shipping_company.id }) %></h4>
+  </div>
+  <h4><%= link_to t('.new_outpost'), new_shipping_company_outpost_path({ page_of_origin: request.path, shipping_company_id: @service_order.shipping_company.id }) %></h4>
+<% end %>

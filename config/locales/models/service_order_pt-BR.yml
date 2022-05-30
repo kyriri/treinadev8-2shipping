@@ -1,8 +1,12 @@
 pt-BR:
   service_orders:
     index:
+      being_delivered: Em processo de entrega
+      delivered: Entregues
       details: detalhes
+      new_orders: Novas
       no_service_orders: Nenhuma ordem de serviço.
+      rejected: Devolvidas
       title: Ordens de Serviço
     show:
       accept: aceitar

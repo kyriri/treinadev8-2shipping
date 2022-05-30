@@ -9,7 +9,7 @@ class DeliveriesController < ApplicationController
   def add_step
     delivery = Delivery.find(params[:delivery_id])
     outpost = Outpost.find(params[:outpost_id])
-    date = Time.now if params[:when].nil? 
+    date = params[:when] 
     stage = Stage.new(delivery_id: delivery.id, outpost_id: outpost.id, when: date)
     if stage.save
       delivery.service_order.delivered! if stage.outpost.category == 'entregue'

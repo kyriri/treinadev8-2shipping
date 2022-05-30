@@ -1,8 +1,12 @@
 en:
   service_orders:
     index:
+      being_delivered: In process of delivery
+      delivered: Delivered
       details: details
+      new_orders: New
       no_service_orders: No service orders to show.
+      rejected: Rejected
       title: Service Orders
     show:
       accept: accept
