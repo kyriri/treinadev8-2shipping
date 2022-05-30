@@ -1,13 +1,30 @@
 pt-BR:
   service_orders:
     show:
+      accept: aceitar
       business_days:
         one: dia útil
         other: dias úteis
+      cubic_volume: Volume cúbico
+      delivery_details: Dados para entrega
+      delivery_time: Prazo de entrega
+      distance: Distância
+      fee: Valor do serviço
+      measures: Dimensões
+      pickup_address: Endereço de retirada
+      reject: rejeitar
+      title: Ordem de Serviço nº %{number}
+      weight: Peso
     quotes:
       business_days:
         one: dia útil
         other: dias úteis
+      company: empresa
+      delivery_time: prazo
+      fee: preço
+      no_quotes_yet: Nenhum orçamento feito até agora.
+      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
+      quotes: Orçamentos
     delivery:
       date: data
       delivery_details: Detalhes da entrega

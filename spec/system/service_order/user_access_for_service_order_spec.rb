@@ -59,7 +59,7 @@ describe 'Normal user' do
       visit service_orders_path
       click_on 'detalhes'
 
-      expect(page).to have_text('Ordem de serviço nº 1')
+      expect(page).to have_text('Ordem de Serviço nº 1')
       expect(current_path).to eq service_order_path(serv_order)
       within '.package_details' do
         expect(page).to have_text('Dimensões')

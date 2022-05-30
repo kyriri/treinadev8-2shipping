@@ -1,10 +1,10 @@
-<h1><%= "Ordem de serviço nº #{@service_order.id}" %></h1>
+<h1><%= t('.title', number: @service_order.id) %></h1>
 
 <% unless current_user.admin? %>
   <div class='winning_quote'>
     <% if @service_order.pending? %>
-      <%= button_to 'rejeitar', update_status_service_order_path, params: { status: 'rejected'} %>
-      <%= button_to 'aceitar', update_status_service_order_path, params: { status: 'accepted'} %>
+      <%= button_to t('.reject'), update_status_service_order_path, params: { status: 'rejected'} %>
+      <%= button_to t('.accept'), update_status_service_order_path, params: { status: 'accepted'} %>
     <% else %>
       <div class='order_status' style='font-size: 1rem; width: auto'>
         <%= ServiceOrder.human_attribute_name("status.#{@service_order.status}") %>
@@ -12,8 +12,8 @@
     <% end %>
     <table>
       <tr>
-        <th>Valor do serviço</th>
-        <th>Prazo de entrega</th>
+        <th><%= t('.fee') %></th>
+        <th><%= t('.delivery_time') %></th>
       </tr>
       <tr>
         <% if @winning_quote.present? %>
@@ -29,30 +29,30 @@
 
 <div class='package_details'>
   <dl>
-    <dt>Dimensões</dt>
+    <dt><%= t('.measures') %></dt>
     <dd><%= "#{@measures[0]} x #{@measures[1]} x #{@measures[2]} cm" %></dd>
 
-    <dt>Volume cúbico</dt>
+    <dt><%= t('.cubic_volume') %></dt>
     <dd><%= "#{@package.volume_in_m3} m³" %></dd>
 
-    <dt>Peso</dt>
+    <dt><%= t('.weight') %></dt>
     <% if @package.weight_in_g < 1000 %>
       <dd><%= "#{@package.weight_in_g} g" %></dd>
     <% else %>
       <dd><%= "#{ number_with_delimiter(@package.weight_in_g.to_f/1000) } kg" %></dd>
     <% end %>
 
-    <dt>Endereço de retirada</dt>
+    <dt><%= t('.pickup_address') %></dt>
     <dd><%= @package.pickup_address %></dd>
 
-    <dt>Dados para entrega</dt>
+    <dt><%= t('.delivery_details') %></dt>
     <dd>
       <%= "#{@package.delivery_recipient_name} - #{@package.delivery_recipient_phone}" %>
       <br>
       <%= @package.delivery_address %>
     </dd>
 
-    <dt>Distância</dt>
+    <dt><%= t('.distance') %></dt>
     <dd><%= "#{@package.distance_in_km} km" %></dd>
   </dl>
 </div>

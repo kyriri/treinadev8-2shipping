@@ -16,9 +16,9 @@
       
       <div class='language_switcher'>
         <% if I18n.locale == :en %>
-          <%= link_to 'pt-BR', current_user ? root_path(locale: 'pt-BR') : new_user_session_path(locale: 'pt-BR'), title: 'trocar para português' %>
+          <%= link_to 'pt-BR', request.path.concat('?locale=pt-BR'), title: 'trocar para português' %>
         <% else %>
-          <%= link_to 'en', current_user ? root_path(locale: 'en') : new_user_session_path(locale: 'en'), title: 'switch to English' %>
+          <%= link_to 'en', request.path.concat('?locale=en'), title: 'switch to English' %>
         <% end %>
       </div>
     </div></header>

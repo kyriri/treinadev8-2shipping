@@ -42,17 +42,22 @@ describe 'User lands on the app' do
   end
 
   it 'change languages, and it is kept throughout navigation' do
-      sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
-      user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
+      sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
+      ServiceOrder.create!(status: 'pending', package: Package.new, shipping_company: sc)
+      user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc)
 
-    visit root_path
-    fill_in 'Email', with: 'me@email.com'
-    fill_in 'Senha', with: '12345678'
-    click_on 'Entrar'
-    click_on 'en' # TODO this test breaks if user switch language before login
-    click_on 'My Company'
-    click_on 'My Service Orders'
+      visit root_path
+      click_on 'en'
+      fill_in 'Email', with: 'me@email.com'
+      fill_in 'Password', with: '12345678'
+      click_on 'Log in'
+      click_on 'en' # devise unfortunately "forgets" user locale
+      click_on 'My Service Orders'
+      click_on 'pt-BR'
+      click_on 'detalhes'
+      click_on 'en'
     
     expect(page).to have_css('header', text: 'Shipping Department')
+    expect(page).to have_text('Service Order # 1')
   end
 end

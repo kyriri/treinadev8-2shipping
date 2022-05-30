@@ -1,17 +1,17 @@
 <div class='quotes'>
-  <b>Orçamentos</b><br>
+  <b><%= t('.quotes') %></b><br>
   <%= button_to "Obter #{"novos " if @quotes.any?}orçamentos", obtain_quotes_service_order_path %>
   <% if @quotes.empty? %>
-    Nenhum orçamento feito até agora.
+    <%= t('.no_quotes_yet') %>
   <% elsif @quotes.map{ |q| q.is_valid }.all?(false) %>
-    <b>Orçamentos</b><br>
-    <span class='alert'>Nenhuma transportadora ativa oferece serviços compatíveis.</span>
+    <b><%= t('.quotes') %></b><br>
+    <span class='alert'><%= t('.no_service_available') %></span>
   <% else %>
     <table>
       <tr>
-        <th>empresa</th>
-        <th>preço</th>
-        <th>prazo</th>
+        <th><%= t('.company') %></th>
+        <th><%= t('.fee') %></th>
+        <th><%= t('.delivery_time') %></th>
         <th></th>
       </tr>
       <% @quotes.each do |quote| %>

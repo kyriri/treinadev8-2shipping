@@ -1,13 +1,19 @@
 en:
   service_orders:
     show:
+      accept: accept
       business_days:
         one: business day
         other: business days
+      reject: reject
+      title: 'Service Order # %{number}'
     quotes:
       business_days:
         one: business day
         other: business days
+      no_quotes_yet: Nenhum orçamento feito até agora.
+      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
+      
     delivery:
       date: when
       delivery_details: Delivery details
