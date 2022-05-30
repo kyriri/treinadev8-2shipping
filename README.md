@@ -14,6 +14,22 @@
 - [x] Shipping Company users can create shipment updates for a certain package
 - [x] Guest users can track a shipment with only a tracking code
 
+### Entities
+
+This app intends to help manage the relationship between an e-commerce and its many shipping providers.
+
+A **Shipping Company** is one such provider. It can be *in registration*, *suspended* or *active*. Only active companies participate in the quoting process, and for this they are required to provide their tables of **Shipping Rate**s and **Delivery Time**s, as well as a factor for calculation of cubic weight and their minimal fee.
+
+**User** is the model managing access to the application. The role of *admin* is designed for an employee of the e-commerce who obtains quotes and distributes service orders, whereas the role of *user* is designed for an employee of a shipping company who accepts or rejects orders on its behalf, and who provides updates for ongoing deliveries.
+
+A **Package** is the information this app receives from another part of the e-commerce system. It is immediately tied to an **Service Order** after reception.
+
+The **Service Order** is the main object of the app. Its status tracks its life: it starts as *unassigned*, changes to *pending* when a shipping company is offered the shipping service, and then changes to *accepted* or *rejected* according to the shipping company response. Its end-of-life options are *canceled*, or, more happily, *delivered*. 
+
+To help admins on their task to choose a shipping company, they can run a **Quote**, which will retrieve prices and delivery times from all active companies for a given package. Each set of quotes is recorded and can be audited anytime.
+
+When a shipping company accepts a service order, a **Delivery** is created, which records the **Stage**s of delivery, that is, the route of a package through the many **Outpost**s of a shipping company. This information can be accessed with a link by an unlogged person, and is intended to allow the costumers of the e-commerce to track their buys.
+
 ### Installation
 
 ![This app requires Ruby 3.1.1 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.1&color=B61D1D&style=for-the-badge&logo=ruby)
