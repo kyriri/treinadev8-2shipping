@@ -125,16 +125,16 @@ simple_package5 = Package.create!(volume_in_m3: 0.0105, weight_in_g: 3276, dista
                 
 ServiceOrder.create!(status: 'unassigned', package: simple_package1)
 ServiceOrder.create!(status: 'unassigned', package: simple_package2)
-ServiceOrder.create!(status: 'rejected', package: simple_package3, shipping_company: sc2)
-serv_order1 = ServiceOrder.create!(status: 'pending', package: complete_package1, shipping_company: sc2)
-serv_order2 = ServiceOrder.create!(status: 'pending', package: complete_package2, shipping_company: sc2)
+ServiceOrder.create!(status: 'rejected',   package: simple_package3, shipping_company: sc2)
+serv_order1 = ServiceOrder.create!(status: 'pending',  package: complete_package1, shipping_company: sc2)
+serv_order2 = ServiceOrder.create!(status: 'pending',  package: complete_package2, shipping_company: sc2)
 serv_order3 = ServiceOrder.create!(status: 'accepted', package: complete_package3, shipping_company: sc2)
-ServiceOrder.create!(status: 'canceled', package: simple_package4)
+ServiceOrder.create!(status: 'canceled',  package: simple_package4)
 ServiceOrder.create!(status: 'delivered', package: simple_package5)
 
 Quote.create!(fee: 21.24, delivery_time: 2, chosen: true, quote_group: "WYV-UUG", shipping_company: sc2, service_order: serv_order1, is_valid: true)
-Quote.create!(fee: 27.24, delivery_time: 1, chosen: true,  quote_group: "90A-P4B", shipping_company: sc2, service_order: serv_order2, is_valid: true)
-Quote.create!(fee: 10.00, delivery_time: 3, chosen: true,  quote_group: "MNH-BL0", shipping_company: sc2, service_order: serv_order3, is_valid: true)
+Quote.create!(fee: 27.24, delivery_time: 1, chosen: true, quote_group: "90A-P4B", shipping_company: sc2, service_order: serv_order2, is_valid: true)
+Quote.create!(fee: 10.00, delivery_time: 3, chosen: true, quote_group: "MNH-BL0", shipping_company: sc2, service_order: serv_order3, is_valid: true)
 
 User.create!(email: 'user@email.com', password: '123456', shipping_company: sc2)
 User.create!(email: 'admin@email.com', password: '123456', admin: true)
