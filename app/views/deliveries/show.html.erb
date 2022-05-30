@@ -30,7 +30,7 @@
             </tr>
             <% @stages.each do |stage| %>
             <tr>
-              <td><%= stage.when %></td>
+              <td><%= l(stage.when) %></td>
               <td><%= "#{stage.outpost.category}, #{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
             </tr>
             <% end %>

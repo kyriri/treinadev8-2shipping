@@ -9,7 +9,7 @@ describe 'User updates delivery history' do
               Outpost.create!(shipping_company: sc1, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')
     delivery = Delivery.create!(service_order: serv_order, tracking_code: 'HU876592369BR')
     user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
-    stage = Stage.create!(delivery: delivery, outpost: outpost)
+    stage = Stage.create!(delivery: delivery, outpost: outpost, when: '2022-05-27 13:57')
 
     login_as(user)
     visit root_path
@@ -24,7 +24,7 @@ describe 'User updates delivery history' do
     expect(page).to have_text('HU876592369BR')
     expect(page).to have_text('posto de entrega')
     expect(page).to have_text('Savassi Belo Horizonte, MG')
-    # TODO expect(page).to have_text('27/05/2022 13:57')
+    expect(page).to have_text('27/05/2022, 13:57')
   end
 
   it 'but buttons appear only for accepted service orders' do

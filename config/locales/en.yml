@@ -20,3 +20,10 @@ en:
         significant: false
         strip_insignificant_zeros: false
         unit: BRL # all prices in this app are BRL values
+      
+  time:
+    am: ''
+    formats:
+      default: '%B %d, %Y - %H:%M'
+    pm: ''
+      

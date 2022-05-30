@@ -10,7 +10,7 @@
         <% @delivery_stages.each do |stage| %>
           <%= next if stage.nil? %>
           <tr>
-            <td><%= l(stage.when, locale: :'pt-BR') %></td>
+            <td><%= l(stage.when) %></td>
             <td><%= "#{stage.outpost.name} - #{stage.outpost.city_state}" %></td>
           </tr>
         <% end %>

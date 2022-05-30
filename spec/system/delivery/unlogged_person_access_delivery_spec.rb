@@ -11,7 +11,7 @@ describe 'Unlogged user has a link' do
     outpost3 = Outpost.create!(shipping_company: sc1, name: 'Domicílio indicado', city_state: 'Belo Horizonte, MG', category: 'entregue')
     stage3 = Stage.create!(delivery: delivery, outpost: outpost3, when: 1.day.ago)
     stage1 = Stage.create!(delivery: delivery, outpost: outpost1, when: 5.days.ago)
-    stage0 = Stage.create!(delivery: delivery, outpost: outpost0, when: 6.day.ago)
+    stage0 = Stage.create!(delivery: delivery, outpost: outpost0, when: '2022-05-01 15:34')
     stage2 = Stage.create!(delivery: delivery, outpost: outpost2, when: 2.day.ago)
 
     visit delivery_path(delivery.tracking_code)
@@ -21,7 +21,7 @@ describe 'Unlogged user has a link' do
     expect(page).to have_text('posto de entrega')
     expect(page).to have_text('Savassi - Belo Horizonte, MG')
     expect(page.text.index('coletado')).to be < page.text.index('entregue')
-    # TODO expect(page).to have_text('27/05/2022')
+    expect(page).to have_text('01/05/2022, 15:34')
   end
 
   it 'but the code is wrong' do
