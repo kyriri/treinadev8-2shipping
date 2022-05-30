@@ -1,26 +1,27 @@
 en:
   outposts:
     index:
-      title: my outposts 
-      standard_icon_alt: a truck going fast
-      no_outposts: No outposts to show.
+      delete: delete
       new_outpost: Register new outpost
+      no_outposts: No outposts to show.
+      standard_icon_alt: a truck going fast
+      title: my outposts 
     new: 
-      title: Register new outpost 
       city_state_explanation: 'ex: Rio de Janeiro, RJ'
+      title: Register new outpost 
     create:
-      success: Outpost %{name} was succesfully recorded.
       error: Something went wrong. The outpost was not saved.
+      success: Outpost %{name} was succesfully recorded.
 
   activerecord:
     models:
       outpost: Outpost
     attributes:
       outpost:
-        outpost_: Outpost # for error msg on custom validation
-        name: Name
-        city_state: Place
         category: Category
+        city_state: Place
+        name: Name
+        outpost_: Outpost # for error msg on custom validation
         shipping_company: Shipping company
         shipping_company_id: Shipping company
     errors:

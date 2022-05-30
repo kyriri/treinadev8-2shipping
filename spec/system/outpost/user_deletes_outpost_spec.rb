@@ -11,7 +11,7 @@ describe 'User soft deletes outpost' do
 
     login_as(user)
     visit shipping_company_outposts_path(sc)
-    click_on 'apagar', match: :first
+    first(".delete_button").click
 
     expect(Outpost.find(o1_id).deleted_at).to be
     expect(Outpost.find(o2_id).deleted_at).not_to be
@@ -33,7 +33,7 @@ describe 'User soft deletes outpost' do
 
     login_as(user)
     visit shipping_company_outposts_path(sc)
-    click_on 'apagar', match: :first
+    first(".delete_button").click
     click_on 'Minhas Ordens de Serviço'
     click_on 'detalhes'
 

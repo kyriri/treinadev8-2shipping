@@ -1,13 +1,14 @@
 pt-BR:
   outposts:
     index:
-      title: meus entrepostos 
-      standard_icon_alt: um caminhão andando rápido
-      no_outposts: Nenhum entreposto cadastrado.
+      delete: apagar
       new_outpost: Cadastrar novo entreposto
+      no_outposts: Nenhum entreposto cadastrado.
+      standard_icon_alt: um caminhão andando rápido
+      title: meus entrepostos 
     new: 
-      title: Cadastrar novo entreposto 
       city_state_explanation: 'ex: Salvador, BA'
+      title: Cadastrar novo entreposto 
     create:
       error: Houve um erro. O entreposto não foi salvo.
       success: O entreposto %{name} foi salvo com sucesso.
@@ -20,10 +21,10 @@ pt-BR:
       outpost: entreposto
     attributes:
       outpost:
-        outpost_: Entreposto # for error msg on custom validation
-        name: Nome
-        city_state: Localidade
         category: Categoria
+        city_state: Localidade
+        name: Nome
+        outpost_: Entreposto # for error msg on custom validation
         shipping_company: Transportadora
         shipping_company_id: Transportadora
     errors:

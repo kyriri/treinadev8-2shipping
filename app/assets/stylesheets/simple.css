@@ -578,4 +578,21 @@ pre code {
   border: 1px solid var(--accent);
   padding: 0.2rem;
   border-radius: 5px;
+  position: relative;
+}
+
+.delete_form {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.delete_button {
+  background: none;
+  padding: 0.2rem;
+  margin: 0;
+}
+
+.delete_button:hover {
+  background: var(--border);
 }

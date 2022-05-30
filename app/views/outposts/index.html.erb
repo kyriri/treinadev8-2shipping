@@ -1,6 +1,6 @@
 <h2><%= t('.title').titleize %></h2>
 
-<%= link_to t('.new_outpost'), new_shipping_company_outpost_path %>
+<h4><%= link_to t('.new_outpost'), new_shipping_company_outpost_path %></h4>
 
 <div id='outposts_container'>
   <% if @outposts.empty? %>
@@ -9,13 +9,16 @@
     <% @outposts.each do |outpost| %>
       <div class="outpost_card">
         <figure style="text-align: center;">
-          <%= image_tag('outposts/1.png', size: "50", alt: "#{t('.standard_icon_alt')}") %>
+          <%= image_tag('outposts/1.png', size: '50', alt: "#{t('.standard_icon_alt')}") %>
         </figure>
         <figcaption>
           <b><%= "#{outpost.name} - #{outpost.city_state}" %></b>
           <br><%= outpost.category %>
         </figcaption>
-        <%= button_to 'apagar', shipping_company_outpost_path({ id: outpost.id, shipping_company_id: outpost.shipping_company_id }), method: :delete  %>
+        <%= button_to shipping_company_outpost_path({ id: outpost.id, shipping_company_id: outpost.shipping_company_id }), 
+                      method: :delete, form_class: 'delete_form', class: 'delete_button' do %>
+          <%= image_tag('bin.png', size: '15', title: t('.delete')) %>
+        <% end %>   
       </div>
     <% end %>
   <% end %>
