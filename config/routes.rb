@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
     resources :shipping_companies, only: [:index, :show, :new, :create, :edit, :update] do
       resources :shipping_rates, only: [:index]
-      resources :outposts, only: [:index, :new, :create]
+      # outposts are not no editable to protect history of older deliveries
+      resources :outposts, only: [:index, :new, :create, :destroy] 
     end
     # the route below goes unnested so that "fake_delete" doesn't appear on URL
     post '/shipping_companies/:id', to: 'shipping_companies#fake_delete', as: 'fake_delete_shipping_company'

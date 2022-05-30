@@ -571,7 +571,7 @@ pre code {
   gap: 1rem 1rem;
 }
 
-.outposts_card {
+.outpost_card {
   width: 6rem; 
   height: 10rem; 
   background-color: var(--accent-bg);

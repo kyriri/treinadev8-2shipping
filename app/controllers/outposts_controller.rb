@@ -3,7 +3,7 @@ class OutpostsController < ApplicationController
   
   def index
     shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @outposts = shipping_company.outposts.where(standard: false).order(:city_state)
+    @outposts = shipping_company.outposts.where(standard: false, deleted_at: nil).order(:city_state)
   end
 
   def new
@@ -21,6 +21,15 @@ class OutpostsController < ApplicationController
     else
       flash.now[:alert] = t('.error')
       render :new 
+    end
+  end
+
+  def destroy
+    outpost = Outpost.find(params[:id])
+    if outpost.update_attribute(:deleted_at, Time.now)
+      redirect_to shipping_company_outposts_path(params[:shipping_company_id]), notice: t('.success', name: "#{outpost.name} - #{outpost.city_state}")
+    else
+      redirect_to shipping_company_outposts_path(params[:shipping_company_id]), alert: t('.error')
     end
   end
   

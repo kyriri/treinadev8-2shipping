@@ -6,10 +6,7 @@ describe 'User visits page listing' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cubic_weight_const: 35, min_fee: 8)
       another_sc = ShippingCompany.create!(status: 'active', name: 'Ibérica', legal_name: 'Ibérica dos Transportes Ltda', email_domain: 'iberica.com.br', cnpj: 98765432101234, billing_address: 'Rua da Paz, 34 - Rio Branco, AC', cubic_weight_const: 30, min_fee: 10)
       Outpost.create!(shipping_company: sc1, name: 'Zona Sul', city_state: 'São Paulo, SP', category: 'centro de coleta')
-      Outpost.create!(shipping_company: sc1, name: 'Aeroporto', city_state: 'Guarulhos, SP', category: 'centro de envios aéreos')
       Outpost.create!(shipping_company: sc1, name: 'Aeroporto', city_state: 'Confins, MG', category: 'centro de envios aéreos')
-      Outpost.create!(shipping_company: sc1, name: 'Pampulha', city_state: 'Belo Horizonte, MG', category: 'centro de distribuição')
-      Outpost.create!(shipping_company: sc1, name: 'Savassi', city_state: 'Belo Horizonte, MG', category: 'posto de entrega')
       Outpost.create!(shipping_company: another_sc, name: 'Foro', city_state: 'Teresina, PI', category: 'regional II')
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
 
@@ -20,14 +17,8 @@ describe 'User visits page listing' do
       expect(current_path).to eq shipping_company_outposts_path(sc1)
       expect(page).to have_content('Zona Sul - São Paulo, SP')
       expect(page).to have_content('centro de coleta')
-      expect(page).to have_content('Aeroporto - Guarulhos, SP')
-      expect(page).to have_content('centro de envios aéreos')
       expect(page).to have_content('Aeroporto - Confins, MG')
       expect(page).to have_content('centro de envios aéreos')
-      expect(page).to have_content('Pampulha - Belo Horizonte, MG')
-      expect(page).to have_content('centro de distribuição')
-      expect(page).to have_content('Savassi - Belo Horizonte, MG')
-      expect(page).to have_content('posto de entrega')
       expect(page).not_to have_content('Foro - Teresina, PI') # from another company
       expect(page).not_to have_content('regional II')
     end

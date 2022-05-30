@@ -7,7 +7,13 @@ class Outpost < ApplicationRecord
   validate :uniqueness_of_outpost
 
   def uniqueness_of_outpost
-    if Outpost.where(name: self.name, city_state: self.city_state, category: self.category, shipping_company: self.shipping_company).present?
+    if Outpost.where(name: self.name, 
+                     city_state: self.city_state, 
+                     category: self.category, 
+                     shipping_company: self.shipping_company,
+                     deleted_at: nil,
+                    )
+              .present?
       errors.add(:outpost_, I18n.t('activerecord.errors.models.outpost.not_unique'))
     end
   end
