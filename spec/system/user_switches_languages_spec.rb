@@ -51,7 +51,7 @@ describe 'User lands on the app' do
       fill_in 'Email', with: 'me@email.com'
       fill_in 'Password', with: '12345678'
       click_on 'Log in'
-      click_on 'en' # devise unfortunately "forgets" user locale
+      click_on 'en' # TODO devise unfortunately "forgets" user locale
       click_on 'My Service Orders'
       click_on 'pt-BR'
       click_on 'detalhes'
@@ -73,6 +73,6 @@ describe 'User lands on the app' do
     click_on 'My Service Orders'
     click_on 'details'
   
-  expect(page).to have_text('21.24 BRL')
-end
+    expect(page).to have_text('21.24 BRL')
+  end
 end

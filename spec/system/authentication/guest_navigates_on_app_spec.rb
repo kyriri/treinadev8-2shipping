@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe 'Unlogged user visits the application and' do
+  it 'sees application name' do
+    visit '/'
+
+    expect(page).to have_css('header', text: 'East Wing - Departamento de Envios')
+  end
+
   it 'is redirected to login page' do
     visit '/shipping_companies/2'
 

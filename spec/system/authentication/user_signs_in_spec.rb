@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-describe 'Unlogged user lands on homepage and' do
-  it 'sees application name' do
-    visit '/'
-
-    expect(page).to have_css('header', text: 'East Wing - Departamento de Envios')
-  end
-end
-
 describe 'User signs in' do
   it 'succesfully' do
     User.create!(email: 'me@email.com', password: '12345678')
