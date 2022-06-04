@@ -1,5 +1,12 @@
 pt-BR:
   service_orders:
+    delivery:
+      button_title: clique para adicionar passo de entrega
+      date: data
+      delivery_details: Detalhes da entrega
+      no_outposts: Nenhum entreposto cadastrado.
+      new_outpost: Cadastrar novo entreposto
+      place: lugar
     index:
       being_delivered: Em processo de entrega
       delivered: Entregues
@@ -8,6 +15,24 @@ pt-BR:
       no_service_orders: Nenhuma ordem de serviço.
       rejected: Devolvidas
       title: Ordens de Serviço
+    quotes:
+      business_days:
+        one: dia útil
+        other: dias úteis
+      company: empresa
+      delivery_time: prazo
+      fee: preço
+      no_quotes_yet: Nenhum orçamento feito até agora.
+      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
+      quotes: Orçamentos
+    search:
+      details: detalhes
+      number_of_results:
+        zero: Nenhum resultado encontrado
+        one: '%{count} resultado encontrado'
+        other: '%{count} resultados encontrados'
+      service_order_number: Ordem de serviço nº %{number}
+      title: 'Resultados da busca por:'
     show:
       accept: aceitar
       business_days:
@@ -23,23 +48,7 @@ pt-BR:
       reject: rejeitar
       title: Ordem de Serviço nº %{number}
       weight: Peso
-    quotes:
-      business_days:
-        one: dia útil
-        other: dias úteis
-      company: empresa
-      delivery_time: prazo
-      fee: preço
-      no_quotes_yet: Nenhum orçamento feito até agora.
-      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
-      quotes: Orçamentos
-    delivery:
-      button_title: clique para adicionar passo de entrega
-      date: data
-      delivery_details: Detalhes da entrega
-      no_outposts: Nenhum entreposto cadastrado.
-      new_outpost: Cadastrar novo entreposto
-      place: lugar
+
   
   activerecord:
       models:

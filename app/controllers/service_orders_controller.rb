@@ -20,6 +20,18 @@ class ServiceOrdersController < ApplicationController
     end
   end
 
+  def search
+    @original_query = params[:query]
+    search_queries = @original_query.strip.match(/\d+/).to_a
+    @service_orders = search_queries.reduce([]) { |memo, query|
+      if current_user.admin
+        memo << ServiceOrder.where(id: query)
+      else
+        memo << ServiceOrder.where(id: query, shipping_company: current_user.shipping_company)
+      end
+    }.flatten
+  end
+
   def obtain_quotes
     @service_order = ServiceOrder.find(params[:id])
     @quotes = @service_order.get_quotes

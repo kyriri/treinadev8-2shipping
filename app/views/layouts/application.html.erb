@@ -40,6 +40,13 @@
         <%# TODO direct link below to the user profile page %>
         <%= link_to current_user.email, '' %>
         <%= button_to t('devise.shared.links.log_out'), destroy_user_session_path, method: :delete, form_class: 'login_form' %>
+        <div id='search'>
+          <%= form_with url: search_service_orders_path, method: :get do |f| %>
+            <%= f.label :query, t('.search_tag') %>
+            <%= f.text_field :query %>
+            <%= f.submit t('.search_button') %>
+          <% end %>
+        </div>
       <% end %>
     </nav>
 

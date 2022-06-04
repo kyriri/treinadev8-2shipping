@@ -1,0 +1,15 @@
+<h2><%= "#{t('.title')} #{@original_query}" %></h2>
+
+<h3><%= t('.number_of_results', count: @service_orders.size) %></h3>
+
+<% if @service_orders.present? %>
+  <% @service_orders.each do |order| %>
+    <ul>
+      <li>
+        <%= t('.service_order_number', number: order.id) %>
+        | <%= ServiceOrder.human_attribute_name("status.#{order.status}") %>
+        | <%= link_to t('.details'), order %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

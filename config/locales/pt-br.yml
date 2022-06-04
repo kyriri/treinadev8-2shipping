@@ -7,6 +7,8 @@ pt-BR:
       my_rates_and_times: Meus Preços & Prazos
       my_service_orders: Minhas Ordens de Serviço
       rates_and_times: Preços & Prazos
+      search_button: Buscar
+      search_tag: 'Ordem de serviço:'
       service_orders: Ordens de Serviço
       shipping_companies: Transportadoras
 

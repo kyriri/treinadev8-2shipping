@@ -1,5 +1,12 @@
 en:
   service_orders:
+    delivery:
+      button_title: click to add delivery step
+      date: when
+      delivery_details: Delivery details
+      new_outpost: Add outpost
+      no_outposts: No outposts to show.
+      place: place
     index:
       being_delivered: In process of delivery
       delivered: Delivered
@@ -8,6 +15,20 @@ en:
       no_service_orders: No service orders to show.
       rejected: Rejected
       title: Service Orders
+    quotes:
+      business_days:
+        one: business day
+        other: business days
+      no_quotes_yet: Nenhum orçamento feito até agora.
+      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
+    search:
+      details: details
+      number_of_results:
+        zero: Nothing found
+        one: Found %{count} result
+        other: Found %{count} results
+      service_order_number: 'Service order # %{number}'
+      title: 'Search results for:'
     show:
       accept: accept
       business_days:
@@ -15,16 +36,3 @@ en:
         other: business days
       reject: reject
       title: 'Service Order # %{number}'
-    quotes:
-      business_days:
-        one: business day
-        other: business days
-      no_quotes_yet: Nenhum orçamento feito até agora.
-      no_service_available: Nenhuma transportadora ativa oferece serviços compatíveis.
-    delivery:
-      button_title: click to add delivery step
-      date: when
-      delivery_details: Delivery details
-      new_outpost: Add outpost
-      no_outposts: No outposts to show.
-      place: place

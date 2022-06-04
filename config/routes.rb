@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     post '/shipping_companies/:id', to: 'shipping_companies#fake_delete', as: 'fake_delete_shipping_company'
 
     resources :service_orders, only: [:index, :show] do
+      get 'search', on: :collection
       post 'obtain_quotes', on: :member
       post 'attribute_to_carrier', on: :member
       post 'update_status', on: :member
