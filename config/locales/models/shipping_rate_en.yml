@@ -5,6 +5,12 @@ en:
       business_days:
         one: business day
         other: business days
+    edit:
+      subtitle: Edit shipping rates
+      table_header_price: rate per km (in CENTS)
+      table_header_weight: weight
+      up_to: up to
+      update_button: Save
         
   activerecord:
     models:

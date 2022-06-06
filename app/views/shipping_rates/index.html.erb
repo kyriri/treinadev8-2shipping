@@ -10,17 +10,20 @@
 
   <dt>Valor mínimo</dt>
   <dd><%= number_to_currency(@shipping_company.min_fee) %></dd>
-  <%# TODO values in BRL should be in BRL even if locale = en %>
 </dl>
 
-<% unless @fees.empty? %>
-  <table>
-    <caption>Tabela de tarifas</caption>
+<% unless @shipping_rates.empty? %>
+  <table id='shipping_rates'>
+    <caption>
+      Tabela de tarifas (
+      <%= link_to 'editar', edit_shipping_company_shipping_rate_path(id: @shipping_rates.first.id) %>
+      )
+    </caption>
     <tr>
       <th>peso</th>
       <th>preço</th>
     </tr>
-    <% @fees.each do |tier| %>
+    <% @shipping_rates.each do |tier| %>
       <tr>
         <td>
           até 
@@ -37,14 +40,14 @@
   </table>
 <% end %>
 
-<% unless @times.empty? %>
-  <table>
+<% unless @delivery_times.empty? %>
+  <table id='delivery_times'>
     <caption>Tabela de prazos</caption>
     <tr>
       <th>distância</th>
       <th>tempo</th>
     </tr>
-    <% @times.each do |tier| %>
+    <% @delivery_times.each do |tier| %>
       <tr>
         <td>
           <%= "até #{number_with_precision(tier.max_distance_in_km, precision: 0)} km" %>

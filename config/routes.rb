@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     root 'home#index'
 
     resources :shipping_companies, only: [:index, :show, :new, :create, :edit, :update] do
-      resources :shipping_rates, only: [:index]
+      resources :shipping_rates, only: [:index, :edit, :update]
       # outposts are not no editable to protect history of older deliveries
       resources :outposts, only: [:index, :new, :create, :destroy] 
     end

@@ -1,0 +1,28 @@
+<h2><%= @shipping_company.name %></h2>
+
+<%= form_with model: @shipping_company do |form| %>
+  <table>
+    <caption><%= t('.subtitle') %></caption>
+    <tr>
+      <th><%= t('.table_header_weight') %></th>
+      <th><%= t('.table_header_price') %></th>
+    </tr>
+    <%= form.fields_for :shipping_rates do |rates_form| %>
+      <tr>
+        <td>
+          <%= rates_form.label :cost_per_km_in_cents, 
+            # label text
+            "#{t('.up_to')} #{
+              if rates_form.object.max_weight_in_kg % 1 == 0
+                number_with_precision(rates_form.object.max_weight_in_kg, precision: 0)
+              else
+                number_with_precision(rates_form.object.max_weight_in_kg, precision: 1)
+              end
+            } kg" %>
+        </td>
+        <td><%= rates_form.number_field :cost_per_km_in_cents %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= form.submit t('.update_button') %>
+<% end %>

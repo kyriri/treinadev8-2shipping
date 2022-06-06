@@ -3,9 +3,15 @@ class ShippingRatesController < ApplicationController
   
   def index
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @fees = @shipping_company.shipping_rates.order(:max_weight_in_kg)
-    @times = @shipping_company.delivery_times.order(:max_distance_in_km)
+    @shipping_rates = @shipping_company.shipping_rates.order(:max_weight_in_kg)
+    @delivery_times = @shipping_company.delivery_times.order(:max_distance_in_km)
   end
+
+  def edit
+    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
+  end
+
+  # since the form is a nestled one, the "update" action is actually managed by the shipping company controller
   
   private
 

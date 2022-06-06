@@ -5,6 +5,12 @@ pt-BR:
       business_days:
         one: dia útil
         other: dias úteis
+    edit:
+      subtitle: Editar tabela de tarifas
+      table_header_price: preço por km (em CENTAVOS)
+      table_header_weight: peso
+      up_to: até
+      update_button: Salvar
 
   activerecord:
     models:

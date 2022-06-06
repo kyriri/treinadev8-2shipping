@@ -9,9 +9,10 @@ class ShippingCompany < ApplicationRecord
 
   enum status: { deleted: 0, suspended: 2, in_registration: 5, active: 8 }
 
-  has_many :shipping_rates
   has_many :delivery_times
   has_many :outposts
+  has_many :shipping_rates
+  accepts_nested_attributes_for :shipping_rates
 
   def create_default_outposts
     Outpost.create!(standard: true, category: 'coletado', shipping_company: self, name: '', city_state: '')
