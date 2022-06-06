@@ -6,6 +6,8 @@ pt-BR:
         one: dia útil
         other: dias úteis
     edit:
+      flash_error: Houve um erro. As taxas não foram atualizadas.
+      flash_success: Taxas atualizadas com sucesso.
       subtitle: Editar tabela de tarifas
       table_header_price: preço por km (em CENTAVOS)
       table_header_weight: peso

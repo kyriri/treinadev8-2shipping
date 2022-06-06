@@ -1,3 +1,13 @@
+<div id='error_msgs'>
+  <% if @rate.errors.any? %>
+    <ul>
+    <% @rate.errors.full_messages.sort_by!{ |e| e.downcase }.each do |msg| %>
+    <li><%= msg.capitalize %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
 <h2><%= @shipping_company.name %></h2>
 
 <%= form_with model: @shipping_company do |form| %>

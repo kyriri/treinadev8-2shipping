@@ -6,6 +6,8 @@ en:
         one: business day
         other: business days
     edit:
+      flash_error: Something went wrong. The rates were not updated.
+      flash_success: Rates succesfully updated.
       subtitle: Edit shipping rates
       table_header_price: rate per km (in CENTS)
       table_header_weight: weight

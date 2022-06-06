@@ -9,6 +9,7 @@ class ShippingRatesController < ApplicationController
 
   def edit
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
+    @rate = ShippingRate.find(params[:id]) # here just not to bug error display
   end
 
   # since the form is a nestled one, the "update" action is actually managed by the shipping company controller

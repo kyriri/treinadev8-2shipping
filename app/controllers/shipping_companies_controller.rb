@@ -32,14 +32,33 @@ class ShippingCompaniesController < ApplicationController
 
   def update
     shipping_co_params.delete(:status) unless current_user.admin? # TODO test this line
-    if @shipping_co.update(shipping_co_params)
-      flash[:notice] = t('shipping_company_update_succesful')
-      redirect_to @shipping_co
+    
+    if params[:shipping_company][:shipping_rates_attributes].present?
+      # shipping rates edit
+      rates_params = params.require(:shipping_company).permit(shipping_rates_attributes: [:id, :cost_per_km_in_cents])
+      rates_params[:shipping_rates_attributes].each do |index, rate_params|
+        @rate = ShippingRate.find(rate_params[:id])
+        @rate.cost_per_km_in_cents = rate_params[:cost_per_km_in_cents]
+        unless @rate.save
+          @shipping_company = ShippingCompany.find(params[:id])
+          flash.now[:alert] = t('shipping_rates.edit.flash_error')
+          render 'shipping_rates/edit'
+          return
+        end
+      end
+      redirect_to shipping_company_shipping_rates_path(@shipping_co), notice: t('shipping_rates.edit.flash_success')
     else
-      flash.now[:alert] = t('shipping_company_update_failed')
-      @statuses = form_statuses
-      render :edit
+      # shipping company edit
+      if @shipping_co.update(shipping_co_params)
+        flash[:notice] = t('shipping_company_update_succesful')
+        redirect_to @shipping_co
+      else
+        flash.now[:alert] = t('shipping_company_update_failed')
+        @statuses = form_statuses
+        render :edit
+      end
     end
+    
   end
 
   def fake_delete

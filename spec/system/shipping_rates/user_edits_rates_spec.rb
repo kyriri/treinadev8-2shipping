@@ -22,9 +22,10 @@ feature 'Shipping rates are editable' do
       expect(page).not_to have_css('input#shipping_company_shipping_rates_attributes_0_max_weight_in_kg')
     end
 
-    xit 'who receives a flash message on success' do
+    it 'who receives a flash message on success' do
       sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', cubic_weight_const: 35, min_fee: 8, legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
       ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 20, shipping_company: sc1)
+      ShippingRate.create!(max_weight_in_kg: 2.5, cost_per_km_in_cents: 21, shipping_company: sc1)
       user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc1)
       
       login_as(user)
@@ -34,13 +35,29 @@ feature 'Shipping rates are editable' do
         click_on 'editar'
       end
       fill_in 'até 1 kg', with: '33'
+      fill_in 'até 2,5 kg', with: '50'
       click_on 'Salvar'
 
       expect(current_path).to eq shipping_company_shipping_rates_path(sc1)
-      expect(page).to have_css('table', text: 'até 1 kg R$ 0,33')
+      expect(page).to have_text('Taxas atualizadas com sucesso')
+      expect(page).to have_css('table', text: 'até 1 kg R$ 0,33 / km')
+      expect(page).to have_css('table', text: 'até 2,5 kg R$ 0,50')
     end
 
-    xit 'who receives a flash message on failure' do
+    it 'who receives a flash message on failure' do
+      sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', cubic_weight_const: 35, min_fee: 8, legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', cnpj: 12345678901234, billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP')
+      rate = ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 20, shipping_company: sc)
+      user = User.create!(email: 'me@email.com', password: '12345678', shipping_company: sc)
+      
+      login_as(user)
+      visit edit_shipping_company_shipping_rate_path(shipping_company_id: sc.id, id: rate.id)
+      fill_in 'até 1 kg', with: ''
+      click_on 'Salvar'
+
+      expect(page).to have_text('Editar tabela de tarifas')
+      expect(page).to have_text('Houve um erro. As taxas não foram atualizadas')
+      expect(page).to have_text('Custo por km não pode ficar em branco')
+      expect(page).to have_field('até 1 kg', with: 20)
     end
   end
 end
