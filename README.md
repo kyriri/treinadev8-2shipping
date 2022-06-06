@@ -18,6 +18,10 @@ The **Service Order** is the main object of this app. Its status tracks its life
 To help e-commerce employess (admins) on their task to choose a shipping company, they can run a **Quote**, which will retrieve prices and delivery times from all active companies for a given package. Each set of quotes is recorded and can be audited anytime.
 
 When a shipping company accepts a service order, a **Delivery** is created, which records the **Stage**s of delivery, that is, the route of a package through the many **Outpost**s of a shipping company. This information can be accessed with a link by an unlogged person, and is intended to allow the costumers of the e-commerce to track their buys.
+  
+### Project decisions
+
+Some relevant project decisions were taken during the design of this app. They are presented [here](docs/project_decisions.md).  
 
 ### Features
 
@@ -35,7 +39,9 @@ When a shipping company accepts a service order, a **Delivery** is created, whic
 ### Installation
 
 ![This app requires Ruby 3.1.1 to be installed](https://img.shields.io/static/v1?label=ruby&message=version%203.1.1&color=B61D1D&style=for-the-badge&logo=ruby)
-
+  
+This app requires Ruby 3.1.1 and SQLite 3. Once they are installed in the machine:  
+  
 1 - Clone the repository  
 `$ git clone git@github.com:kyriri/treinadev8-2shipping.git`
 
@@ -72,10 +78,6 @@ To clean the mock data, go to the project directory and run
 
 On the project directory, run   
 `$ bin/bundle exec rspec`   
-  
-### Project decisions
-
-Some relevant project decisions were taken during the design of this app. They are presented [here](docs/project_decisions.md).  
    
 ### Other info
 
