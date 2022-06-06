@@ -3,6 +3,24 @@ require 'rails_helper'
 RSpec.describe ShippingRate, type: :model do
   describe '#valid' do
     context 'should be false if' do
+      it 'weight is blank' do
+        sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234, cubic_weight_const: 300, min_fee: 5)
+        rate = ShippingRate.new(max_weight_in_kg: '', cost_per_km_in_cents: 99, shipping_company: sc)
+        
+        rate.valid?
+
+        expect(rate.errors.full_messages).to include('peso máximo não pode ficar em branco')
+      end
+
+      it 'rate is blank' do
+        sc = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234, cubic_weight_const: 300, min_fee: 5)
+        rate = ShippingRate.new(max_weight_in_kg: '1', cost_per_km_in_cents: '', shipping_company: sc)
+        
+        rate.valid?
+
+        expect(rate.errors.full_messages).to include('custo por km não pode ficar em branco')
+      end
+
       it 'weight was already in database' do
         sc1 = ShippingCompany.create!(status: 'active', name: 'Cheirex', legal_name: 'Transportes Federais do Brasil S.A.', email_domain: 'cheirex.com', billing_address: 'Av. das Nações Unidas, 1.532 - São Paulo, SP', cnpj: 12345678901234, cubic_weight_const: 300, min_fee: 5)
         ShippingRate.create!(max_weight_in_kg: 1, cost_per_km_in_cents: 60, shipping_company: sc1)
