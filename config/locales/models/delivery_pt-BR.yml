@@ -6,3 +6,10 @@ pt-BR:
       date: data
       place: lugar
       not_found: Código de rastreio %{code} não encontrado.
+
+  activerecord:
+    models:
+      delivery: entrega
+    attributes:
+      delivery:
+        tracking_code: código de rastreio

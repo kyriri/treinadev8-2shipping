@@ -22,12 +22,14 @@ class ServiceOrdersController < ApplicationController
 
   def search
     @original_query = params[:query]
-    search_queries = @original_query.strip.match(/\d+/).to_a
+    search_queries = @original_query.match(/(\w+)/).present? ? @original_query.match(/(\w+)/).captures : []
     @service_orders = search_queries.reduce([]) { |memo, query|
       if current_user.admin
-        memo << ServiceOrder.where(id: query)
+        memo << ServiceOrder.where('id LIKE ?', "%#{query}%")
+        memo << ServiceOrder.joins(:delivery).where('tracking_code LIKE ?', "%#{query}%")
       else
-        memo << ServiceOrder.where(id: query, shipping_company: current_user.shipping_company)
+        memo << ServiceOrder.where(shipping_company: current_user.shipping_company).where('id LIKE ?', "%#{query}%")
+        memo << ServiceOrder.where(shipping_company: current_user.shipping_company).joins(:delivery).where('tracking_code LIKE ?', "%#{query}%")
       end
     }.flatten
   end

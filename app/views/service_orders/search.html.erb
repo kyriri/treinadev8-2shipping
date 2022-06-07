@@ -8,6 +8,9 @@
       <li>
         <%= t('.service_order_number', number: order.id) %>
         | <%= ServiceOrder.human_attribute_name("status.#{order.status}") %>
+        <% if order.accepted? || order.delivered? %>
+          | <%= "#{Delivery.human_attribute_name('tracking_code')}: #{order.delivery.tracking_code}" %>
+        <% end %>
         | <%= link_to t('.details'), order %>
       </li>
     </ul>
