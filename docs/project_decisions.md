@@ -1,7 +1,8 @@
 # Project decisions
 
 ## Rates
-This original instructions for this project assumed shipping companies would provide a single table which considered both distances and weight to define a shipping rate, like
+
+The original instructions for this project assumed shipping companies would provide a single table which considered both distances and weight to define a shipping rate, like
 |Cubic meters/Weight|0-10kg|10-30kg|over 30kg|
 ---|---|---|---|
 |0,001 a 0,500|50 cents per km|80 cents per km| 100 cents per km
@@ -12,6 +13,7 @@ This original instructions for this project assumed shipping companies would pro
 Such a data structure was difficult to model. Furthermore, research has indicated that shipping companies often use the concept of *cubic weight*, which calculates a "virtual weight" based on the size of the package. Since this approach was both easier to model and had a strong correlation to actual business, this was the choice of implementation.
 
 ### Example of fee calculation
+
 factor for calculation of cubic weight, FCW = 300 kg/m³   
 minimal fee = 10.000 cents  
 weight|rate
@@ -37,3 +39,9 @@ The original instructions for this project required the shipping companies to be
 The author of this app tought this was too far removed from reality: while vehicles do transport packages, there isn't really a tie between vehicles and packages - if a truck is broken the morning of a delivery, the company will just send another truck to do the job, and this is irrelevant to the process of delivery. What *is* relevant is the location of the package, but sharing the positioning of a vehicle for the purpose of package tracking is neither practical nor safe.
 
 Therefore, this app does not support vehicles. It uses instead the passage of a package through logistical outposts as the compounder of a delivery history. 
+
+## No addresses on track page
+
+The original instructions for this project required the track page - the one that can be accessed by an unlogged user - to display the addresses of pick up and delivery of a package.  
+  
+The author of this project decided not to implement this part because it was perceived as a potential security risk for both the ecommerce and its clients (imagine a mob of angry clients at the company's door, or someone who tries many combinations of delivery codes and ends up retriving true adddresses of clients).
